@@ -34,4 +34,15 @@ abstract public class Ship implements hitable
 	{
 		return this.inhabitsTarget(target.getName());
 	}
+
+	public ShipType getType()
+	{
+		return type;
+	}
+
+	public boolean getHit(String place)
+	{
+		final Target target = targets.parallelStream().filter(obj -> obj.equals(place)).findAny().get();
+		return target.getHit();
+	}
 }
