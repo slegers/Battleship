@@ -1,14 +1,17 @@
 package model;
 
+import model.type.ShipType;
+
 import java.util.ArrayList;
 
 abstract public class Ship implements hitable
 {
 	private ArrayList<Target> targets = new ArrayList<>();
+	private ShipType type;
 
-
-	public Ship(ArrayList<Target> targets)
+	public Ship(ArrayList<Target> targets, ShipType shipType)
 	{
+		type = shipType;
 		this.targets = targets;
 	}
 
