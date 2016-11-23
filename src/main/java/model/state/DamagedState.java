@@ -1,5 +1,17 @@
 package model.state;
 
-public class DamagedState
+public class DamagedState implements TargetState
 {
+
+	@Override
+	public TargetState damage()
+	{
+		return this;
+	}
+
+	@Override
+	public TargetState sink()
+	{
+		return new SunkState();
+	}
 }
