@@ -1,5 +1,22 @@
 package model.settings;
 
-public class Settings
+
+class Settings
 {
+	private static Settings settings;
+	private static boolean done = true;
+
+	private Settings()
+	{
+	}
+
+	public Settings createSettings()
+	{
+		if (done)
+		{
+			done = false;
+			settings = new Settings();
+		}
+		return settings;
+	}
 }

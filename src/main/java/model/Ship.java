@@ -2,9 +2,10 @@ package model;
 
 import java.util.ArrayList;
 
-abstract public class Ship
+abstract public class Ship implements hitable
 {
-	ArrayList<Target> targets = new ArrayList<>();
+	private ArrayList<Target> targets = new ArrayList<>();
+
 
 	public Ship(ArrayList<Target> targets)
 	{

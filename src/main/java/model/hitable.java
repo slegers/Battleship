@@ -2,5 +2,5 @@ package model;
 
 public interface hitable
 {
-	void getHit(String place);
+	boolean getHit(String place);
 }
