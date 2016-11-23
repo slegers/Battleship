@@ -17,6 +17,7 @@ public class Field extends JLabel {
     }
 
     public void create(){
+        setBorder(BorderFactory.createLineBorder(Color.black));
         setSize(new Dimension(getFieldSize(),getFieldSize()));
         setBackground(getColor());
         setVisible(true);

@@ -25,6 +25,7 @@ public class BattleshipBoard extends JFrame{
     public void createBoard(){
         player1 = new PlayerBoard(20,100);
         player2 = new PlayerBoard(20,100);
+        setLayout(new GridLayout(1,2));
         add(player1);
         add(player2);
         this.setTitle("Zeeslag");
