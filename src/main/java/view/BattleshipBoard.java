@@ -23,6 +23,7 @@ public class BattleshipBoard extends JFrame{
     }
 
     public void createBoard(){
+<<<<<<< HEAD
         this.setTitle("Zeeslag");
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setSize(new Dimension(1000,500));
@@ -30,5 +31,11 @@ public class BattleshipBoard extends JFrame{
         this.pack();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
+=======
+        setTitle("Zeeslag - Game");
+        setBounds(0,0,100,200);
+        pack();
+        setVisible(true);
+>>>>>>> 60d058697a7392896391219bce11cafcd49a6a3a
     }
 }
