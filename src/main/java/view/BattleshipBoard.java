@@ -16,10 +16,11 @@ public class BattleshipBoard extends JFrame{
     public BattleshipController getController(){
         return controller;
     }
+
     public void createBoard(){
-        this.setTitle("Zeeslag");
-        this.setBounds(0,0,100,200);
-        this.pack();
-        this.setVisible(true);
+        setTitle("Zeeslag - Game");
+        setBounds(0,0,100,200);
+        pack();
+        setVisible(true);
     }
 }
