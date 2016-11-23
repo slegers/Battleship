@@ -10,10 +10,14 @@ import java.awt.*;
  */
 public class BattleshipBoard extends JFrame{
     private BattleshipController controller;
+    private PlayerBoard player1 = new PlayerBoard();
+    private PlayerBoard player2 = new PlayerBoard();
+
     public BattleshipBoard(BattleshipController controller) {
         this.controller = controller;
         createBoard();
     }
+
     public BattleshipController getController(){
         return controller;
     }
