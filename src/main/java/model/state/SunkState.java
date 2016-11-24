@@ -16,7 +16,6 @@ public class SunkState implements TargetState
 	}
 
 	@Override
-	public TargetState missed() {
-		return null;
+	public void missed() {
 	}
 }

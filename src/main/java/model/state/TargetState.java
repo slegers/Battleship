@@ -6,6 +6,6 @@ public interface TargetState
 
 	TargetState sink();
 
-	TargetState missed();
+	void missed();
 
 }

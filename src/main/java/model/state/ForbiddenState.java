@@ -15,7 +15,7 @@ public class ForbiddenState implements TargetState
 	}
 
 	@Override
-	public TargetState missed() {
-		return null;
+	public void missed() {
+
 	}
 }

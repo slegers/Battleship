@@ -16,7 +16,7 @@ public class DamagedState implements TargetState
 	}
 
 	@Override
-	public TargetState missed() {
-		return null;
+	public void missed() {
+
 	}
 }

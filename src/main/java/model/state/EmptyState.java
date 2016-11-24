@@ -13,4 +13,9 @@ public class EmptyState implements TargetState
 	{
 		return null;
 	}
+
+    @Override
+    public void missed() {
+
+    }
 }
