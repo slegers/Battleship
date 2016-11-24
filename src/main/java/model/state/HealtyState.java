@@ -13,4 +13,9 @@ public class HealtyState implements TargetState
 	{
 		throw new IllegalStateException("healty can't sink");
 	}
+
+	@Override
+	public TargetState missed() {
+		return null;
+	}
 }

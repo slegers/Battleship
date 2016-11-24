@@ -14,4 +14,9 @@ public class DamagedState implements TargetState
 	{
 		return new SunkState();
 	}
+
+	@Override
+	public TargetState missed() {
+		return null;
+	}
 }
