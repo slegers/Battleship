@@ -1,6 +1,8 @@
 package view;
 
 import controller.BattleshipController;
+import model.Ship;
+import model.type.ShipType;
 
 import javax.swing.*;
 import java.awt.*;
@@ -53,11 +55,10 @@ public class SettingsView extends JFrame{
         heightText = new JTextField();
         add(heightText);
 
+        /*foreach(Ship schip : ShipType.values()){
 
-
-
-
-
+        }
+        */
     }
 
 }
