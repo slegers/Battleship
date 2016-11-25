@@ -10,9 +10,11 @@ import java.util.TreeMap;
  */
 public class PlayerBoard extends JPanel {
     TreeMap<Integer, Field> fields = new TreeMap<Integer, Field>();
+
     private int fieldsize;
 
-    public PlayerBoard(int fieldsize, int amountOfFields){
+
+    public  PlayerBoard(int fieldsize, int amountOfFields){
         setSize(new Dimension(400,400));
 
         setLayout(new GridLayout((int)Math.sqrt(amountOfFields),(int)Math.sqrt(amountOfFields)));
@@ -27,4 +29,6 @@ public class PlayerBoard extends JPanel {
             add(field);
         }
     }
+
+
 }

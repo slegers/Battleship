@@ -9,7 +9,5 @@ import view.SettingsView;
 public class Main {
     public static void main(String[] args) {
         BattleshipController controller = new BattleshipController();
-        SettingsView.getSettingsView().init();
-        BattleshipBoard view = new BattleshipBoard(controller);
     }
 }

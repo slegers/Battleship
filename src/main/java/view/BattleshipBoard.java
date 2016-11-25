@@ -1,5 +1,6 @@
 package view;
 
+import com.sun.scenario.Settings;
 import controller.BattleshipController;
 
 import javax.swing.*;
@@ -10,12 +11,15 @@ import java.awt.*;
  */
 public class BattleshipBoard extends JFrame{
     private BattleshipController controller;
+    private Settings settings;
     private PlayerBoard player1;
     private PlayerBoard player2;
 
-    public BattleshipBoard(BattleshipController controller) {
+    public BattleshipBoard(BattleshipController controller,Settings settings) {
         this.controller = controller;
+        this.settings = settings;
         createBoard();
+
     }
 
     public BattleshipController getController(){

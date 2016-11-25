@@ -5,6 +5,8 @@ import model.type.ShipType;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
@@ -13,16 +15,16 @@ import java.util.ArrayList;
 public class SettingsView extends JFrame{
     private BattleshipController controller;
     private JLabel speler1,speler2, length,height;
-    private JTextField speler1Text, speler2Text, widthText, heightText;
+    private static JTextField speler1Text, speler2Text, widthText, heightText;
     private ArrayList<JLabel> shipLabels;
     private ArrayList<JTextField> shipText;
     private static volatile SettingsView settingsView;
     private static boolean done = true;
-
+    private JButton play;
     private SettingsView(){
         this.shipLabels = new ArrayList<>();
         this.shipText = new ArrayList<>();
-        this.controller = controller;
+        init();
     }
 
     public static synchronized SettingsView getSettingsView(){
@@ -32,11 +34,14 @@ public class SettingsView extends JFrame{
         }
         return settingsView;
     }
-
-    public BattleshipController getController(){
-        return controller;
+    public void setController(BattleshipController controller){
+        this.controller = controller;
     }
-    public void init(){
+    public BattleshipController getController(){
+        return this.controller;
+    }
+
+    private void init(){
         createComponents();
         setBounds(0,0,100,200);
         setTitle("Zeeslag - Instellingen");
@@ -45,7 +50,7 @@ public class SettingsView extends JFrame{
     }
 
     private void createComponents() {
-        setLayout(new GridLayout(4 + ShipType.values().length,2));
+        setLayout(new GridLayout(5 + ShipType.values().length,2));
 
         speler1 = new JLabel("Speler 1:");
         add(speler1);
@@ -78,6 +83,17 @@ public class SettingsView extends JFrame{
             shipText.add(text);
             add(text);
         }
+
+        play = new JButton("play");
+        play.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                getController().createBattleshipBoard();
+            }
+        });
+        add(play);
     }
+
 
 }
