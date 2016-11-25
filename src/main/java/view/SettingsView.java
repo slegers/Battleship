@@ -1,34 +1,36 @@
 package view;
 
 import controller.BattleshipController;
-import model.Ship;
-import model.facade.ShipFacade;
 import model.type.ShipType;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-import static java.awt.SystemColor.text;
-
 /**
  * Created by yanice on 23/11/16.
  */
 public class SettingsView extends JFrame{
     private BattleshipController controller;
-    private JLabel speler1,speler2,width,height;
+    private JLabel speler1,speler2, length,height;
     private JTextField speler1Text, speler2Text, widthText, heightText;
     private ArrayList<JLabel> shipLabels;
     private ArrayList<JTextField> shipText;
+    private static volatile SettingsView settingsView;
+    private static boolean done = true;
 
-    public SettingsView(BattleshipController controller){
+    private SettingsView(){
         this.shipLabels = new ArrayList<>();
         this.shipText = new ArrayList<>();
         this.controller = controller;
     }
 
-    public SettingsView() {
-
+    public static synchronized SettingsView getSettingsView(){
+        if(done ){
+            settingsView = new SettingsView();
+            done = false;
+        }
+        return settingsView;
     }
 
     public BattleshipController getController(){
@@ -55,8 +57,8 @@ public class SettingsView extends JFrame{
         speler2Text.setEnabled(false);
         add(speler2Text);
 
-        width = new JLabel("Breedte:");
-        add(width);
+        length = new JLabel("Breedte:");
+        add(length);
         widthText = new JTextField(10+"");
         widthText.setEnabled(false);
         add(widthText);
