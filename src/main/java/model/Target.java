@@ -1,20 +1,26 @@
 package model;
 
+import model.TargetState.TargetState;
+import model.TargetState.TargetStateFactory;
+
 public class Target
 {
 	private String name;
 	private Ship partOf;
-	private Boolean hit;
+	private Boolean hit = false;
+	private TargetState state;
 
-	public Target(String name, Ship partOf, Boolean hit)
+	public Target(String name, Ship partOf)
 	{
 		this.name = name;
 		this.partOf = partOf;
-		this.hit = hit;
+		state = TargetStateFactory.createHealtyState();
 	}
 
-	public Target()
+	public Target(String name)
 	{
+		this.name = name;
+
 	}
 
 	public String getName()
