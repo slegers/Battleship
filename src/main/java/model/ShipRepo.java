@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ShipRepo implements ShipRepoInterface
+class ShipRepo implements ShipRepoInterface
 {
 	ArrayList<Ship> ships = new ArrayList<>();
 	HashMap<ShipType, Integer> regesterdShips = new HashMap<>();

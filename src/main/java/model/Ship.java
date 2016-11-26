@@ -46,4 +46,10 @@ public class Ship implements hitable
 		final Target target = targets.parallelStream().filter(obj -> obj.getName().equals(place)).findAny().get();
 		return target.getHit();
 	}
+
+	@Override
+	public boolean getHit(Target place)
+	{
+		return this.getHit(place.getName());
+	}
 }

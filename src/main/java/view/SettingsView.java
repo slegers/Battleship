@@ -1,15 +1,11 @@
 package view;
 
 import controller.BattleshipController;
-import model.Ship;
-import model.facade.ShipFacade;
 import model.type.ShipType;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-
-import static java.awt.SystemColor.text;
 
 /**
  * Created by yanice on 23/11/16.

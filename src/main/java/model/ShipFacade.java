@@ -1,9 +1,5 @@
-package model.facade;
+package model;
 
-import model.Ship;
-import model.ShipRepo;
-import model.ShipRepoInterface;
-import model.Target;
 import model.type.ShipType;
 
 import java.util.List;

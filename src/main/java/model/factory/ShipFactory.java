@@ -1,8 +1,8 @@
 package model.factory;
 
 import model.Ship;
+import model.ShipFacade;
 import model.Target;
-import model.facade.ShipFacade;
 import model.type.ShipType;
 
 import java.util.List;
