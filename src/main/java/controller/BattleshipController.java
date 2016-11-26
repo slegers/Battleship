@@ -2,6 +2,7 @@ package controller;
 
 import com.sun.scenario.Settings;
 import view.BattleshipBoard;
+import view.PlayerBoard;
 import view.SettingsView;
 
 /**
@@ -18,5 +19,6 @@ public class BattleshipController {
     }
 
     public void createBattleshipBoard() {
+
     }
 }

@@ -88,8 +88,19 @@ public class SettingsView extends JFrame{
         play.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                getController().createBattleshipBoard();
+                if(canStartGame()) {
+                    setVisible(false);
+                    getController().createBattleshipBoard();
+                }
+            }
+
+            public boolean canStartGame() {
+                System.out.println(speler1Text.getText());
+                if(speler1Text.getText() =="" || speler2Text.getText()== ""){
+                    return false;
+                }
+                return true;
+
             }
         });
         add(play);
