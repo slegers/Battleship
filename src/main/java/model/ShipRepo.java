@@ -3,12 +3,13 @@ package model;
 import model.type.ShipType;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-public class ShipRepo implements ShipRepoInterface
+class ShipRepo implements ShipRepoInterface
 {
 	ArrayList<Ship> ships = new ArrayList<>();
-
+	HashMap<ShipType, Integer> regesterdShips = new HashMap<>();
 	@Override
 	public Ship getShip(String targetName)
 	{
@@ -36,7 +37,11 @@ public class ShipRepo implements ShipRepoInterface
 	@Override
 	public void setShip(Ship ship)
 	{
-		//TODO defensive
+		Integer amountOfType = regesterdShips.get(ship.getType());
+		if (amountOfType >= ship.getType().getMaxShips())
+			throw new IllegalStateException("te veel schepen van type" + ShipType.Aircraftcarrier.name());
+		if (ship.getType().getSize() != ship.getTargets().size())
+			throw new IllegalStateException("schip heeft foute aantal targets");
 		ships.add(ship);
 	}
 

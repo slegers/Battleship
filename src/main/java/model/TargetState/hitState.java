@@ -1,6 +1,6 @@
-package model.state;
+package model.TargetState;
 
-public class DamagedState implements TargetState
+class hitState implements TargetState
 {
 
 	@Override

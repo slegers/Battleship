@@ -1,11 +1,15 @@
-package model.state;
+package model.TargetState;
 
 public class HealtyState implements TargetState
 {
+	public HealtyState()
+	{
+	}
+
 	@Override
 	public TargetState damage()
 	{
-		return new DamagedState();
+		return new hitState();
 	}
 
 	@Override
@@ -14,14 +18,13 @@ public class HealtyState implements TargetState
 		throw new IllegalStateException("healty can't sink");
 	}
 
-    @Override
+
     public TargetState placeShip() {
         return null;
     }
 
-    @Override
-    public TargetState missed() {
-        return new EmptyState();
-    }
-
+	@Override
+	public TargetState missed() {
+		throw new IllegalStateException("healty TargetState can't be missed");
+	}
 }

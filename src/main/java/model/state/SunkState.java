@@ -1,5 +1,7 @@
 package model.state;
 
+import model.TargetState.TargetState;
+
 public class SunkState implements TargetState
 {
 	@Override

@@ -1,5 +1,8 @@
 package model.state;
 
+import model.TargetState.HealtyState;
+import model.TargetState.TargetState;
+
 public class EmptyState implements TargetState
 {
 	@Override
