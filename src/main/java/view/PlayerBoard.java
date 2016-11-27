@@ -1,5 +1,8 @@
 package view;
 
+import com.sun.xml.internal.ws.api.config.management.policy.ManagementAssertion;
+import model.settings.SettingsFacade;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -13,12 +16,11 @@ public class PlayerBoard extends JPanel {
 
     private int fieldsize;
 
+    public  PlayerBoard(int fieldsize,int amountOfTiles ){
 
-    public  PlayerBoard(int fieldsize, int amountOfFields){
         setSize(new Dimension(400,400));
-
-        setLayout(new GridLayout((int)Math.sqrt(amountOfFields),(int)Math.sqrt(amountOfFields)));
-        for(int i = 0; i < amountOfFields; i++){
+        setLayout(new GridLayout((int)Math.sqrt(amountOfTiles),(int)Math.sqrt(amountOfTiles)));
+        for(int i = 0; i < amountOfTiles; i++){
             Field field = new Field(fieldsize,Color.gray);
             field.create();
             field.setText(i+"");

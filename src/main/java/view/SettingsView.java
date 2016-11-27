@@ -1,6 +1,7 @@
 package view;
 
 import controller.BattleshipController;
+import model.settings.SettingsFacade;
 import model.type.ShipType;
 
 import javax.swing.*;
@@ -21,9 +22,12 @@ public class SettingsView extends JFrame{
     private static volatile SettingsView settingsView;
     private static boolean done = true;
     private JButton play;
+    private SettingsFacade facade;
     private SettingsView(){
         this.shipLabels = new ArrayList<>();
         this.shipText = new ArrayList<>();
+        this.facade = new SettingsFacade();
+
         init();
     }
 
@@ -77,7 +81,6 @@ public class SettingsView extends JFrame{
             JLabel label = new JLabel("Aantal " + schip.toString() + ":");
             add(label);
             shipLabels.add(label);
-            System.out.print(schip.getSize());
             JTextField text = new JTextField(schip.getMaxShips() +"");
             text.setEnabled(false);
             shipText.add(text);
@@ -90,13 +93,14 @@ public class SettingsView extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 if(canStartGame()) {
                     setVisible(false);
-                    getController().createBattleshipBoard();
+                    facade.setLength(Integer.parseInt(widthText.getText()));
+                    facade.setHeight(Integer.parseInt(heightText.getText()));
+                    getController().createBattleshipBoard(facade);
                 }
             }
 
             public boolean canStartGame() {
-                System.out.println(speler1Text.getText());
-                if(speler1Text.getText() =="" || speler2Text.getText()== ""){
+                if(speler1Text.getText().equals("") || speler2Text.getText().equals("") ){
                     return false;
                 }
                 return true;

@@ -1,7 +1,7 @@
 package view;
 
-import com.sun.scenario.Settings;
 import controller.BattleshipController;
+import model.settings.SettingsFacade;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,13 +11,13 @@ import java.awt.*;
  */
 public class BattleshipBoard extends JFrame{
     private BattleshipController controller;
-    private Settings settings;
+    private SettingsFacade settingsFacade;
     private PlayerBoard player1;
     private PlayerBoard player2;
 
-    public BattleshipBoard(BattleshipController controller,Settings settings) {
+    public BattleshipBoard(BattleshipController controller, SettingsFacade settingsFacade) {
         this.controller = controller;
-        this.settings = settings;
+        this.settingsFacade = settingsFacade;
         createBoard();
 
     }
@@ -27,8 +27,8 @@ public class BattleshipBoard extends JFrame{
     }
 
     public void createBoard(){
-        player1 = new PlayerBoard(20,100);
-        player2 = new PlayerBoard(20,100);
+        player1 = new PlayerBoard(20,settingsFacade.getHeight()*settingsFacade.getLength());
+        player2 = new PlayerBoard(20,settingsFacade.getHeight()*settingsFacade.getLength());
         setLayout(new GridLayout(1,2));
         add(player1);
         add(player2);

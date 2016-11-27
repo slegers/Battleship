@@ -6,6 +6,7 @@ public class SettingsFacade
 {
 
 	public void setLength(int length){
+
         Settings.getSettings().setLength(length);
     }
 
@@ -15,7 +16,7 @@ public class SettingsFacade
 	}
 
     public void setHeight(int height){
-        Settings.getSettings().setLength(height);
+        Settings.getSettings().setHeight(height);
     }
 
     public int getHeight()
