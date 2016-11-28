@@ -29,7 +29,7 @@ public class BattleshipBoard extends JFrame{
 
         JPanel options = new JPanel();
         options.setPreferredSize(new Dimension(300,15));
-        String[] ships = getController().getSettingsFacade().ge
+        //String[] ships = getController().getSettingsFacade().ge
         String[] bookTitles = new String[] {"Effective Java", "Head First Java",
                 "Thinking in Java", "Java for Dummies"};
         JComboBox<String> bookList = new JComboBox<>(bookTitles);
