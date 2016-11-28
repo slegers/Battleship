@@ -1,14 +1,17 @@
 package model;
 
+import model.type.ShipType;
+
 import java.util.ArrayList;
 
 abstract public class Ship implements hitable
 {
 	private ArrayList<Target> targets = new ArrayList<>();
+	private ShipType type;
 
-
-	public Ship(ArrayList<Target> targets)
+	public Ship(ArrayList<Target> targets, ShipType shipType)
 	{
+		type = shipType;
 		this.targets = targets;
 	}
 
@@ -30,5 +33,16 @@ abstract public class Ship implements hitable
 	public boolean inhabitsTarget(Target target)
 	{
 		return this.inhabitsTarget(target.getName());
+	}
+
+	public ShipType getType()
+	{
+		return type;
+	}
+
+	public boolean getHit(String place)
+	{
+		final Target target = targets.parallelStream().filter(obj -> obj.equals(place)).findAny().get();
+		return target.getHit();
 	}
 }

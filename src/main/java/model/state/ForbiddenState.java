@@ -1,12 +1,11 @@
 package model.state;
 
-public class SunkState implements TargetState
+public class ForbiddenState implements TargetState
 {
 	@Override
 	public TargetState damage()
 	{
-
-		throw new IllegalStateException("sunken state can't go to damaged");
+		return null;
 	}
 
 	@Override

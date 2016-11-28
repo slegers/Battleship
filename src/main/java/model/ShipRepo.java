@@ -18,42 +18,43 @@ public class ShipRepo implements ShipRepoInterface
 	@Override
 	public Ship getShip(Target place)
 	{
-		return null;
+		return this.getShip(place.getName());
 	}
 
 	@Override
 	public ShipType getShipType(String place)
 	{
-		return null;
+		return this.getShip(place).getType();
 	}
 
 	@Override
 	public ShipType getShipType(Target place)
 	{
-		return null;
+		return this.getShipType(place.getName());
 	}
 
 	@Override
 	public void setShip(Ship ship)
 	{
-
+		//TODO defensive
+		ships.add(ship);
 	}
 
 	@Override
 	public List<Ship> getAllShips()
 	{
-		return null;
+		return ships;
 	}
 
 	@Override
 	public Boolean hit(String place)
 	{
-		return null;
+		return this.getShip(place).getHit(place);
 	}
 
 	@Override
 	public Boolean hit(Target place)
 	{
-		return null;
+		return this.hit(place.getName());
 	}
 }
