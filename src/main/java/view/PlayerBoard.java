@@ -18,13 +18,9 @@ public class PlayerBoard extends JPanel {
         setLayout(new GridLayout((int)Math.sqrt(amountOfTiles),(int)Math.sqrt(amountOfTiles)));
         for(int i = 0; i < amountOfTiles; i++){
 
-            Field field = new Field(fieldsize,Color.gray);
+            Field field = new Field(fieldsize,Color.gray,i, this);
             field.create();
             //field.setText(i+"");
-            if(i == 33 || i == 34){
-                field.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 1, Color.gray));
-                field.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, Color.black));
-            }
             fields.put(i,field);
             add(field);
         }
