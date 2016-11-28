@@ -3,19 +3,20 @@ package model;
 import model.type.ShipType;
 
 import java.util.ArrayList;
+import java.util.List;
 
-abstract public class Ship implements hitable
+public class Ship implements hitable
 {
-	private ArrayList<Target> targets = new ArrayList<>();
+	private List<Target> targets = new ArrayList<>();
 	private ShipType type;
 
-	public Ship(ArrayList<Target> targets, ShipType shipType)
+	public Ship(List<Target> targets, ShipType shipType)
 	{
 		type = shipType;
 		this.targets = targets;
 	}
 
-	public ArrayList<Target> getTargets()
+	public List<Target> getTargets()
 	{
 		return targets;
 	}
@@ -42,7 +43,13 @@ abstract public class Ship implements hitable
 
 	public boolean getHit(String place)
 	{
-		final Target target = targets.parallelStream().filter(obj -> obj.equals(place)).findAny().get();
+		final Target target = targets.parallelStream().filter(obj -> obj.getName().equals(place)).findAny().get();
 		return target.getHit();
+	}
+
+	@Override
+	public boolean getHit(Target place)
+	{
+		return this.getHit(place.getName());
 	}
 }

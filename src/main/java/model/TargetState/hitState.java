@@ -1,17 +1,18 @@
-package model.state;
+package model.TargetState;
 
-public class ForbiddenState implements TargetState
+class hitState implements TargetState
 {
+
 	@Override
 	public TargetState damage()
 	{
-		return null;
+		return this;
 	}
 
 	@Override
 	public TargetState sink()
 	{
-		return null;
+		return new SunkState();
 	}
 
 	@Override

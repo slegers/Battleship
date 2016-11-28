@@ -1,12 +1,9 @@
-package model.facade;
+package model;
 
-import model.Ship;
-import model.ShipRepo;
-import model.ShipRepoInterface;
-import model.Target;
 import model.type.ShipType;
 
 import java.util.List;
+import java.util.Map;
 
 public class ShipFacade implements ShipRepoInterface
 {
@@ -58,5 +55,10 @@ public class ShipFacade implements ShipRepoInterface
 	public Boolean hit(Target place)
 	{
 		return shipRepo.hit(place);
+	}
+
+	@Override
+	public Map<ShipType, Integer> getAvailableShipCount() {
+		return shipRepo.getAvailableShipCount();
 	}
 }
