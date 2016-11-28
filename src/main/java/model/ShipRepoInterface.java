@@ -3,6 +3,7 @@ package model;
 import model.type.ShipType;
 
 import java.util.List;
+import java.util.Map;
 
 interface ShipRepoInterface
 {
@@ -22,5 +23,6 @@ interface ShipRepoInterface
 
 	Boolean hit(Target place);
 
+	Map<ShipType, Integer> getAvailableShipCount();
 
 }
