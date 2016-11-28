@@ -1,6 +1,6 @@
-package model.state;
+package model.TargetState;
 
-public class DamagedState implements TargetState
+class hitState implements TargetState
 {
 
 	@Override
@@ -13,6 +13,11 @@ public class DamagedState implements TargetState
 	public TargetState sink()
 	{
 		return new SunkState();
+	}
+
+	@Override
+	public TargetState placeShip() {
+		return null;
 	}
 
 	@Override

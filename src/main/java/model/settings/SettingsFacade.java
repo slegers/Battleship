@@ -4,24 +4,47 @@ import model.type.ShipType;
 
 public class SettingsFacade
 {
-	public int getWidth()
-	{
-		return 0;
-	}
+
+	public void setLength(int length){
+
+        Settings.getSettings().setLength(length);
+    }
 
 	public int getLength()
 	{
-		return 0;
+		return Settings.getSettings().getLength();
 	}
 
-	public int getAmount(ShipType shipType)
+    public void setHeight(int height){
+        Settings.getSettings().setHeight(height);
+    }
+
+    public int getHeight()
+    {
+        return Settings.getSettings().getHeight();
+    }
+
+
+    public int getAmount(ShipType shipType)
 	{
-		return 0;
+		return shipType.getMaxShips();
 	}
 
-	public int setAmount(ShipType shipType, int amount)
+	public void setAmount(ShipType shipType, int amount)
 	{
-		return 0;
+		shipType.setMaxShips(amount);
 	}
 
+	public void setNamePlayer1(String name){
+		Settings.getSettings().setNamePlayer1(name);
+	}
+    public void setNamePlayer2(String name){
+        Settings.getSettings().setNamePlayer2(name);
+    }
+    public String getNamePlayer1(){
+        return Settings.getSettings().getNamePlayer1();
+    }
+    public String getNamePlayer2(){
+        return Settings.getSettings().getNamePlayer2();
+    }
 }

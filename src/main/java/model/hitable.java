@@ -1,6 +1,8 @@
 package model;
 
-public interface hitable
+interface hitable
 {
 	boolean getHit(String place);
+
+	boolean getHit(Target place);
 }

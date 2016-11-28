@@ -1,6 +1,7 @@
 package view;
 
 import controller.BattleshipController;
+import model.settings.SettingsFacade;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,6 +24,7 @@ public class BattleshipBoard extends JFrame{
     }
 
     public void createBoard(){
+<<<<<<< HEAD
         JPanel player1Panel = new JPanel();
         player1Panel.setLayout(new FlowLayout());
         JLabel player1Label = new JLabel("player1");
@@ -37,6 +39,13 @@ public class BattleshipBoard extends JFrame{
         player2Panel.add(player2Label);
         player2Panel.add(player2);
 
+=======
+
+
+        int size = getController().getSettingsFacade().getHeight()*getController().getSettingsFacade().getLength();
+        player1 = new PlayerBoard(20,size);
+        player2 = new PlayerBoard(20,size);
+>>>>>>> 2119ca2bc0cbdcdc25e2fb54e21a567060185b26
         setLayout(new GridLayout(1,2));
         add(player1Panel);
         add(player2Panel);

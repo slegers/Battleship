@@ -4,7 +4,7 @@ import model.type.ShipType;
 
 import java.util.List;
 
-public interface ShipRepoInterface
+interface ShipRepoInterface
 {
 	Ship getShip(String place);
 

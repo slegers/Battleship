@@ -1,40 +1,51 @@
 package view;
 
 import controller.BattleshipController;
-import model.Ship;
-import model.facade.ShipFacade;
+import model.settings.SettingsFacade;
 import model.type.ShipType;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
-import static java.awt.SystemColor.text;
 
 /**
  * Created by yanice on 23/11/16.
  */
 public class SettingsView extends JFrame{
     private BattleshipController controller;
-    private JLabel speler1,speler2,width,height;
-    private JTextField speler1Text, speler2Text, widthText, heightText;
+    private JLabel speler1,speler2, length,height;
+    private static JTextField speler1Text, speler2Text, widthText, heightText;
     private ArrayList<JLabel> shipLabels;
     private ArrayList<JTextField> shipText;
-
-    public SettingsView(BattleshipController controller){
+    private static volatile SettingsView settingsView;
+    private static boolean done = true;
+    private JButton play;
+    private SettingsFacade facade;
+    private SettingsView(){
         this.shipLabels = new ArrayList<>();
         this.shipText = new ArrayList<>();
+        this.facade = new SettingsFacade();
+
+        init();
+    }
+
+    public static synchronized SettingsView getSettingsView(){
+        if(done ){
+            settingsView = new SettingsView();
+            done = false;
+        }
+        return settingsView;
+    }
+    public void setController(BattleshipController controller){
         this.controller = controller;
     }
-
-    public SettingsView() {
-
-    }
-
     public BattleshipController getController(){
-        return controller;
+        return this.controller;
     }
-    public void init(){
+
+    private void init(){
         createComponents();
         setBounds(0,0,100,200);
         setTitle("Zeeslag - Instellingen");
@@ -43,7 +54,7 @@ public class SettingsView extends JFrame{
     }
 
     private void createComponents() {
-        setLayout(new GridLayout(4 + ShipType.values().length,2));
+        setLayout(new GridLayout(5 + ShipType.values().length,2));
 
         speler1 = new JLabel("Speler 1:");
         add(speler1);
@@ -55,8 +66,8 @@ public class SettingsView extends JFrame{
         speler2Text.setEnabled(false);
         add(speler2Text);
 
-        width = new JLabel("Breedte:");
-        add(width);
+        length = new JLabel("Breedte:");
+        add(length);
         widthText = new JTextField(10+"");
         widthText.setEnabled(false);
         add(widthText);
@@ -70,12 +81,34 @@ public class SettingsView extends JFrame{
             JLabel label = new JLabel("Aantal " + schip.toString() + ":");
             add(label);
             shipLabels.add(label);
-            System.out.print(schip.getSize());
             JTextField text = new JTextField(schip.getMaxShips() +"");
             text.setEnabled(false);
             shipText.add(text);
             add(text);
         }
+
+        play = new JButton("play");
+        play.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(canStartGame()) {
+                    setVisible(false);
+                    facade.setLength(Integer.parseInt(widthText.getText()));
+                    facade.setHeight(Integer.parseInt(heightText.getText()));
+                    getController().createBattleshipBoard(facade);
+                }
+            }
+
+            public boolean canStartGame() {
+                if(speler1Text.getText().equals("") || speler2Text.getText().equals("") ){
+                    return false;
+                }
+                return true;
+
+            }
+        });
+        add(play);
     }
+
 
 }
