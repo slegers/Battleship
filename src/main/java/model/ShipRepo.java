@@ -5,11 +5,16 @@ import model.type.ShipType;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 class ShipRepo implements ShipRepoInterface
 {
 	ArrayList<Ship> ships = new ArrayList<>();
 	HashMap<ShipType, Integer> regesterdShips = new HashMap<>();
+
+	ShipRepo() {
+	}
+
 	@Override
 	public Ship getShip(String targetName)
 	{
@@ -61,5 +66,14 @@ class ShipRepo implements ShipRepoInterface
 	public Boolean hit(Target place)
 	{
 		return this.hit(place.getName());
+	}
+
+	@Override
+	public Map<ShipType, Integer> getAvailableShipCount() {
+		Map<ShipType, Integer> availableCount = new HashMap<>();
+		for (Map.Entry<ShipType, Integer> varNext : regesterdShips.entrySet()) {
+			availableCount.put(varNext.getKey(), varNext.getKey().getMaxShips() - varNext.getValue());
+		}
+		return availableCount;
 	}
 }
