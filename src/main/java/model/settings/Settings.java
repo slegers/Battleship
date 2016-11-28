@@ -6,7 +6,9 @@ class Settings
 	private static volatile Settings settings;
 	private static boolean done = true;
 	private int length, height;
-	private Settings()
+    private String namePlayer1,namePlayer2;
+
+    private Settings()
 	{
 	}
 
@@ -35,4 +37,17 @@ class Settings
 	public int getHeight(){
 		return height;
 	}
+	public void setNamePlayer1(String name){
+        this.namePlayer1 = name;
+    }
+
+    public String getNamePlayer1() {
+        return namePlayer1;
+    }
+    public String getNamePlayer2() {
+        return namePlayer2;
+    }
+    public void setNamePlayer2(String name){
+        this.namePlayer2 = name;
+    }
 }

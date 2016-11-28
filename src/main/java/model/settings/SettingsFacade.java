@@ -35,4 +35,16 @@ public class SettingsFacade
 		shipType.setMaxShips(amount);
 	}
 
+	public void setNamePlayer1(String name){
+		Settings.getSettings().setNamePlayer1(name);
+	}
+    public void setNamePlayer2(String name){
+        Settings.getSettings().setNamePlayer2(name);
+    }
+    public String getNamePlayer1(){
+        return Settings.getSettings().getNamePlayer1();
+    }
+    public String getNamePlayer2(){
+        return Settings.getSettings().getNamePlayer2();
+    }
 }

@@ -11,15 +11,12 @@ import java.awt.*;
  */
 public class BattleshipBoard extends JFrame{
     private BattleshipController controller;
-    private SettingsFacade settingsFacade;
     private PlayerBoard player1;
     private PlayerBoard player2;
 
-    public BattleshipBoard(BattleshipController controller, SettingsFacade settingsFacade) {
+    public BattleshipBoard(BattleshipController controller) {
         this.controller = controller;
-        this.settingsFacade = settingsFacade;
         createBoard();
-
     }
 
     public BattleshipController getController(){
@@ -27,8 +24,11 @@ public class BattleshipBoard extends JFrame{
     }
 
     public void createBoard(){
-        player1 = new PlayerBoard(20,settingsFacade.getHeight()*settingsFacade.getLength());
-        player2 = new PlayerBoard(20,settingsFacade.getHeight()*settingsFacade.getLength());
+
+
+        int size = getController().getSettingsFacade().getHeight()*getController().getSettingsFacade().getLength();
+        player1 = new PlayerBoard(20,size);
+        player2 = new PlayerBoard(20,size);
         setLayout(new GridLayout(1,2));
         add(player1);
         add(player2);

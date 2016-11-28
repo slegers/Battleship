@@ -1,11 +1,7 @@
 package view;
 
-import com.sun.xml.internal.ws.api.config.management.policy.ManagementAssertion;
-import model.settings.SettingsFacade;
-
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.TreeMap;
 
 /**
@@ -15,9 +11,9 @@ public class PlayerBoard extends JPanel {
     TreeMap<Integer, Field> fields = new TreeMap<Integer, Field>();
 
     private int fieldsize;
+    private JLabel nameJlabel;
 
-    public  PlayerBoard(int fieldsize,int amountOfTiles ){
-
+    public  PlayerBoard(int fieldsize,int amountOfTiles){
         setSize(new Dimension(400,400));
         setLayout(new GridLayout((int)Math.sqrt(amountOfTiles),(int)Math.sqrt(amountOfTiles)));
         for(int i = 0; i < amountOfTiles; i++){

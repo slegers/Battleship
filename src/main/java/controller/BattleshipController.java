@@ -20,6 +20,12 @@ public class BattleshipController {
 
     public void createBattleshipBoard(SettingsFacade facade) {
         this.facade = facade;
-        board = new BattleshipBoard(this,this.facade);
+        board = new BattleshipBoard(this);
+    }
+    public void setSettingsFacade(SettingsFacade facade){
+        this.facade = facade;
+    }
+    public SettingsFacade getSettingsFacade(){
+        return facade;
     }
 }
