@@ -27,7 +27,6 @@ public class SettingsView extends JFrame{
         this.shipLabels = new ArrayList<>();
         this.shipText = new ArrayList<>();
         this.facade = new SettingsFacade();
-
         init();
     }
 
@@ -55,6 +54,7 @@ public class SettingsView extends JFrame{
 
     private void createComponents() {
         setLayout(new GridLayout(5 + ShipType.values().length,2));
+    setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         speler1 = new JLabel("Speler 1:");
         add(speler1);
@@ -93,6 +93,8 @@ public class SettingsView extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 if(canStartGame()) {
                     setVisible(false);
+                    facade.setNamePlayer1(speler1Text.getText());
+                    facade.setNamePlayer2(speler2Text.getText());
                     facade.setLength(Integer.parseInt(widthText.getText()));
                     facade.setHeight(Integer.parseInt(heightText.getText()));
                     getController().createBattleshipBoard(facade);
