@@ -23,16 +23,29 @@ public class BattleshipBoard extends JFrame{
     }
 
     public void createBoard(){
-        player1 = new PlayerBoard(20,100);
-        player2 = new PlayerBoard(20,100);
+        JPanel player1Panel = new JPanel();
+        player1Panel.setLayout(new FlowLayout());
+        JLabel player1Label = new JLabel("player1");
+        player1 = new PlayerBoard(30,100);
+        player1Panel.add(player1Label);
+        player1Panel.add(player1);
+
+        JPanel player2Panel = new JPanel();
+        player2Panel.setLayout(new FlowLayout());
+        JLabel player2Label = new JLabel("player2");
+        player2 = new PlayerBoard(30,100);
+        player2Panel.add(player2Label);
+        player2Panel.add(player2);
+
         setLayout(new GridLayout(1,2));
-        add(player1);
-        add(player2);
+        add(player1Panel);
+        add(player2Panel);
+
         this.setTitle("Zeeslag");
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setSize(new Dimension(1000,500));
-        this.setBounds(0,0,100,200);
-        this.pack();
+        this.setSize(new Dimension(700,380));
+        //this.setBounds(0,0,100,200);
+        //this.pack();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
     }

@@ -13,15 +13,16 @@ public class PlayerBoard extends JPanel {
     private int fieldsize;
 
     public PlayerBoard(int fieldsize, int amountOfFields){
-        setSize(new Dimension(400,400));
+        setSize(new Dimension(600,600));
 
         setLayout(new GridLayout((int)Math.sqrt(amountOfFields),(int)Math.sqrt(amountOfFields)));
         for(int i = 0; i < amountOfFields; i++){
             Field field = new Field(fieldsize,Color.gray);
             field.create();
-            field.setText(i+"");
-            if(i == 33){
+            //field.setText(i+"");
+            if(i == 33 || i == 34){
                 field.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 1, Color.gray));
+                field.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, Color.black));
             }
             fields.put(i,field);
             add(field);

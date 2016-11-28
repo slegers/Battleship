@@ -15,6 +15,6 @@ public class HealtyState implements TargetState
 	}
 
 	@Override
-	public TargetState missed() {
+	public TargetState missed() {return null;
 	}
 }
