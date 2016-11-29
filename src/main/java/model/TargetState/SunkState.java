@@ -3,7 +3,7 @@ package model.TargetState;
 /**
  * Created by louis on 26/11/2016.
  */
-public class SunkState implements TargetState
+class SunkState implements TargetState
 {
 	SunkState()
 	{

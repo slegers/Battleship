@@ -75,6 +75,7 @@ public class BattleshipBoard extends JFrame{
         player2Label.setPreferredSize(new Dimension(300,15));
         player2Label.setHorizontalAlignment(SwingConstants.CENTER);
         player2 = new PlayerBoard(30,100);
+        player2.setEnabled(false);
         player2Panel.add(player2Label);
         player2Panel.add(player2);
 

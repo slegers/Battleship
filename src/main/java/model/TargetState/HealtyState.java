@@ -1,8 +1,8 @@
 package model.TargetState;
 
-public class HealtyState implements TargetState
+class HealtyState implements TargetState
 {
-	public HealtyState()
+	HealtyState()
 	{
 	}
 

@@ -2,6 +2,9 @@ package model.TargetState;
 
 class hitState implements TargetState
 {
+	hitState()
+	{
+	}
 
 	@Override
 	public TargetState damage()

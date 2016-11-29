@@ -1,7 +1,6 @@
 package model;
 
 import model.TargetState.TargetState;
-import model.TargetState.TargetStateFactory;
 
 public class Target
 {
@@ -10,11 +9,11 @@ public class Target
 	private Boolean hit = false;
 	private TargetState state;
 
-	public Target(String name, Ship partOf)
+	public Target(String name, Ship partOf, TargetState targetState)
 	{
 		this.name = name;
 		this.partOf = partOf;
-		state = TargetStateFactory.createHealtyState();
+		state = targetState;
 	}
 
 	public Target(String name)
@@ -45,11 +44,12 @@ public class Target
 
 	public Boolean getHit()
 	{
-		return hit;
+		return state.getClass().getName().equals("HitState");
 	}
 
 	public void setHit(Boolean hit)
 	{
-		this.hit = hit;
+		if (hit)
+			state.damage();
 	}
 }
