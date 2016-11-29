@@ -23,8 +23,9 @@ public class SettingsView extends JFrame{
     private static boolean done = true;
     private JButton play;
 
+
     private SettingsView(){
-        shipTypeJTextFieldHashMap = new HashMap<>();
+            shipTypeJTextFieldHashMap = new HashMap<>();
         init();
     }
 
@@ -52,6 +53,7 @@ public class SettingsView extends JFrame{
 
     private void createComponents() {
         setLayout(new GridLayout(5 + ShipType.values().length,2));
+    setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         speler1 = new JLabel("Speler 1:");
         add(speler1);
