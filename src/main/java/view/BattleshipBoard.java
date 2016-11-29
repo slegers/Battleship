@@ -31,7 +31,8 @@ public class BattleshipBoard extends JFrame{
 
         JPanel options = new JPanel();
         options.setPreferredSize(new Dimension(300,15));
-        options.setLayout(new GridLayout(2,1));
+        options.setLayout(new FlowLayout());
+
         String[] ships = new String[ShipType.values().length];
         int i = 0;
         for(ShipType schip : ShipType.values()){
@@ -44,17 +45,33 @@ public class BattleshipBoard extends JFrame{
                 System.out.println((String) ShipList.getSelectedItem());
             }
         });
-        options.add(ShipList);
-        JPanel alignment = new JPanel();
+        JPanel optionboxPanel = new JPanel();
+        optionboxPanel.setPreferredSize(new Dimension(300,30));
+        optionboxPanel.add(ShipList);
+        options.add(optionboxPanel);
+        JPanel radiobuttons = new JPanel();
         //Add buttons
         JRadioButton horizontal = new JRadioButton("Horizontal");
+        horizontal.setSelected(true);
+        horizontal.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                player1.setRichting(1);
+            }
+        });
         JRadioButton vertical = new JRadioButton("vertical");
+        vertical.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                player1.setRichting(10);
+            }
+        });
         ButtonGroup group = new ButtonGroup();
         group.add(horizontal);
         group.add(vertical);
-        alignment.add(horizontal);
-        alignment.add(vertical);
-        options.add(alignment);
+        radiobuttons.add(horizontal);
+        radiobuttons.add(vertical);
+        options.add(radiobuttons);
 
         JPanel player1Panel = new JPanel();
         player1Panel.setLayout(new FlowLayout());

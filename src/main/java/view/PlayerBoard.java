@@ -8,84 +8,78 @@ import java.util.TreeMap;
  * Created by Kevin on 23/11/2016.
  */
 public class PlayerBoard extends JPanel {
+
     TreeMap<Integer, Field> fields = new TreeMap<Integer, Field>();
     int shipsize = 4;
     int richting = 1;
-
     boolean enabled = true;
 
-    private int fieldsize;
-    private JLabel nameJlabel;
-
-    public  PlayerBoard(int fieldsize,int amountOfTiles){
+    public  PlayerBoard(int fieldSize,int amountOfTiles){
         setSize(new Dimension(400,400));
         setLayout(new GridLayout((int)Math.sqrt(amountOfTiles),(int)Math.sqrt(amountOfTiles)));
         for(int i = 0; i < amountOfTiles; i++){
 
-            Field field = new Field(fieldsize,Color.gray,i, this);
+            Field field = new Field(fieldSize,Color.gray,i, this);
             field.create();
-            fields.put(i,field);
+            getFields().put(i,field);
             add(field);
         }
     }
 
     public void mouseEnter(Field left) {
-        if (enabled) {
+        if (isEnabled()) {
             int column = left.getNumber() % 10;
             int row = left.getNumber() / 10;
-            if ((richting == 1 && shipsize + column <= 10) || (richting == 10 && shipsize + row <= 10)) {
-                if (richting == 1) {
-                    left.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.gray));
-                    left.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 0, Color.black));
+            if ((getRichting() == 1 && getShipsize() + column <= 10) || (getRichting() == 10 && getShipsize() + row <= 10)) {
+                if (getRichting() == 1) {
+                    left.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 0, getStandardBorderColor()));
                 } else {
-                    left.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.gray));
-                    left.setBorder(BorderFactory.createMatteBorder(1, 1, 0, 1, Color.black));
+                    left.setBorder(BorderFactory.createMatteBorder(1, 1, 0, 1, getStandardBorderColor()));
                 }
-                left.setBackground(Color.white);
+                left.setColor(getSelectedBackgroundColor());
                 int i = 1;
-                while (i <= shipsize - 2) {
-                    Field middle = fields.get(left.getNumber() + i * richting);
-                    if (richting == 1) {
-                        middle.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 1, Color.gray));
-                        middle.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, Color.black));
+                while (i <= getShipsize() - 2) {
+                    Field middle = getFields().get(left.getNumber() + i * getRichting());
+                    if (getRichting() == 1) {
+                        middle.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, getStandardBorderColor()));
                     } else {
-                        middle.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, Color.gray));
-                        middle.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 1, Color.black));
+                        middle.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 1, getStandardBorderColor()));
                     }
-                    middle.setBackground(Color.white);
+                    middle.setColor(getSelectedBackgroundColor());
                     i++;
                 }
-                Field right = fields.get(left.getNumber() + i * richting);
-                if (richting == 1) {
-                    right.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, Color.gray));
-                    right.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 1, Color.black));
+                Field right = getFields().get(left.getNumber() + i * getRichting());
+                if (getRichting() == 1) {
+                    right.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 1, getStandardBorderColor()));
                 } else {
-                    right.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.gray));
-                    right.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, Color.black));
+                    right.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, getStandardBorderColor()));
                 }
-                right.setBackground(Color.white);
+                right.setColor(getSelectedBackgroundColor());
             }
         }
     }
     public void mouseExit(Field left) {
-        if (enabled) {
+        if (isEnabled()) {
             int column = left.getNumber() % 10;
             int row = left.getNumber() / 10;
-            if ((richting == 1 && shipsize + column <= 10) || (richting == 10 && shipsize + row <= 10)) {
-                left.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
-                left.setBackground(left.getColor());
+            if ((getRichting() == 1 && getShipsize() + column <= 10) || (getRichting() == 10 && getShipsize() + row <= 10)) {
+                left.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, getStandardBorderColor()));
+                left.setBackground(getStandardBackGroundColor());
                 int i = 1;
-                while (i <= shipsize - 2) {
-                    Field middle = fields.get(left.getNumber() + i * richting);
-                    middle.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
-                    middle.setBackground(middle.getColor());
+                while (i <= getShipsize() - 2) {
+                    Field middle = getFields().get(left.getNumber() + i * getRichting());
+                    middle.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, getStandardBorderColor()));
+                    middle.setBackground(getStandardBackGroundColor());
                     i++;
                 }
-                Field right = fields.get(left.getNumber() + i * richting);
-                right.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
-                right.setBackground(right.getColor());
+                Field right = getFields().get(left.getNumber() + i * getRichting());
+                right.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, getStandardBorderColor()));
+                right.setBackground(getStandardBackGroundColor());
             }
         }
+    }
+    public void mouseClick(Field f){
+
     }
     public int getShipsize() {
         return shipsize;
@@ -113,20 +107,23 @@ public class PlayerBoard extends JPanel {
         this.enabled = enabled;
     }
 
-    public int getFieldsize() {
-        return fieldsize;
+    public TreeMap<Integer, Field> getFields() {
+        return fields;
     }
 
-    public void setFieldsize(int fieldsize) {
-        this.fieldsize = fieldsize;
+    public void setFields(TreeMap<Integer, Field> fields) {
+        this.fields = fields;
     }
 
-    public JLabel getNameJlabel() {
-        return nameJlabel;
+    public Color getStandardBorderColor(){
+        return Color.black;
     }
 
-    public void setNameJlabel(JLabel nameJlabel) {
-        this.nameJlabel = nameJlabel;
+    public Color getSelectedBackgroundColor(){
+        return Color.white;
     }
 
+    public Color getStandardBackGroundColor(){
+        return Color.gray;
+    }
 }

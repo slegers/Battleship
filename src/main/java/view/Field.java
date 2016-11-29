@@ -47,6 +47,11 @@ public class Field extends JPanel {
             public void mouseExited(MouseEvent e){
                 getPlayerBoard().mouseExit((Field)e.getSource());
             }
+
+            @Override
+            public void mouseClicked(MouseEvent e){
+                getPlayerBoard().mouseClick((Field)e.getSource());
+            }
         });
     }
 
@@ -64,6 +69,7 @@ public class Field extends JPanel {
 
     public void setColor(Color color) {
         this.color = color;
+        setBackground(color);
     }
 
     public void setPlayerBoard(PlayerBoard board){
