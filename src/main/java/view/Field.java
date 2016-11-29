@@ -6,9 +6,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 /**
- * Created by Peelm on 23/11/2016.
+ * Created by Kevin on 23/11/2016.
  */
 public class Field extends JPanel {
+
 
     private int fieldSize;
     private Color color;
