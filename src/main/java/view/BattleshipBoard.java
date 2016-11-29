@@ -27,16 +27,16 @@ public class BattleshipBoard extends JFrame{
 
         JPanel player1Panel = new JPanel();
         player1Panel.setLayout(new FlowLayout());
-        //JLabel player1Label = new JLabel(getController().getSettingsFacade().getNamePlayer1());
-        JLabel player1Label = new JLabel("Player1");
+        JLabel player1Label = new JLabel(getController().getSettingsFacade().getNamePlayer1());
+       // JLabel player1Label = new JLabel("Player1");
         player1 = new PlayerBoard(30,100);
         player1Panel.add(player1Label);
         player1Panel.add(player1);
 
         JPanel player2Panel = new JPanel();
         player2Panel.setLayout(new FlowLayout());
-        //JLabel player2Label = new JLabel(getController().getSettingsFacade().getNamePlayer2());
-        JLabel player2Label = new JLabel("Player2");
+        JLabel player2Label = new JLabel(getController().getSettingsFacade().getNamePlayer2());
+        //JLabel player2Label = new JLabel("Player2");
         player2 = new PlayerBoard(30,100);
         player2Panel.add(player2Label);
         player2Panel.add(player2);

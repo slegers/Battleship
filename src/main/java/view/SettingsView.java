@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by yanice on 23/11/16.
@@ -17,17 +18,13 @@ public class SettingsView extends JFrame{
     private BattleshipController controller;
     private JLabel speler1,speler2, length,height;
     private static JTextField speler1Text, speler2Text, widthText, heightText;
-    private ArrayList<JLabel> shipLabels;
-    private ArrayList<JTextField> shipText;
+    private HashMap<ShipType,Integer> shipTypeJTextFieldHashMap;
     private static volatile SettingsView settingsView;
     private static boolean done = true;
     private JButton play;
-    private SettingsFacade facade;
-    private SettingsView(){
-        this.shipLabels = new ArrayList<>();
-        this.shipText = new ArrayList<>();
-        this.facade = new SettingsFacade();
 
+    private SettingsView(){
+        shipTypeJTextFieldHashMap = new HashMap<>();
         init();
     }
 
@@ -80,10 +77,10 @@ public class SettingsView extends JFrame{
         for(ShipType schip : ShipType.values()){
             JLabel label = new JLabel("Aantal " + schip.toString() + ":");
             add(label);
-            shipLabels.add(label);
             JTextField text = new JTextField(schip.getMaxShips() +"");
             text.setEnabled(false);
-            shipText.add(text);
+            //TODO: validation settings
+           shipTypeJTextFieldHashMap.put(schip,Integer.parseInt(text.getText()));
             add(text);
         }
 
@@ -93,9 +90,8 @@ public class SettingsView extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 if(canStartGame()) {
                     setVisible(false);
-                    facade.setLength(Integer.parseInt(widthText.getText()));
-                    facade.setHeight(Integer.parseInt(heightText.getText()));
-                    getController().createBattleshipBoard(facade);
+                    updateSettings();
+                    getController().createBattleshipBoard();
                 }
             }
 
@@ -109,6 +105,14 @@ public class SettingsView extends JFrame{
         });
         add(play);
     }
-
+    public void updateSettings(){
+        getController().getSettingsFacade().setLength(Integer.parseInt(widthText.getText()));
+        getController().getSettingsFacade().setHeight(Integer.parseInt(heightText.getText()));
+        getController().getSettingsFacade().setNamePlayer1(speler1Text.getText());
+        getController().getSettingsFacade().setNamePlayer2(speler2Text.getText());
+        for(ShipType schip : ShipType.values()){
+            getController().getSettingsFacade().setAmount(schip,shipTypeJTextFieldHashMap.get(schip));
+        }
+    }
 
 }

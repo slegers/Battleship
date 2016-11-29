@@ -14,12 +14,12 @@ public class BattleshipController {
     private BattleshipBoard board;
 
     public BattleshipController(){
+        setSettingsFacade(new SettingsFacade());
         SettingsView.getSettingsView().setController(this);
         SettingsView.getSettingsView();
     }
 
-    public void createBattleshipBoard(SettingsFacade facade) {
-        this.facade = facade;
+    public void createBattleshipBoard() {
         board = new BattleshipBoard(this);
     }
     public void setSettingsFacade(SettingsFacade facade){
