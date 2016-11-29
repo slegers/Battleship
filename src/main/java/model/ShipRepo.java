@@ -13,6 +13,11 @@ class ShipRepo implements ShipRepoInterface
 	HashMap<ShipType, Integer> regesterdShips = new HashMap<>();
 
 	ShipRepo() {
+		//init regesterdShips
+		for (ShipType shipType : ShipType.values())
+		{
+			regesterdShips.put(shipType, 0);
+		}
 	}
 
 	@Override

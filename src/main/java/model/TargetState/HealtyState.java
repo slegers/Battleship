@@ -9,22 +9,12 @@ class HealtyState implements TargetState
 	@Override
 	public TargetState damage()
 	{
-		return new hitState();
+		return new HitState();
 	}
 
 	@Override
 	public TargetState sink()
 	{
-		throw new IllegalStateException("healty can't sink");
-	}
-
-
-    public TargetState placeShip() {
-        return null;
-    }
-
-	public TargetState missed() {
-		throw new IllegalStateException("healty TargetState can't be missed");
-
+		throw new IllegalStateException("Healty can't imediatly sink");
 	}
 }

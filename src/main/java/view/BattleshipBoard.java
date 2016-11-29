@@ -1,8 +1,6 @@
 package view;
 
 import controller.BattleshipController;
-import model.Ship;
-import model.settings.SettingsFacade;
 import model.type.ShipType;
 
 import javax.swing.*;
@@ -36,7 +34,7 @@ public class BattleshipBoard extends JFrame{
         String[] ships = new String[ShipType.values().length];
         int i = 0;
         for(ShipType schip : ShipType.values()){
-            ships[i] = schip.toString();
+            ships[i] = schip.toString() + " ("+ getController().getShipFacade("player1").getAvailableShipCount().get(schip)  +")";
             i++;
         };
         JComboBox<String> ShipList = new JComboBox<>(ships);
