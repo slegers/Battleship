@@ -39,23 +39,12 @@ public class Field extends JPanel {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                //setBackground(Color.blue);
-                setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.gray));
-                setBorder(BorderFactory.createMatteBorder(1, 1, 1, 0, Color.black));
-                setBackground(Color.white);
-                Field left = getPlayerBoard().fields.get(number+1);
-                left.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, Color.gray));
-                left.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 1, Color.black));
-                left.setBackground(Color.white);
+                getPlayerBoard().mouseEnter((Field)e.getSource());
             }
 
             @Override
             public void mouseExited(MouseEvent e){
-                setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
-                setBackground(getColor());
-                Field left = getPlayerBoard().fields.get(number+1);
-                left.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
-                left.setBackground(left.getColor());
+                getPlayerBoard().mouseExit((Field)e.getSource());
             }
         });
     }
