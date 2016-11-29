@@ -9,6 +9,10 @@ public class ShipFacade implements ShipRepoInterface
 {
 	ShipRepo shipRepo = new ShipRepo();
 
+	ShipFacade()
+	{
+	}
+
 	@Override
 	public Ship getShip(String place)
 	{
