@@ -48,6 +48,7 @@ public class BattleshipBoard extends JFrame{
         JPanel alignment = new JPanel();
         //Add buttons
         JRadioButton horizontal = new JRadioButton("Horizontal");
+        horizontal.setSelected(true);
         JRadioButton vertical = new JRadioButton("vertical");
         ButtonGroup group = new ButtonGroup();
         group.add(horizontal);
