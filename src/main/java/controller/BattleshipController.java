@@ -1,9 +1,10 @@
 package controller;
 
 import com.sun.scenario.Settings;
+import model.BoardFacade;
+import model.ShipFacade;
 import model.settings.SettingsFacade;
 import view.BattleshipBoard;
-import view.PlayerBoard;
 import view.SettingsView;
 
 /**
@@ -11,6 +12,7 @@ import view.SettingsView;
  */
 public class BattleshipController {
     private SettingsFacade facade;
+    private BoardFacade boardFacade = new BoardFacade();
     private BattleshipBoard board;
 
     public BattleshipController(){
@@ -27,5 +29,9 @@ public class BattleshipController {
     }
     public SettingsFacade getSettingsFacade(){
         return facade;
+    }
+
+    public ShipFacade getShipFacade(String id){
+        return boardFacade.getShipRepo(id);
     }
 }

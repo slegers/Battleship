@@ -4,9 +4,9 @@ import java.util.HashMap;
 
 public class BoardFacade
 {
-	HashMap<String, ShipRepoInterface> boardRepo = new HashMap<>();
+	HashMap<String, ShipFacade> boardRepo = new HashMap<>();
 
-	ShipRepoInterface getShipRepo(String id)
+	public ShipFacade getShipRepo(String id)
 	{
 		if (!boardRepo.containsKey(id))
 		{

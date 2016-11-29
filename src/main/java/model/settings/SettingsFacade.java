@@ -25,7 +25,7 @@ public class SettingsFacade
     }
 
 
-    public int getAmount(ShipType shipType)
+    public int getMaxAmount(ShipType shipType)
 	{
 		return shipType.getMaxShips();
 	}
