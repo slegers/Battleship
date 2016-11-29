@@ -19,17 +19,6 @@ class SunkState implements TargetState
 	@Override
 	public TargetState sink()
 	{
-		throw new IllegalStateException("sunkstate is already sunk");
-	}
-
-	@Override
-	public TargetState placeShip() {
-		return null;
-	}
-
-	@Override
-	public TargetState missed()
-	{
-		throw new IllegalStateException("sunkstate can't be missed");
+		return this;
 	}
 }
