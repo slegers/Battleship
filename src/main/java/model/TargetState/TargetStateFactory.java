@@ -14,4 +14,9 @@ public interface TargetStateFactory
 	{
 		return new HealtyState();
 	}
+
+	static TargetState createForbiddenState()
+	{
+		return new ForbiddenState();
+	}
 }
