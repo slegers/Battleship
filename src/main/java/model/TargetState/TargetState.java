@@ -6,8 +6,4 @@ public interface TargetState
 
 	TargetState sink();
 
-	TargetState placeShip();
-
-	TargetState missed();
-
 }
