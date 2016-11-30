@@ -14,14 +14,14 @@ public class PlayerBoard extends JPanel {
     int richting = 1;
     boolean enabled = true;
 
-    public  PlayerBoard(int fieldSize,int amountOfTiles){
-        setSize(new Dimension(400,400));
-        setLayout(new GridLayout((int)Math.sqrt(amountOfTiles),(int)Math.sqrt(amountOfTiles)));
-        for(int i = 0; i < amountOfTiles; i++){
+    public PlayerBoard(int fieldSize, int amountOfTiles) {
+        setSize(new Dimension(400, 400));
+        setLayout(new GridLayout((int) Math.sqrt(amountOfTiles), (int) Math.sqrt(amountOfTiles)));
+        for (int i = 0; i < amountOfTiles; i++) {
 
-            Field field = new Field(fieldSize,Color.gray,i, this);
+            Field field = new Field(fieldSize, Color.gray, i, this);
             field.create();
-            getFields().put(i,field);
+            getFields().put(i, field);
             add(field);
         }
     }
@@ -58,6 +58,7 @@ public class PlayerBoard extends JPanel {
             }
         }
     }
+
     public void mouseExit(Field left) {
         if (isEnabled()) {
             int column = left.getNumber() % 10;
@@ -78,9 +79,11 @@ public class PlayerBoard extends JPanel {
             }
         }
     }
-    public void mouseClick(Field f){
+
+    public void mouseClick(Field f) {
 
     }
+
     public int getShipsize() {
         return shipsize;
     }
@@ -115,15 +118,15 @@ public class PlayerBoard extends JPanel {
         this.fields = fields;
     }
 
-    public Color getStandardBorderColor(){
+    public Color getStandardBorderColor() {
         return Color.black;
     }
 
-    public Color getSelectedBackgroundColor(){
+    public Color getSelectedBackgroundColor() {
         return Color.white;
     }
 
-    public Color getStandardBackGroundColor(){
+    public Color getStandardBackGroundColor() {
         return Color.gray;
     }
 }

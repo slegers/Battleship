@@ -25,32 +25,31 @@ public class Field extends JPanel {
 
     private int number;
 
-    public Field(int size, Color color, int number, PlayerBoard board){
+    public Field(int size, Color color, int number, PlayerBoard board) {
         setFieldSize(size);
         setColor(color);
         setNumber(number);
         setPlayerBoard(board);
     }
 
-    public void create(){
+    public void create() {
         setBorder(BorderFactory.createLineBorder(Color.black));
-        setPreferredSize(new Dimension(getFieldSize(),getFieldSize()));
+        setPreferredSize(new Dimension(getFieldSize(), getFieldSize()));
         setBackground(getColor());
         setVisible(true);
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                getPlayerBoard().mouseEnter((Field)e.getSource());
+                getPlayerBoard().mouseEnter((Field) e.getSource());
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                getPlayerBoard().mouseExit((Field) e.getSource());
             }
 
             @Override
-            public void mouseExited(MouseEvent e){
-                getPlayerBoard().mouseExit((Field)e.getSource());
-            }
-
-            @Override
-            public void mouseClicked(MouseEvent e){
-                getPlayerBoard().mouseClick((Field)e.getSource());
+            public void mouseClicked(MouseEvent e) {
+                getPlayerBoard().mouseClick((Field) e.getSource());
             }
         });
     }
@@ -72,11 +71,11 @@ public class Field extends JPanel {
         setBackground(color);
     }
 
-    public void setPlayerBoard(PlayerBoard board){
+    public void setPlayerBoard(PlayerBoard board) {
         this.board = board;
     }
 
-    public PlayerBoard getPlayerBoard(){
+    public PlayerBoard getPlayerBoard() {
         return this.board;
     }
 

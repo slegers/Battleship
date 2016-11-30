@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by yanice on 18/11/16.
  */
-public class BattleshipBoard extends JFrame{
+public class BattleshipBoard extends JFrame {
     private BattleshipController controller;
     private PlayerBoard player1;
     private PlayerBoard player2;
@@ -21,34 +21,57 @@ public class BattleshipBoard extends JFrame{
         createBoard();
     }
 
-    public BattleshipController getController(){
+    public BattleshipController getController() {
         return controller;
     }
 
-    public void createBoard(){
+    public void createBoard() {
+        JPanel options = createOptionsPanel();
+        JPanel player1Panel = createPlayer1Panel();
+        JPanel player2Panel = createPlayer2Panel();
+
+        setLayout(new GridLayout(1, 3));
+        this.setTitle("Zeeslag");
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setSize(new Dimension(1050, 380));
+        this.setVisible(true);
+        this.setLocationRelativeTo(null);
+
+        add(options);
+        add(player1Panel);
+        add(player2Panel);
+    }
+
+    private JPanel createOptionsPanel() {
+        JPanel selectShip = selectShip();
+        JPanel selectDirection = selectDirection();
+        JPanel startButton = startButton();
 
         JPanel options = new JPanel();
-        options.setPreferredSize(new Dimension(300,15));
-        options.setLayout(new FlowLayout());
+        options.setPreferredSize(new Dimension(300, 15));
+        options.setLayout(new GridLayout(3,1));
 
-        String[] ships = new String[ShipType.values().length];
-        int i = 0;
-        for(ShipType schip : ShipType.values()){
-            ships[i] = schip.toString() + " ("+ getController().getShipFacade("player1").getAvailableShipCount().get(schip)  +")";
-            i++;
-        };
-        JComboBox<String> ShipList = new JComboBox<>(ships);
-        ShipList.addActionListener (new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                player1.setShipsize((int)ShipType.valueOf(((String)ShipList.getSelectedItem()).split(" ")[0]).getSize());
-            }
-        });
-        JPanel optionboxPanel = new JPanel();
-        optionboxPanel.setPreferredSize(new Dimension(300,30));
-        optionboxPanel.add(ShipList);
-        options.add(optionboxPanel);
-        JPanel radiobuttons = new JPanel();
-        //Add buttons
+        options.add(selectShip);
+        options.add(selectDirection);
+        options.add(startButton);
+
+        return options;
+    }
+
+    private JPanel startButton(){
+        JPanel startButton = new JPanel();
+        startButton.setLayout(new GridBagLayout());
+
+        JButton button = new JButton("Start");
+        button.setPreferredSize(new Dimension(200,30));
+
+        startButton.add(button);
+
+        return startButton;
+    }
+
+    private JPanel selectDirection(){
+        JPanel direction = new JPanel();
         JRadioButton horizontal = new JRadioButton("Horizontal");
         horizontal.setSelected(true);
         horizontal.addActionListener(new ActionListener() {
@@ -57,7 +80,7 @@ public class BattleshipBoard extends JFrame{
                 player1.setRichting(1);
             }
         });
-        JRadioButton vertical = new JRadioButton("vertical");
+        JRadioButton vertical = new JRadioButton("Vertical");
         vertical.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -67,38 +90,67 @@ public class BattleshipBoard extends JFrame{
         ButtonGroup group = new ButtonGroup();
         group.add(horizontal);
         group.add(vertical);
-        radiobuttons.add(horizontal);
-        radiobuttons.add(vertical);
-        options.add(radiobuttons);
 
+        JLabel directiontitle = new JLabel("Richting:");
+        directiontitle.setPreferredSize(new Dimension(300,30));
+
+        JPanel buttons = new JPanel();
+        buttons.setLayout(new GridLayout(1,2));
+        buttons.add(horizontal);
+        buttons.add(vertical);
+
+        direction.add(directiontitle);
+        direction.add(buttons);
+        return direction;
+    }
+
+    private JPanel selectShip() {
+        String[] ships = new String[ShipType.values().length];
+        int i = 0;
+        for (ShipType schip : ShipType.values()) {
+            ships[i] = schip.toString() + " (" + getController().getShipFacade("player1").getAvailableShipCount().get(schip) + ")";
+            i++;
+        }
+        JComboBox<String> ShipList = new JComboBox<>(ships);
+        ShipList.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                player1.setShipsize((int) ShipType.valueOf(((String) ShipList.getSelectedItem()).split(" ")[0]).getSize());
+            }
+        });
+
+        JLabel shipsTitle = new JLabel("Beschikbare schepen:");
+        shipsTitle.setPreferredSize(new Dimension(300,30));
+
+        JPanel selectShip = new JPanel();
+        selectShip.setLayout(new FlowLayout());
+        selectShip.setPreferredSize(new Dimension(300, 30));
+        selectShip.add(shipsTitle);
+        selectShip.add(ShipList);
+        return selectShip;
+    }
+
+    private JPanel createPlayer1Panel() {
         JPanel player1Panel = new JPanel();
         player1Panel.setLayout(new FlowLayout());
         JLabel player1Label = new JLabel(getController().getSettingsFacade().getNamePlayer1());
-        player1Label.setPreferredSize(new Dimension(300,15));
+        player1Label.setPreferredSize(new Dimension(300, 15));
         player1Label.setHorizontalAlignment(SwingConstants.CENTER);
-        player1 = new PlayerBoard(30,100);
+        player1 = new PlayerBoard(30, 100);
         player1Panel.add(player1Label);
         player1Panel.add(player1);
+        return player1Panel;
+    }
 
+    private JPanel createPlayer2Panel() {
         JPanel player2Panel = new JPanel();
         player2Panel.setLayout(new FlowLayout());
         JLabel player2Label = new JLabel(getController().getSettingsFacade().getNamePlayer2());
-        player2Label.setPreferredSize(new Dimension(300,15));
+        player2Label.setPreferredSize(new Dimension(300, 15));
         player2Label.setHorizontalAlignment(SwingConstants.CENTER);
-        player2 = new PlayerBoard(30,100);
+        player2 = new PlayerBoard(30, 100);
         player2.setEnabled(false);
         player2Panel.add(player2Label);
         player2Panel.add(player2);
-
-        setLayout(new GridLayout(1,3));
-        add(options);
-        add(player1Panel);
-        add(player2Panel);
-
-        this.setTitle("Zeeslag");
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setSize(new Dimension(1050,380));
-        this.setVisible(true);
-        this.setLocationRelativeTo(null);
+        return player2Panel;
     }
 }

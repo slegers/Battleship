@@ -1,6 +1,5 @@
 package controller;
 
-import com.sun.scenario.Settings;
 import model.BoardFacade;
 import model.ShipFacade;
 import model.settings.SettingsFacade;
