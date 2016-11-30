@@ -9,8 +9,8 @@ import java.util.Map;
 
 class ShipRepo implements ShipRepoInterface
 {
-	ArrayList<Ship> ships = new ArrayList<>();
-	HashMap<ShipType, Integer> regesterdShips = new HashMap<>();
+	private ArrayList<Ship> ships = new ArrayList<>();
+	private HashMap<ShipType, Integer> regesterdShips = new HashMap<>();
 
 	ShipRepo() {
 		//init regesterdShips

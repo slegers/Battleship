@@ -1,6 +1,5 @@
 package controller;
 
-import com.sun.scenario.Settings;
 import model.BoardFacade;
 import model.ShipFacade;
 import model.settings.SettingsFacade;
@@ -24,11 +23,14 @@ public class BattleshipController {
     public void createBattleshipBoard() {
         board = new BattleshipBoard(this);
     }
-    public void setSettingsFacade(SettingsFacade facade){
-        this.facade = facade;
-    }
+
     public SettingsFacade getSettingsFacade(){
         return facade;
+    }
+
+    public void setSettingsFacade(SettingsFacade facade)
+    {
+        this.facade = facade;
     }
 
     public ShipFacade getShipFacade(String id){

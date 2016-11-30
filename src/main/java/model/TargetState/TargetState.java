@@ -6,4 +6,9 @@ public interface TargetState
 
 	TargetState sink();
 
+	default void processShipState()
+	{
+
+	}
+
 }
