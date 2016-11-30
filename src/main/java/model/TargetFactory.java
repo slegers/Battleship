@@ -1,12 +1,13 @@
 package model;
 
+import model.TargetState.TargetState;
 import model.TargetState.TargetStateFactory;
 
 public interface TargetFactory
 {
-	static Target ceateTarget(String place)
+	static Target ceateTarget(String place, TargetState targetState)
 	{
-		return new Target(place);
+		return new Target(place, targetState);
 	}
 
 	static Target createTarget(String place, Ship ship)

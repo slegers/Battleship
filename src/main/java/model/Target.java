@@ -15,10 +15,17 @@ public class Target
 		state = targetState;
 	}
 
+	@Deprecated
 	public Target(String name)
 	{
 		this.name = name;
 
+	}
+
+	public Target(String name, TargetState targetState)
+	{
+		this.name = name;
+		this.state = targetState;
 	}
 
 	public String getName()
