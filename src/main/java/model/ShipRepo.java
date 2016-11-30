@@ -64,7 +64,7 @@ class ShipRepo implements ShipRepoInterface
 	@Override
 	public Boolean hit(String place)
 	{
-		return this.getShip(place).getHit(place);
+		return this.getShip(place).getsHit(place);
 	}
 
 	@Override
