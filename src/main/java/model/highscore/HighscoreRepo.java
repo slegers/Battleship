@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class HighscoreRepo implements HighscoreRepoInterface
+class HighscoreRepo implements HighscoreRepoInterface
 {
 	static boolean made = true;
 
@@ -15,7 +15,7 @@ public class HighscoreRepo implements HighscoreRepoInterface
 	{
 	}
 
-	HighscoreRepo createHighscoreRepo()
+	static HighscoreRepo createHighscoreRepo()
 	{
 		if (made)
 		{
