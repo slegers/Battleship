@@ -1,4 +1,4 @@
-package model.highscore;
+package model.persister;
 
 public class ToFile
 {

@@ -8,7 +8,7 @@ public class Target
 	private Ship partOf;
 	private TargetState state;
 
-	public Target(String name, Ship partOf, TargetState targetState)
+	Target(String name, Ship partOf, TargetState targetState)
 	{
 		this.name = name;
 		this.partOf = partOf;

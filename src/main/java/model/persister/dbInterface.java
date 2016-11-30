@@ -1,5 +1,6 @@
-package model.highscore;
+package model.persister;
 
 public class dbInterface
 {
+
 }
