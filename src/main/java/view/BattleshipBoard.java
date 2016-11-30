@@ -40,7 +40,7 @@ public class BattleshipBoard extends JFrame{
         JComboBox<String> ShipList = new JComboBox<>(ships);
         ShipList.addActionListener (new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println((String) ShipList.getSelectedItem());
+                player1.setShipsize((int)ShipType.valueOf(((String)ShipList.getSelectedItem()).split(" ")[0]).getSize());
             }
         });
         JPanel optionboxPanel = new JPanel();
@@ -74,9 +74,6 @@ public class BattleshipBoard extends JFrame{
         JPanel player1Panel = new JPanel();
         player1Panel.setLayout(new FlowLayout());
         JLabel player1Label = new JLabel(getController().getSettingsFacade().getNamePlayer1());
-
-       // JLabel player1Label = new JLabel("Player1");
-
         player1Label.setPreferredSize(new Dimension(300,15));
         player1Label.setHorizontalAlignment(SwingConstants.CENTER);
         player1 = new PlayerBoard(30,100);
@@ -86,7 +83,6 @@ public class BattleshipBoard extends JFrame{
         JPanel player2Panel = new JPanel();
         player2Panel.setLayout(new FlowLayout());
         JLabel player2Label = new JLabel(getController().getSettingsFacade().getNamePlayer2());
-
         player2Label.setPreferredSize(new Dimension(300,15));
         player2Label.setHorizontalAlignment(SwingConstants.CENTER);
         player2 = new PlayerBoard(30,100);

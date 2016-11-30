@@ -10,7 +10,7 @@ import java.util.TreeMap;
 public class PlayerBoard extends JPanel {
 
     TreeMap<Integer, Field> fields = new TreeMap<Integer, Field>();
-    int shipsize = 4;
+    int shipsize = 5;
     int richting = 1;
     boolean enabled = true;
 
