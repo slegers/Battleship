@@ -49,6 +49,7 @@ public class SettingsView extends JFrame{
         setTitle("Zeeslag - Instellingen");
         setVisible(true);
         pack();
+        setLocationRelativeTo(null);
     }
 
     private void createComponents() {
