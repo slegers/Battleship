@@ -1,5 +1,5 @@
 package model.highscore;
 
-public interface Persister
+public class HighscoreFacade
 {
 }
