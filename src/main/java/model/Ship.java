@@ -31,6 +31,16 @@ public class Ship implements hitable
 		return targets.parallelStream().anyMatch(obj -> obj.getName().equals(target));
 	}
 
+	private Target getTarget(String place)
+	{
+		return targets.parallelStream().filter(obj -> obj.getName().equals(place)).findAny().get();
+	}
+
+	private Target getTarget(Target target)
+	{
+		return getTarget(target.getName());
+	}
+
 	public boolean inhabitsTarget(Target target)
 	{
 		return this.inhabitsTarget(target.getName());
@@ -41,15 +51,15 @@ public class Ship implements hitable
 		return type;
 	}
 
-	public boolean getHit(String place)
+	public boolean getsHit(String place)
 	{
 		final Target target = targets.parallelStream().filter(obj -> obj.getName().equals(place)).findAny().get();
 		return target.getHit();
 	}
 
 	@Override
-	public boolean getHit(Target place)
+	public boolean getsHit(Target place)
 	{
-		return this.getHit(place.getName());
+		return this.getsHit(place.getName());
 	}
 }

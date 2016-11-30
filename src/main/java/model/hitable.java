@@ -2,7 +2,7 @@ package model;
 
 interface hitable
 {
-	boolean getHit(String place);
+	boolean getsHit(String place);
 
-	boolean getHit(Target place);
+	boolean getsHit(Target place);
 }

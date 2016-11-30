@@ -6,7 +6,6 @@ public class Target
 {
 	private String name;
 	private Ship partOf;
-	private Boolean hit = false;
 	private TargetState state;
 
 	public Target(String name, Ship partOf, TargetState targetState)
@@ -16,10 +15,17 @@ public class Target
 		state = targetState;
 	}
 
+	@Deprecated
 	public Target(String name)
 	{
 		this.name = name;
 
+	}
+
+	public Target(String name, TargetState targetState)
+	{
+		this.name = name;
+		this.state = targetState;
 	}
 
 	public String getName()
@@ -49,7 +55,6 @@ public class Target
 
 	public void setHit(Boolean hit)
 	{
-		if (hit)
-			state.damage();
+		state = state.damage();
 	}
 }

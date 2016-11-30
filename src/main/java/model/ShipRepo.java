@@ -9,8 +9,8 @@ import java.util.Map;
 
 class ShipRepo implements ShipRepoInterface
 {
-	ArrayList<Ship> ships = new ArrayList<>();
-	HashMap<ShipType, Integer> regesterdShips = new HashMap<>();
+	private ArrayList<Ship> ships = new ArrayList<>();
+	private HashMap<ShipType, Integer> regesterdShips = new HashMap<>();
 
 	ShipRepo() {
 		//init regesterdShips
@@ -64,7 +64,7 @@ class ShipRepo implements ShipRepoInterface
 	@Override
 	public Boolean hit(String place)
 	{
-		return this.getShip(place).getHit(place);
+		return this.getShip(place).getsHit(place);
 	}
 
 	@Override
