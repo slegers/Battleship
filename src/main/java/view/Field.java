@@ -10,11 +10,10 @@ import java.awt.event.MouseEvent;
  */
 public class Field extends JPanel {
 
-
     private int fieldSize;
     private Color color;
     private PlayerBoard board;
-
+    private boolean occupied = false;
     public int getNumber() {
         return number;
     }
@@ -79,4 +78,11 @@ public class Field extends JPanel {
         return this.board;
     }
 
+    public boolean isoccupied() {
+        return occupied;
+    }
+
+    public void setOccupied(boolean occupied) {
+        this.occupied = occupied;
+    }
 }

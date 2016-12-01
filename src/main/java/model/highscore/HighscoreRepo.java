@@ -14,7 +14,7 @@ class HighscoreRepo implements HighscoreRepoInterface
 	private HighscoreRepo()
 	{
 	}
-
+	//TODO beter singleton van maken dan
 	static HighscoreRepo createHighscoreRepo()
 	{
 		if (made)
