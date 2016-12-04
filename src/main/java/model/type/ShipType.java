@@ -13,11 +13,12 @@ public enum ShipType {
 		return size;
 	}
 
-	public int getMaxShips() {
-		return this.maxShips;
-	}
 	public void setMaxShips(int maxShips){
 		this.maxShips = maxShips;
 	}
+
+    public int getMaxShips() {
+        return maxShips;
+    }
 }
 

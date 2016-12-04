@@ -15,9 +15,13 @@ public class BattleshipBoard extends JFrame {
     private BattleshipController controller;
     private PlayerBoard player1;
     private PlayerBoard player2;
+    private int amountOfTiles;
+    private int tileSize;
 
     public BattleshipBoard(BattleshipController controller) {
         this.controller = controller;
+        setAmountOfTiles(controller.getSettingsFacade().getLength());//10
+        setTileSize(controller.getSettingsFacade().getHeight());//30
         createBoard();
     }
 
@@ -33,7 +37,7 @@ public class BattleshipBoard extends JFrame {
         setLayout(new GridLayout(1, 3));
         this.setTitle("Zeeslag");
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setSize(new Dimension(1050, 380));
+        this.setSize(new Dimension((getAmountOfTiles()*getTileSize()+50)*3, (getAmountOfTiles()*getTileSize()+80)));
         this.setVisible(true);
         this.setLocationRelativeTo(null);
 
@@ -48,7 +52,7 @@ public class BattleshipBoard extends JFrame {
         JPanel startButton = startButton();
 
         JPanel options = new JPanel();
-        options.setPreferredSize(new Dimension(300, 15));
+        options.setPreferredSize(new Dimension(getAmountOfTiles()*getTileSize(), 15));
         options.setLayout(new GridLayout(3,1));
 
         options.add(selectShip);
@@ -63,7 +67,7 @@ public class BattleshipBoard extends JFrame {
         startButton.setLayout(new GridBagLayout());
 
         JButton button = new JButton("Start");
-        button.setPreferredSize(new Dimension(200,30));
+        button.setPreferredSize(new Dimension(getAmountOfTiles()*getTileSize()/2,30));
 
         startButton.add(button);
 
@@ -92,7 +96,7 @@ public class BattleshipBoard extends JFrame {
         group.add(vertical);
 
         JLabel directiontitle = new JLabel("Richting:");
-        directiontitle.setPreferredSize(new Dimension(300,30));
+        directiontitle.setPreferredSize(new Dimension(getAmountOfTiles()*getTileSize(),30));
 
         JPanel buttons = new JPanel();
         buttons.setLayout(new GridLayout(1,2));
@@ -119,11 +123,11 @@ public class BattleshipBoard extends JFrame {
         });
 
         JLabel shipsTitle = new JLabel("Beschikbare schepen:");
-        shipsTitle.setPreferredSize(new Dimension(300,30));
+        shipsTitle.setPreferredSize(new Dimension(getAmountOfTiles()*getTileSize(),30));
 
         JPanel selectShip = new JPanel();
         selectShip.setLayout(new FlowLayout());
-        selectShip.setPreferredSize(new Dimension(300, 30));
+        selectShip.setPreferredSize(new Dimension(getAmountOfTiles()*getTileSize(), 30));
         selectShip.add(shipsTitle);
         selectShip.add(ShipList);
         return selectShip;
@@ -133,9 +137,9 @@ public class BattleshipBoard extends JFrame {
         JPanel player1Panel = new JPanel();
         player1Panel.setLayout(new FlowLayout());
         JLabel player1Label = new JLabel(getController().getSettingsFacade().getNamePlayer1());
-        player1Label.setPreferredSize(new Dimension(300, 15));
+        player1Label.setPreferredSize(new Dimension(getAmountOfTiles()*getTileSize(), 15));
         player1Label.setHorizontalAlignment(SwingConstants.CENTER);
-        player1 = new PlayerBoard(30, 100);
+        player1 = new PlayerBoard(getTileSize(), getAmountOfTiles()*getAmountOfTiles());
         player1Panel.add(player1Label);
         player1Panel.add(player1);
         return player1Panel;
@@ -145,12 +149,29 @@ public class BattleshipBoard extends JFrame {
         JPanel player2Panel = new JPanel();
         player2Panel.setLayout(new FlowLayout());
         JLabel player2Label = new JLabel(getController().getSettingsFacade().getNamePlayer2());
-        player2Label.setPreferredSize(new Dimension(300, 15));
+        player2Label.setPreferredSize(new Dimension(getAmountOfTiles()*getTileSize(), 15));
         player2Label.setHorizontalAlignment(SwingConstants.CENTER);
-        player2 = new PlayerBoard(30, 100);
+        player2 = new PlayerBoard(getTileSize(), getAmountOfTiles()*getAmountOfTiles());
         player2.setEnabled(false);
         player2Panel.add(player2Label);
         player2Panel.add(player2);
         return player2Panel;
     }
+
+    public int getAmountOfTiles() {
+        return amountOfTiles;
+    }
+
+    public void setAmountOfTiles(int amountOfTiles) {
+        this.amountOfTiles = amountOfTiles;
+    }
+
+    public int getTileSize() {
+        return tileSize;
+    }
+
+    public void setTileSize(int tileSize) {
+        this.tileSize = tileSize;
+    }
+
 }

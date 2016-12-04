@@ -73,7 +73,7 @@ public class SettingsView extends JFrame{
         add(widthText);
         height = new JLabel("Lengte:");
         add(height);
-        heightText = new JTextField(10+"");
+        heightText = new JTextField(30+"");
         heightText.setEnabled(false);
         add(heightText);
         //maakt voor ieder schip type een label en plaatst de hoeveelheid schepen die er gezet kunnen worden.
