@@ -26,28 +26,32 @@ public class PlayerBoard extends JPanel {
             add(field);
         }
     }
-
+    public boolean changeColor(){
+        return false;
+    }
     public void mouseEnter(Field left) {
         if (isEnabled() && !left.isoccupied()) {
             int column = left.getNumber() % 10;
             int row = left.getNumber() / 10;
             if ((getRichting() == 1 && getShipsize() + column <= 10) || (getRichting() == 10 && getShipsize() + row <= 10) && !left.getColor().equals(getSelectedBackgroundColor())) {
-                if (getRichting() == 1) {
+                if (getRichting() == 1 && !left.isoccupied()) {
                     left.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 0, getStandardBorderColor()));
-                } else {
+                } else if (!left.isoccupied()) {
                     left.setBorder(BorderFactory.createMatteBorder(1, 1, 0, 1, getStandardBorderColor()));
                 }
                 left.setColor(getSelectedBackgroundColor());
                 int i = 1;
                 while (i <= getShipsize() - 2) {
                     Field middle = getFields().get(left.getNumber() + i * getRichting());
-                    if(!middle.isoccupied()) {
-                        if (getRichting() == 1) {
+                    if (!middle.isoccupied()) {
+                        if (getRichting() == 1 && !middle.isoccupied()) {
                             middle.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, getStandardBorderColor()));
-                        } else {
+                            middle.setColor(getSelectedBackgroundColor());
+                        } else if (!middle.isoccupied()) {
                             middle.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 1, getStandardBorderColor()));
+                            middle.setColor(getSelectedBackgroundColor());
                         }
-                        middle.setColor(getSelectedBackgroundColor());
+
                         i++;
                     }
                 }
@@ -61,8 +65,13 @@ public class PlayerBoard extends JPanel {
             }
         }
     }
+
+
     public void mouseExit(Field left) {
-        if (isEnabled() && !clicked && !left.isoccupied()) {
+        if(isEnabled() && !left.isoccupied()){
+            left.setBackground(getStandardBackGroundColor());
+        }
+         if (isEnabled() && !clicked && !left.isoccupied()) {
             int column = left.getNumber() % 10;
             int row = left.getNumber() / 10;
             if ((getRichting() == 1 && getShipsize() + column <= 10) || (getRichting() == 10 && getShipsize() + row <= 10)) {
@@ -117,6 +126,7 @@ public class PlayerBoard extends JPanel {
                 right.setColor(getSelectedBackgroundColor());
             }
         }
+
     }
     public int getShipsize() {
         return shipsize;
@@ -162,5 +172,9 @@ public class PlayerBoard extends JPanel {
 
     public Color getStandardBackGroundColor(){
         return Color.gray;
+    }
+
+    public boolean isClicked() {
+        return clicked;
     }
 }
