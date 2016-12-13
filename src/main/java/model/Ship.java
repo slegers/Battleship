@@ -7,8 +7,8 @@ import java.util.List;
 
 public class Ship implements hitable
 {
+	private final ShipType type;
 	private List<Target> targets = new ArrayList<>();
-	private ShipType type;
 
 	public Ship(List<Target> targets, ShipType shipType)
 	{

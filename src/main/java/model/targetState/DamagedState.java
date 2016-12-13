@@ -1,8 +1,8 @@
-package model.TargetState;
+package model.targetState;
 
-class HitState implements TargetState
+class DamagedState implements TargetState
 {
-	HitState()
+	DamagedState()
 	{
 	}
 

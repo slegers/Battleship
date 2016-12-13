@@ -1,4 +1,4 @@
-package model.TargetState;
+package model.targetState;
 
 class HealtyState implements TargetState
 {
@@ -9,7 +9,7 @@ class HealtyState implements TargetState
 	@Override
 	public TargetState damage()
 	{
-		return new HitState();
+		return new DamagedState();
 	}
 
 	@Override

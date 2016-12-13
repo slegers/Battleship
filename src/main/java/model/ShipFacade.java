@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class ShipFacade implements ShipRepoInterface
 {
-	ShipRepo shipRepo = new ShipRepo();
+	private final ShipRepo shipRepo = new ShipRepo();
 
 	ShipFacade()
 	{

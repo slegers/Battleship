@@ -1,8 +1,8 @@
 package controller.ai;
 
-import model.ShipFacade;
+import controller.BattleshipController;
 
-public interface Action
+interface Action
 {
-	void doAction(ShipFacade shipFacade);
+	void doAction(BattleshipController battleshipController);
 }
