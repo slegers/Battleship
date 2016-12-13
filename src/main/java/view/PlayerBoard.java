@@ -13,7 +13,6 @@ public class PlayerBoard extends JPanel {
     int shipsize = 5;
     int richting = 1;
     boolean enabled = true;
-    boolean clicked = false;
 
     public  PlayerBoard(int fieldSize,int amountOfTiles){
         setSize(new Dimension(400,400));
@@ -26,10 +25,62 @@ public class PlayerBoard extends JPanel {
             add(field);
         }
     }
-    public boolean changeColor(){
-        return false;
-    }
 
+    public void mouseEnter(Field left) {
+        if (isEnabled()) {
+            int column = left.getNumber() % 10;
+            int row = left.getNumber() / 10;
+            if ((getRichting() == 1 && getShipsize() + column <= 10) || (getRichting() == 10 && getShipsize() + row <= 10)) {
+                if (getRichting() == 1) {
+                    left.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 0, getStandardBorderColor()));
+                } else {
+                    left.setBorder(BorderFactory.createMatteBorder(1, 1, 0, 1, getStandardBorderColor()));
+                }
+                left.setColor(getSelectedBackgroundColor());
+                int i = 1;
+                while (i <= getShipsize() - 2) {
+                    Field middle = getFields().get(left.getNumber() + i * getRichting());
+                    if (getRichting() == 1) {
+                        middle.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, getStandardBorderColor()));
+                    } else {
+                        middle.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 1, getStandardBorderColor()));
+                    }
+                    middle.setColor(getSelectedBackgroundColor());
+                    i++;
+                }
+                Field right = getFields().get(left.getNumber() + i * getRichting());
+                if (getRichting() == 1) {
+                    right.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 1, getStandardBorderColor()));
+                } else {
+                    right.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, getStandardBorderColor()));
+                }
+                right.setColor(getSelectedBackgroundColor());
+            }
+        }
+    }
+    public void mouseExit(Field left) {
+        if (isEnabled()) {
+            int column = left.getNumber() % 10;
+            int row = left.getNumber() / 10;
+            if ((getRichting() == 1 && getShipsize() + column <= 10) || (getRichting() == 10 && getShipsize() + row <= 10)) {
+                left.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, getStandardBorderColor()));
+                left.setBackground(getStandardBackGroundColor());
+                int i = 1;
+                while (i <= getShipsize() - 2) {
+                    Field middle = getFields().get(left.getNumber() + i * getRichting());
+                    middle.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, getStandardBorderColor()));
+                    middle.setBackground(getStandardBackGroundColor());
+                    i++;
+                }
+                Field right = getFields().get(left.getNumber() + i * getRichting());
+                right.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, getStandardBorderColor()));
+                right.setBackground(getStandardBackGroundColor());
+            }
+        }
+    }
+    public void mouseClick(Field f){
+
+    }
     public int getShipsize() {
         return shipsize;
     }
@@ -74,9 +125,5 @@ public class PlayerBoard extends JPanel {
 
     public Color getStandardBackGroundColor(){
         return Color.gray;
-    }
-
-    public boolean isClicked() {
-        return clicked;
     }
 }
