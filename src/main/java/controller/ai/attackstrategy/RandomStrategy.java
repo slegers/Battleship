@@ -1,5 +1,14 @@
 package controller.ai.attackstrategy;
 
-public class RandomStrategy
+import controller.BattleshipController;
+
+class RandomStrategy implements AttackStrategy
 {
+	RandomStrategy() {
+	}
+
+	@Override
+	public String getTarget(BattleshipController battleshipController) {
+		return String.valueOf(battleshipController.getSettingsFacade().getLength());
+	}
 }

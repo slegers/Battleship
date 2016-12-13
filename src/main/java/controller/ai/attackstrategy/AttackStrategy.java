@@ -1,9 +1,8 @@
 package controller.ai.attackstrategy;
 
-import model.ShipFacade;
-import model.Target;
+import controller.BattleshipController;
 
 public interface AttackStrategy
 {
-	Target getTarget(ShipFacade shipFacade);
+	String getTarget(BattleshipController battleshipController);
 }

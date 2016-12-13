@@ -1,13 +1,15 @@
 package controller.ai.attackstrategy;
 
-import model.ShipFacade;
-import model.Target;
+import controller.BattleshipController;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class SmartStrategy implements AttackStrategy
 {
+	SmartStrategy() {
+	}
+
 	@Override
-	public Target getTarget(ShipFacade shipFacade)
+	public String getTarget(BattleshipController battleshipController)
 	{
 		throw new NotImplementedException();
 	}
