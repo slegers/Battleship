@@ -1,4 +1,4 @@
-package controller.ai.attackstrategy;
+package controller.ai;
 
 import controller.BattleshipController;
 

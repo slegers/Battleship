@@ -2,7 +2,7 @@ package controller.ai;
 
 import controller.BattleshipController;
 
-public interface Action
+interface Action
 {
 	void doAction(BattleshipController battleshipController);
 }

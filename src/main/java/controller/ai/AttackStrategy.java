@@ -1,8 +1,8 @@
-package controller.ai.attackstrategy;
+package controller.ai;
 
 import controller.BattleshipController;
 
-public interface AttackStrategy
+interface AttackStrategy
 {
 	String getTarget(BattleshipController battleshipController);
 }

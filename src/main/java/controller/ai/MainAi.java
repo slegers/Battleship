@@ -1,8 +1,6 @@
 package controller.ai;
 
 import controller.BattleshipController;
-import controller.ai.aistate.AiState;
-import controller.ai.aistate.AiStateFactory;
 
 class MainAi implements Action
 {

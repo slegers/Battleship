@@ -1,13 +1,11 @@
-package controller.ai.actions;
+package controller.ai;
 
 import controller.BattleshipController;
-import controller.ai.Action;
-import controller.ai.attackstrategy.AttackStrategy;
 
 /**
  * Created by covert on 13/12/16.
  */
-public class AttackShipAction implements Action {
+class AttackShipAction implements Action {
 	private final AttackStrategy attackStrategy;
 
 	public AttackShipAction(AttackStrategy attackStrategy) {

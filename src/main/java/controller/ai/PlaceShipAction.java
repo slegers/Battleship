@@ -1,7 +1,6 @@
-package controller.ai.actions;
+package controller.ai;
 
 import controller.BattleshipController;
-import controller.ai.Action;
 import model.Ship;
 import model.ShipFacade;
 import model.factory.ShipFactory;
@@ -14,7 +13,7 @@ import java.util.Map;
 /**
  * Created by covert on 13/12/16.
  */
-public class PlaceShipAction implements Action {
+class PlaceShipAction implements Action {
 	@Override
 	public void doAction(BattleshipController battleshipController) {
 		ShipFacade aiShipsFacade = battleshipController.getShipFacade("ai");
@@ -23,7 +22,7 @@ public class PlaceShipAction implements Action {
 			for (int i = 0; i < varAvailableShipCount.get(varShipType); i++) {
 				try {
 					Method createShipMethod = ShipFactory.class.getMethod("create" + varShipType.name(), Ship.class);
-					createShipMethod.invoke(ShipFactory.class);
+					Ship ship = (Ship) createShipMethod.invoke(ShipFactory.class);
 				} catch (NoSuchMethodException | IllegalAccessException e) {
 					e.printStackTrace();
 				} catch (InvocationTargetException e) {
