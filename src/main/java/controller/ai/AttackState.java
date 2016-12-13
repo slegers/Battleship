@@ -1,10 +1,6 @@
-package controller.ai.aistate;
+package controller.ai;
 
-import controller.ai.Action;
-import controller.ai.actions.AttackShipAction;
-import controller.ai.attackstrategy.AttackStrategy;
-
-public class AttackState implements AiState
+class AttackState implements AiState
 {
 	private final AttackStrategy attackStrategy;
 

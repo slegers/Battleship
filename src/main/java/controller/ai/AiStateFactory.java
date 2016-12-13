@@ -1,12 +1,9 @@
-package controller.ai.aistate;
-
-import controller.ai.attackstrategy.AttackStrategy;
-import controller.ai.attackstrategy.AttackStrategyFactory;
+package controller.ai;
 
 /**
  * Created by covert on 13/12/16.
  */
-public interface AiStateFactory {
+interface AiStateFactory {
 	static AiState createAttackState() {
 		return new AttackState(AttackStrategyFactory.createRandomStrategy());
 	}

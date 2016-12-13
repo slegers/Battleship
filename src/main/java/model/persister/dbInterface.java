@@ -1,6 +1,6 @@
 package model.persister;
 
-public class dbInterface
+class dbInterface
 {
 
 }

@@ -1,7 +1,7 @@
 package model;
 
-import model.TargetState.TargetState;
-import model.TargetState.TargetStateFactory;
+import model.targetState.TargetState;
+import model.targetState.TargetStateFactory;
 
 public interface TargetFactory
 {

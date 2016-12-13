@@ -1,4 +1,4 @@
-package model.TargetState;
+package model.targetState;
 
 public class MissedState implements TargetState
 {

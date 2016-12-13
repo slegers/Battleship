@@ -1,4 +1,4 @@
-package model.TargetState;
+package model.targetState;
 
 /**
  * Created by louis on 26/11/2016.

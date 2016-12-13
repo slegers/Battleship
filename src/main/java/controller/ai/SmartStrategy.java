@@ -1,9 +1,9 @@
-package controller.ai.attackstrategy;
+package controller.ai;
 
 import controller.BattleshipController;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-public class SmartStrategy implements AttackStrategy
+class SmartStrategy implements AttackStrategy
 {
 	SmartStrategy() {
 	}

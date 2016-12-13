@@ -9,7 +9,7 @@ class HighscoreRepo implements HighscoreRepoInterface
 {
 	private static boolean made = true;
 
-	private Map<String, Integer> scores = new HashMap<>();
+	private final Map<String, Integer> scores = new HashMap<>();
 
 	private HighscoreRepo()
 	{

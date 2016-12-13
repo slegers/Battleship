@@ -1,4 +1,4 @@
-package model.TargetState;
+package model.targetState;
 
 class EmptyState implements TargetState
 {
@@ -15,6 +15,6 @@ class EmptyState implements TargetState
 	@Override
 	public TargetState sink()
 	{
-		throw new IllegalStateException("empty TargetState can't be damaged");
+		throw new IllegalStateException("empty targetState can't be damaged");
 	}
 }
