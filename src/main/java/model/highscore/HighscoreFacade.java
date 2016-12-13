@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class HighscoreFacade implements HighscoreRepoInterface
 {
-	private HighscoreRepo highscoreRepo = HighscoreRepo.createHighscoreRepo();
+	private final HighscoreRepo highscoreRepo = HighscoreRepo.createHighscoreRepo();
 
 	@Override
 	public List<String> getValues()

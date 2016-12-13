@@ -10,8 +10,8 @@ import java.util.Map;
 class ShipRepo implements ShipRepoInterface
 {
 	private final static int iMaxShips = 5;
-	private ArrayList<Ship> ships = new ArrayList<>();
-	private HashMap<ShipType, Integer> regesterdShips = new HashMap<>();
+	private final ArrayList<Ship> ships = new ArrayList<>();
+	private final HashMap<ShipType, Integer> regesterdShips = new HashMap<>();
 
 	ShipRepo() {
 		//init regesterdShips

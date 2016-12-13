@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public final class BoardFacade
 {
-	HashMap<String, ShipFacade> boardRepo = new HashMap<>();
+	private final HashMap<String, ShipFacade> boardRepo = new HashMap<>();
 
 	public ShipFacade getShipRepo(String id)
 	{
