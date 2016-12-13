@@ -1,7 +1,5 @@
 package view;
 
-import model.TargetState.TargetState;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -15,14 +13,6 @@ public class Field extends JPanel {
     private int fieldSize;
     private Color color;
     private PlayerBoard board;
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
     private int number;
 
     public Field(int size, Color color, int number, PlayerBoard board) {
@@ -30,6 +20,14 @@ public class Field extends JPanel {
         setColor(color);
         setNumber(number);
         setPlayerBoard(board);
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
 
     public void create() {
@@ -71,11 +69,11 @@ public class Field extends JPanel {
         setBackground(color);
     }
 
-    public void setPlayerBoard(PlayerBoard board) {
-        this.board = board;
-    }
-
     public PlayerBoard getPlayerBoard() {
         return this.board;
+    }
+
+    public void setPlayerBoard(PlayerBoard board) {
+        this.board = board;
     }
 }

@@ -1,4 +1,4 @@
-package model.TargetState;
+package model.targetState;
 
 class HealtyState implements TargetState
 {
