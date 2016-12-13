@@ -2,7 +2,7 @@ package controller.ai.aistate;
 
 import controller.ai.Action;
 
-public interface AiState
+interface AiState
 {
 	Action getNextAction();
 }

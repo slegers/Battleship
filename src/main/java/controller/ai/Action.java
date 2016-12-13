@@ -4,5 +4,5 @@ import model.ShipFacade;
 
 public interface Action
 {
-	void doAction(ShipFacade);
+	void doAction(ShipFacade shipFacade);
 }
