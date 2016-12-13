@@ -1,5 +1,7 @@
 package model.timer;
 
+import controller.BattleshipController;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -8,22 +10,24 @@ import java.util.TimerTask;
  */
 public class BoardTimer {
     Timer boardTimer;
+    BattleshipController controller;
 
-    public BoardTimer(){
+    public BoardTimer(BattleshipController controller) {
         boardTimer = new Timer();
+        this.controller = controller;
     }
 
     public void start(){
         boardTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                stop();
+                //TODO plaats schip
             }
         },30000);
     }
 
     public void stop(){
-
+        boardTimer.cancel();
     }
 
 }
