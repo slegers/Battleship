@@ -1,5 +1,7 @@
 package view;
 
+import model.TargetState.TargetState;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -13,7 +15,6 @@ public class Field extends JPanel {
     private int fieldSize;
     private Color color;
     private PlayerBoard board;
-    private boolean occupied = false;
     public int getNumber() {
         return number;
     }
@@ -76,13 +77,5 @@ public class Field extends JPanel {
 
     public PlayerBoard getPlayerBoard() {
         return this.board;
-    }
-
-    public boolean isoccupied() {
-        return occupied;
-    }
-
-    public void setOccupied(boolean occupied) {
-        this.occupied = occupied;
     }
 }
