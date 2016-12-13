@@ -2,7 +2,7 @@ package model;
 
 import java.util.HashMap;
 
-public class BoardFacade
+public final class BoardFacade
 {
 	HashMap<String, ShipFacade> boardRepo = new HashMap<>();
 

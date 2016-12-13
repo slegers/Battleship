@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 
 class HighscoreRepo implements HighscoreRepoInterface
 {
-	static boolean made = true;
+	private static boolean made = true;
 
-	Map<String, Integer> scores = new HashMap<>();
+	private Map<String, Integer> scores = new HashMap<>();
 
 	private HighscoreRepo()
 	{
