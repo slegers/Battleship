@@ -21,7 +21,7 @@ public class BoardTimer {
         boardTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                //TODO plaats schip
+                //TODO plaats schip.
             }
         },30000);
     }
