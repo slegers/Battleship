@@ -1,20 +1,16 @@
 package model.TargetState;
 
-class HitState implements TargetState
+public class MissedState implements TargetState
 {
-	HitState()
-	{
-	}
-
 	@Override
 	public TargetState damage()
 	{
-		return this;
+		return null;
 	}
 
 	@Override
 	public TargetState sink()
 	{
-		return new SunkState();
+		return null;
 	}
 }

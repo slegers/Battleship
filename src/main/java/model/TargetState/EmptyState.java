@@ -9,7 +9,7 @@ class EmptyState implements TargetState
 	@Override
 	public TargetState damage()
 	{
-		throw new IllegalStateException("empty TargetState can't be damaged");
+		return new MissedState();
 	}
 
 	@Override

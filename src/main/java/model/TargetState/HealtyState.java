@@ -9,7 +9,7 @@ class HealtyState implements TargetState
 	@Override
 	public TargetState damage()
 	{
-		return new HitState();
+		return new DamagedState();
 	}
 
 	@Override
