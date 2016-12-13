@@ -4,6 +4,10 @@ import controller.ai.Action;
 
 public class AttackState implements AiState
 {
+	AttackState()
+	{
+	}
+
 	@Override
 	public Action getNextAction()
 	{
