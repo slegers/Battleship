@@ -2,6 +2,7 @@ package view;
 
 import model.Ship;
 import model.type.ShipType;
+import model.timer.BoardTimer;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -17,6 +18,7 @@ public class PlayerBoard extends JPanel {
     BattleshipBoard board;
 
     TreeMap<Integer, Field> fields = new TreeMap<Integer, Field>();
+
     int shipsize = 5;
     // 1 = horizontaal
     // 0 = verticaal
