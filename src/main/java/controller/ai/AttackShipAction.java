@@ -3,12 +3,13 @@ package controller.ai;
 import controller.BattleshipController;
 
 /**
- * Created by covert on 13/12/16.
+ * @author: Louis Roebben
  */
 class AttackShipAction implements Action {
 	private final AttackStrategy attackStrategy;
 
-	public AttackShipAction(AttackStrategy attackStrategy) {
+	AttackShipAction(AttackStrategy attackStrategy)
+	{
 		this.attackStrategy = attackStrategy;
 	}
 

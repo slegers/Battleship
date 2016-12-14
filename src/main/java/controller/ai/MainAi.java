@@ -2,12 +2,16 @@ package controller.ai;
 
 import controller.BattleshipController;
 
+/**
+ * @author: Louis Roebben
+ */
 class MainAi implements Action
 {
 	private AiState aiState;
 
 	public MainAi() {
 		this.aiState = AiStateFactory.createPlaceState();
+
 	}
 
 	void placingDone() {

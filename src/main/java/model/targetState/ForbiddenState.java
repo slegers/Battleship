@@ -1,5 +1,8 @@
 package model.targetState;
 
+/**
+ * @author: Louis Roebben
+ */
 class ForbiddenState implements TargetState
 {
 	ForbiddenState()

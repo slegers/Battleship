@@ -1,5 +1,8 @@
 package model.targetState;
 
+/**
+ * @author: Louis Roebben
+ */
 public interface TargetState
 {
 	TargetState damage();

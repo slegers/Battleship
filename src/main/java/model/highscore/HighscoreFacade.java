@@ -3,6 +3,9 @@ package model.highscore;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author: Louis Roebben
+ */
 public class HighscoreFacade implements HighscoreRepoInterface
 {
 	private final HighscoreRepo highscoreRepo = HighscoreRepo.createHighscoreRepo();

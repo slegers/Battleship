@@ -5,6 +5,9 @@ import model.type.ShipType;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author: Louis Roebben
+ */
 public class ShipFacade implements ShipRepoInterface
 {
 	private final ShipRepo shipRepo = new ShipRepo();

@@ -1,7 +1,8 @@
 package model.targetState;
 
+
 /**
- * Created by louis on 26/11/2016.
+ * @author: Louis Roebben
  */
 public interface TargetStateFactory
 {

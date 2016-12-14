@@ -7,6 +7,9 @@ import model.type.ShipType;
 
 import java.util.List;
 
+/**
+ * @author: Louis Roebben
+ */
 public interface ShipFactory
 {
 	static Ship createAircraftcarrier(List<Target> targets, ShipFacade shipFacade)

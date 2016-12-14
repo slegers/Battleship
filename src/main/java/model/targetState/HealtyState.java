@@ -1,5 +1,8 @@
 package model.targetState;
 
+/**
+ * @author: Louis Roebben
+ */
 class HealtyState implements TargetState
 {
 	HealtyState()

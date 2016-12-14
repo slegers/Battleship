@@ -1,7 +1,11 @@
 package model;
 
+
 import model.targetState.TargetState;
 
+/**
+ * @author: Louis Roebben
+ */
 public class Target
 {
 	private String name;

@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 
 /**
  * Created by yanice on 18/11/16.
+ *  * @author yanice
+
  */
 public class BattleshipBoard extends JFrame {
     private BattleshipController controller;
