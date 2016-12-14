@@ -8,7 +8,8 @@ import controller.BattleshipController;
 class AttackShipAction implements Action {
 	private final AttackStrategy attackStrategy;
 
-	public AttackShipAction(AttackStrategy attackStrategy) {
+	AttackShipAction(AttackStrategy attackStrategy)
+	{
 		this.attackStrategy = attackStrategy;
 	}
 
