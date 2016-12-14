@@ -43,7 +43,6 @@ public class PlayerBoard extends JPanel {
         while (i <= getShipsize() - 1) {
 
             Field middle = getFields().get(left.getNumber() + i * getRichting());
-            createSea(middle,left);
             if (getRichting() == 1) {
                 middle.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, borderColor));
                 left.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 0, borderColor));
@@ -55,10 +54,37 @@ public class PlayerBoard extends JPanel {
             i++;
         }
     }
+    private void drawNeighbours(Field left) {
+        int i = -1;
+        while (i <= getShipsize()) {
+            Field middle = getFields().get(left.getNumber() + i * getRichting());
+            Field above = getFields().get(middle.getNumber() + 10);
+            Field under =  getFields().get(middle.getNumber() - 10 );
+            if (getRichting() == 1) {
+                above.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, getSeaColor()));
+                above.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 0, getSeaColor()));
+                under.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, getSeaColor()));
+                under.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 0, getSeaColor()));
+            } else {
+                above.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 1, getSeaColor()));
+                above.setBorder(BorderFactory.createMatteBorder(1, 1, 0, 1, getSeaColor()));
+                under.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, getSeaColor()));
+                under.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 0, getSeaColor()));
+            }
+            above.setColor(Color.cyan);
+            under.setColor(Color.cyan);
+            i++;
+        }
+        Field leftTile = getFields().get(left.getNumber() - 1);
+        Field RightTile = getFields().get(left.getNumber() + getShipsize());
+        leftTile.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, getSeaColor()));
+        leftTile.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 0, getSeaColor()));
+        RightTile.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, getSeaColor()));
+        RightTile.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 0, getSeaColor()));
+        leftTile.setColor(getSeaColor());
+        RightTile.setColor(getSeaColor());
 
-    private void createSea(Field middle, Field left) {
-        Field above = getFields().get(middle.getNumber() + 10);
-        above.setColor(Color.cyan);
+
     }
 
     private void unDrawShip(Field left,Color a,Color borderColor){
@@ -84,22 +110,13 @@ public class PlayerBoard extends JPanel {
             int i = 1;
             while (i <= getShipsize() - 1) {
                 Field middle = getFields().get(leftInt + i * getRichting());
-                if(middle.getColor().equals(getSelectedBackgroundColor())){
+                if(middle.getColor().equals(getSelectedBackgroundColor()) || middle.getColor().equals(getSeaColor())){
                     return false;
                 }
                 i++;
             }
         }
-        if(hasNeighbours(left)){
-            return false;
-        }
         return true;
-    }
-
-    private boolean hasNeighbours(Field left) {
-        int column = left.getNumber() % 10;
-        int row = left.getNumber() / 10;
-        return false;
     }
 
     public void mouseExit(Field left) {
@@ -116,8 +133,10 @@ public class PlayerBoard extends JPanel {
         int row = left.getNumber() / 10;
         if(isEnabled() && canDrawShip(column,row,left.getNumber(),left)){
             drawShip(left,getSelectedBackgroundColor(),getStandardBorderColor());
+            drawNeighbours(left);
         }
     }
+
 
     public int getShipsize() {
         return shipsize;
@@ -167,5 +186,9 @@ public class PlayerBoard extends JPanel {
 
     public Color getHoverBackGroundColor(){
         return Color.PINK;
+    }
+
+    public Color getSeaColor() {
+        return Color.cyan;
     }
 }
