@@ -13,6 +13,7 @@ import java.util.HashMap;
 
 /**
  * Created by yanice on 23/11/16.
+ * @author yanice
  */
 public class SettingsView extends JFrame{
     private BattleshipController controller;
@@ -99,7 +100,7 @@ public class SettingsView extends JFrame{
             }
 
             public boolean canStartGame() {
-                if(speler1Text.getText().equals("") || speler2Text.getText().equals("") ){
+                if(speler1Text.getText().equals("") || speler1Text.getText().trim().isEmpty()){
                     return false;
                 }
                 return true;

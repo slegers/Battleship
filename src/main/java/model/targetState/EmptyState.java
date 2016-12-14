@@ -1,4 +1,4 @@
-package model.targetState;
+package model.TargetState;
 
 /**
  * @author: Louis Roebben

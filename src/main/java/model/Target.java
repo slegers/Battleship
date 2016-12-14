@@ -1,6 +1,6 @@
 package model;
 
-import model.targetState.TargetState;
+import model.TargetState.TargetState;
 
 /**
  * @author: Louis Roebben
