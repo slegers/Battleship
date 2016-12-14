@@ -1,5 +1,7 @@
 package view;
 
+import model.timer.BoardTimer;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -10,8 +12,8 @@ import java.util.TreeMap;
  * @author yanice
  */
 public class PlayerBoard extends JPanel {
-
     TreeMap<Integer, Field> fields = new TreeMap<Integer, Field>();
+
     int shipsize = 5;
     // 1 = horizontaal
     // 0 = verticaal

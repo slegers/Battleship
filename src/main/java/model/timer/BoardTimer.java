@@ -16,19 +16,24 @@ import java.util.TimerTask;
  * Created by Dennis on 13/12/2016.
  */
 public class BoardTimer {
-    Timer boardTimer;
+    private static BoardTimer boardTimer;
+    Timer timer;
     BattleshipController controller;
 
+    public void setController(BattleshipController controller){
+        this.controller = controller;
+    }
     public BoardTimer(BattleshipController controller) {
-        boardTimer = new Timer();
+        timer = new Timer();
         this.controller = controller;
     }
 
     public void start(){
-        boardTimer.schedule(new TimerTask() {
+        timer.schedule(new TimerTask() {
             @Override
             public void run() {
-	            ShipFacade aiShipsFacade = controller.getShipFacade("ai");
+                //TODO niet schip plaatsen maar attacken
+	            /*ShipFacade aiShipsFacade = controller.getShipFacade("ai");
 	            Map<ShipType, Integer> varAvailableShipCount = aiShipsFacade.getAvailableShipCount();
 	            for (ShipType varShipType : ShipType.values()) {
 		            if (varShipType.getMaxShips() < varAvailableShipCount.get(varShipType)) {
@@ -40,14 +45,21 @@ public class BoardTimer {
 			            }
 			            return;
 		            }
-	            }
+	            }*/
 
             }
         },30000);
     }
 
     public void stop(){
-        boardTimer.cancel();
+        timer.cancel();
+    }
+
+    public synchronized static BoardTimer getBoardTimer(BattleshipController controller){
+        if (boardTimer == null){
+            boardTimer = new BoardTimer(controller);
+        }
+        return boardTimer;
     }
 
 }
