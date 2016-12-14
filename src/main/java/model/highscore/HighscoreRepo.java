@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * @author: Louis Roebben
+ */
 class HighscoreRepo implements HighscoreRepoInterface
 {
 	private static boolean made = true;

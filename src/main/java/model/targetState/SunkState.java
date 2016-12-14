@@ -1,7 +1,7 @@
 package model.targetState;
 
 /**
- * Created by louis on 26/11/2016.
+ * @author: Louis Roebben
  */
 class SunkState implements TargetState
 {

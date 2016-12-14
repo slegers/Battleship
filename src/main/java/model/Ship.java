@@ -5,6 +5,9 @@ import model.type.ShipType;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author: Louis Roebben
+ */
 public class Ship implements hitable
 {
 	private final ShipType type;

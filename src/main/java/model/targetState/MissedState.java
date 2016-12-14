@@ -1,5 +1,8 @@
 package model.targetState;
 
+/**
+ * @author: Louis Roebben
+ */
 class MissedState implements TargetState
 {
 	MissedState() {

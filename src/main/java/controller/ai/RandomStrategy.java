@@ -4,6 +4,9 @@ import controller.BattleshipController;
 
 import java.util.Random;
 
+/**
+ * @author: Louis Roebben
+ */
 class RandomStrategy implements AttackStrategy
 {
 	RandomStrategy() {

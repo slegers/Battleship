@@ -1,5 +1,8 @@
 package controller.ai;
 
+/**
+ * @author: Louis Roebben
+ */
 class PlaceState implements AiState
 {
 	PlaceState()

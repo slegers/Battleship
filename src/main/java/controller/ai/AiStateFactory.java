@@ -1,7 +1,7 @@
 package controller.ai;
 
 /**
- * Created by covert on 13/12/16.
+ * @author: Louis Roebben
  */
 interface AiStateFactory {
 	static AiState createAttackState() {

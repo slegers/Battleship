@@ -11,7 +11,7 @@ import java.lang.reflect.Method;
 import java.util.Map;
 
 /**
- * Created by covert on 13/12/16.
+ * @author: Louis Roebben
  */
 class PlaceShipAction implements Action {
 	@Override

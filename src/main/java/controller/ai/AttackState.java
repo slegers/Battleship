@@ -1,5 +1,8 @@
 package controller.ai;
 
+/**
+ * @author: Louis Roebben
+ */
 class AttackState implements AiState
 {
 	private final AttackStrategy attackStrategy;

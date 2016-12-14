@@ -5,6 +5,9 @@ import model.type.ShipType;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author: Louis Roebben
+ */
 interface ShipRepoInterface
 {
 	Ship getShip(String place);

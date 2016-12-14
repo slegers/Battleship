@@ -1,5 +1,8 @@
 package model.type;
 
+/**
+ * @author: Louis Roebben
+ */
 public enum ShipType {
 	Aircraftcarrier(5,1), Battleship(4,2), Cruiser(3,3), Submarine(3,3), Destroyer(2,4);
 

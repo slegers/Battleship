@@ -3,6 +3,9 @@ package model;
 import model.targetState.TargetState;
 import model.targetState.TargetStateFactory;
 
+/**
+ * @author: Louis Roebben
+ */
 public interface TargetFactory
 {
 	static Target ceateTarget(String place, TargetState targetState)

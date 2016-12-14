@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author: Louis Roebben
+ */
 class ShipRepo implements ShipRepoInterface
 {
 	private final static int iMaxShips = 5;
