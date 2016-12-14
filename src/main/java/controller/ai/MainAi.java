@@ -8,6 +8,7 @@ class MainAi implements Action
 
 	public MainAi() {
 		this.aiState = AiStateFactory.createPlaceState();
+
 	}
 
 	void placingDone() {

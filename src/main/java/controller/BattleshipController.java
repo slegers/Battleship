@@ -1,5 +1,6 @@
 package controller;
 
+import controller.ai.AiFacade;
 import model.BoardFacade;
 import model.ShipFacade;
 import model.settings.SettingsFacade;
@@ -13,11 +14,17 @@ public class BattleshipController {
     private SettingsFacade facade;
     private BoardFacade boardFacade = new BoardFacade();
     private BattleshipBoard board;
+    private AiFacade aiFacade = new AiFacade();
 
     public BattleshipController(){
         setSettingsFacade(new SettingsFacade());
         SettingsView.getSettingsView().setController(this);
         SettingsView.getSettingsView();
+    }
+
+    public AiFacade getAiFacade()
+    {
+        return aiFacade;
     }
 
     public void createBattleshipBoard() {
