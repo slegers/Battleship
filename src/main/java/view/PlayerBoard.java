@@ -7,6 +7,7 @@ import java.util.TreeMap;
 
 /**
  * Created by Kevin on 23/11/2016.
+ * @author yanice
  */
 public class PlayerBoard extends JPanel {
 
@@ -32,16 +33,17 @@ public class PlayerBoard extends JPanel {
     public void mouseEnter(Field left) {
         int column = left.getNumber() % 10;
         int row = left.getNumber() / 10;
-        if(left.getBackground().equals(getStandardBackGroundColor()) && isEnabled() && canDrawShip(column,row,left.getNumber())){
-           // left.setBackground(getHoverBackGroundColor());
+        if(left.getBackground().equals(getStandardBackGroundColor()) && isEnabled() && canDrawShip(column,row,left.getNumber(),left)){
             drawShip(left,getHoverBackGroundColor(),getHoverBackGroundColor());
-
         }
     }
-    public void drawShip(Field left,Color tileColor,Color borderColor){
+    private void drawShip(Field left,Color tileColor,Color borderColor){
         int i = 0;
+
         while (i <= getShipsize() - 1) {
+
             Field middle = getFields().get(left.getNumber() + i * getRichting());
+            createSea(middle,left);
             if (getRichting() == 1) {
                 middle.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, borderColor));
                 left.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 0, borderColor));
@@ -53,7 +55,13 @@ public class PlayerBoard extends JPanel {
             i++;
         }
     }
-    public void unDrawShip(Field left,Color a,Color borderColor){
+
+    private void createSea(Field middle, Field left) {
+        Field above = getFields().get(middle.getNumber() + 10);
+        above.setColor(Color.cyan);
+    }
+
+    private void unDrawShip(Field left,Color a,Color borderColor){
         left.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, getStandardBorderColor()));
         left.setBackground(getStandardBackGroundColor());
         int i = 1;
@@ -67,11 +75,11 @@ public class PlayerBoard extends JPanel {
         right.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, getStandardBorderColor()));
         right.setBackground(getStandardBackGroundColor());
     }
-    public boolean canDrawShip(int column, int row,int leftInt){
+    public boolean canDrawShip(int column, int row,int leftInt,Field left){
         //Past in het veld?
         if(!(getRichting() == 1 && getShipsize() + column <= 10 || getRichting() == 10 && getShipsize() + row <=10)){
             return false;
-        }//
+        }
         else{
             int i = 1;
             while (i <= getShipsize() - 1) {
@@ -82,13 +90,23 @@ public class PlayerBoard extends JPanel {
                 i++;
             }
         }
+        if(hasNeighbours(left)){
+            return false;
+        }
         return true;
     }
+
+    private boolean hasNeighbours(Field left) {
+        int column = left.getNumber() % 10;
+        int row = left.getNumber() / 10;
+        return false;
+    }
+
     public void mouseExit(Field left) {
             if (isEnabled() && left.getBackground().equals(getHoverBackGroundColor()) && isEnabled()) {
                 int column = left.getNumber() % 10;
                 int row = left.getNumber() / 10;
-                if(canDrawShip(column,row,left.getNumber())){
+                if(canDrawShip(column,row,left.getNumber(),left)){
                     unDrawShip(left,getStandardBackGroundColor(),getStandardBorderColor());
                 }
         }
@@ -96,10 +114,11 @@ public class PlayerBoard extends JPanel {
     public void mouseClick(Field left){
         int column = left.getNumber() % 10;
         int row = left.getNumber() / 10;
-        if(isEnabled() && canDrawShip(column,row,left.getNumber())){
+        if(isEnabled() && canDrawShip(column,row,left.getNumber(),left)){
             drawShip(left,getSelectedBackgroundColor(),getStandardBorderColor());
         }
     }
+
     public int getShipsize() {
         return shipsize;
     }
