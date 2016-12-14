@@ -1,14 +1,7 @@
 package model.timer;
 
 import controller.BattleshipController;
-import model.Ship;
-import model.ShipFacade;
-import model.factory.ShipFactory;
-import model.type.ShipType;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -17,16 +10,27 @@ import java.util.TimerTask;
  */
 public class BoardTimer {
     private static BoardTimer boardTimer;
-    Timer timer;
-    BattleshipController controller;
+	private Timer timer;
+	private BattleshipController controller;
 
-    public void setController(BattleshipController controller){
-        this.controller = controller;
-    }
     public BoardTimer(BattleshipController controller) {
         timer = new Timer();
         this.controller = controller;
     }
+
+	public synchronized static BoardTimer getBoardTimer(BattleshipController controller)
+	{
+		if (boardTimer == null)
+		{
+			boardTimer = new BoardTimer(controller);
+		}
+		return boardTimer;
+	}
+
+	public void setController(BattleshipController controller)
+	{
+		this.controller = controller;
+	}
 
     public void start(){
         timer.schedule(new TimerTask() {
@@ -53,13 +57,6 @@ public class BoardTimer {
 
     public void stop(){
         timer.cancel();
-    }
-
-    public synchronized static BoardTimer getBoardTimer(BattleshipController controller){
-        if (boardTimer == null){
-            boardTimer = new BoardTimer(controller);
-        }
-        return boardTimer;
     }
 
 }
