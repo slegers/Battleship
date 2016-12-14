@@ -9,7 +9,7 @@ import model.targetState.TargetStateFactory;
  */
 public interface TargetFactory
 {
-	@Deprecated
+
 	static Target ceateTarget(String place, TargetState targetState)
 	{
 		return new Target(place, targetState);
