@@ -17,6 +17,7 @@ public class BattleshipBoard extends JFrame {
     private PlayerBoard player2;
     private int amountOfTiles;
     private int tileSize;
+    JComboBox<String> ShipList;
 
     public BattleshipBoard(BattleshipController controller) {
         this.controller = controller;
@@ -115,13 +116,13 @@ public class BattleshipBoard extends JFrame {
             ships[i] = schip.toString() + " (" + getController().getShipFacade("player1").getAvailableShipCount().get(schip) + ")";
             i++;
         }
-        JComboBox<String> ShipList = new JComboBox<>(ships);
+        ShipList = new JComboBox<>(ships);
         ShipList.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                player1.setCurrentShip(ShipType.valueOf((ShipList.getSelectedItem().toString()).split(" ")[0]));
                 player1.setShipsize((int) ShipType.valueOf(((String) ShipList.getSelectedItem()).split(" ")[0]).getSize());
             }
         });
-
         JLabel shipsTitle = new JLabel("Beschikbare schepen:");
         shipsTitle.setPreferredSize(new Dimension(getAmountOfTiles()*getTileSize(),30));
 
@@ -139,7 +140,7 @@ public class BattleshipBoard extends JFrame {
         JLabel player1Label = new JLabel(getController().getSettingsFacade().getNamePlayer1());
         player1Label.setPreferredSize(new Dimension(getAmountOfTiles()*getTileSize(), 15));
         player1Label.setHorizontalAlignment(SwingConstants.CENTER);
-        player1 = new PlayerBoard(getTileSize(), getAmountOfTiles()*getAmountOfTiles());
+        player1 = new PlayerBoard(getTileSize(), getAmountOfTiles()*getAmountOfTiles(), this);
         player1Panel.add(player1Label);
         player1Panel.add(player1);
         return player1Panel;
@@ -151,7 +152,7 @@ public class BattleshipBoard extends JFrame {
         JLabel player2Label = new JLabel(getController().getSettingsFacade().getNamePlayer2());
         player2Label.setPreferredSize(new Dimension(getAmountOfTiles()*getTileSize(), 15));
         player2Label.setHorizontalAlignment(SwingConstants.CENTER);
-        player2 = new PlayerBoard(getTileSize(), getAmountOfTiles()*getAmountOfTiles());
+        player2 = new PlayerBoard(getTileSize(), getAmountOfTiles()*getAmountOfTiles(), this);
         player2.setEnabled(false);
         player2Panel.add(player2Label);
         player2Panel.add(player2);

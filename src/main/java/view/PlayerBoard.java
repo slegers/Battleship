@@ -1,5 +1,8 @@
 package view;
 
+import model.Ship;
+import model.type.ShipType;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -10,16 +13,21 @@ import java.util.TreeMap;
  */
 public class PlayerBoard extends JPanel {
 
+    BattleshipBoard board;
+
     TreeMap<Integer, Field> fields = new TreeMap<Integer, Field>();
     int shipsize = 5;
     // 1 = horizontaal
     // 0 = verticaal
     int richting = 1;
     boolean enabled = true;
+    ShipType currentShip;
 
-    public  PlayerBoard(int fieldSize,int amountOfTiles){
+    public  PlayerBoard(int fieldSize,int amountOfTiles, BattleshipBoard board){
+        this.board  = board;
         setSize(new Dimension(400,400));
         setLayout(new GridLayout((int)Math.sqrt(amountOfTiles),(int)Math.sqrt(amountOfTiles)));
+        setCurrentShip(ShipType.Aircraftcarrier);
         for(int i = 0; i < amountOfTiles; i++){
 
             Field field = new Field(fieldSize,Color.gray,i, this);
@@ -94,12 +102,16 @@ public class PlayerBoard extends JPanel {
         }
     }
     public void mouseClick(Field left){
+        if(getCurrentShip().getMaxShips() <= 0){
+            JOptionPane.showMessageDialog(null,"You already have too much ships of this type.");
+        }else{
         int column = left.getNumber() % 10;
         int row = left.getNumber() / 10;
         if(isEnabled() && canDrawShip(column,row,left.getNumber())){
             drawShip(left,getSelectedBackgroundColor(),getStandardBorderColor());
         }
-    }
+        getCurrentShip().setMaxShips(getCurrentShip().getMaxShips()-1);
+    }}
     public int getShipsize() {
         return shipsize;
     }
@@ -148,5 +160,12 @@ public class PlayerBoard extends JPanel {
 
     public Color getHoverBackGroundColor(){
         return Color.PINK;
+    }
+    public ShipType getCurrentShip() {
+        return currentShip;
+    }
+
+    public void setCurrentShip(ShipType currentShip) {
+        this.currentShip = currentShip;
     }
 }
