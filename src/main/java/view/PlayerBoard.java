@@ -67,11 +67,9 @@ public class PlayerBoard extends JPanel {
     }
     private void drawNeighbours(Field left) {
         ArrayList<Field> neightbours = getNeighbours(left);
-        for(Field f : neightbours){
-            f.setBackground(Color.cyan);
+        for(Field f : neightbours) {
+            f.setColor(getSeaColor());
         }
-
-
     }
 
 
@@ -93,21 +91,25 @@ public class PlayerBoard extends JPanel {
                 neighbours.add(fields.get(f.getNumber()-1));
             }
             if((f.getNumber() % 10 + shipsize) < 9){
-                neighbours.add(fields.get(f.getNumber()+1));
+                neighbours.add(fields.get(f.getNumber()+shipsize));
             }
         }
         if(richting == 10){
             if(f.getNumber() > 9){
-
+                neighbours.add(fields.get(f.getNumber()-10));
             }
             if((f.getNumber() + shipsize * 10) < 90){
-
+                neighbours.add(fields.get(f.getNumber()+shipsize*10));
             }
             if(f.getNumber() %10 > 0){
-
+                for(int i = 0; i < shipsize; i++){
+                    neighbours.add(fields.get(f.getNumber() -1 + 10 * i));
+                }
             }
             if(f.getNumber() % 10 < 9){
-
+                for(int i = 0; i < shipsize; i++){
+                    neighbours.add(fields.get(f.getNumber() +1 + 10 * i));
+                }
             }
         }
         return neighbours;
