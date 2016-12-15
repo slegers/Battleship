@@ -14,6 +14,7 @@ import java.util.HashMap;
 /**
  * Created by yanice on 23/11/16.
  * @author yanice
+ * @author Kevin
  */
 public class SettingsView extends JFrame{
     private BattleshipController controller;

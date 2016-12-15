@@ -1,6 +1,7 @@
 package view;
 
 import controller.BattleshipController;
+import controller.ViewController;
 import model.type.ShipType;
 
 import javax.swing.*;
@@ -10,8 +11,8 @@ import java.awt.event.ActionListener;
 
 /**
  * Created by yanice on 18/11/16.
- *  * @author yanice
-
+ *  @author yanice
+ *  @autor Kevin
  */
 public class BattleshipBoard extends JFrame {
     private BattleshipController controller;
@@ -84,14 +85,14 @@ public class BattleshipBoard extends JFrame {
         horizontal.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                player1.setRichting(1);
+                ViewController.setDirectionOfPlayerBoard(player1, 1);
             }
         });
         JRadioButton vertical = new JRadioButton("Vertical");
         vertical.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                player1.setRichting(10);
+                ViewController.setDirectionOfPlayerBoard(player1, 10);
             }
         });
         ButtonGroup group = new ButtonGroup();
@@ -121,8 +122,7 @@ public class BattleshipBoard extends JFrame {
         ShipList = new JComboBox<>(ships);
         ShipList.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                player1.setCurrentShip(ShipType.valueOf((ShipList.getSelectedItem().toString()).split(" ")[0]));
-                player1.setShipsize((int) ShipType.valueOf(((String) ShipList.getSelectedItem()).split(" ")[0]).getSize());
+                ViewController.setShipTypeOfPlayerBoard(player1, ShipType.valueOf((ShipList.getSelectedItem().toString()).split(" ")[0]));
             }
         });
         JLabel shipsTitle = new JLabel("Beschikbare schepen:");
