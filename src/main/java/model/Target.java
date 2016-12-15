@@ -1,8 +1,5 @@
 package model;
 
-
-import model.targetState.TargetState;
-
 /**
  * @author: Louis Roebben
  */
@@ -12,7 +9,7 @@ public class Target
 	private Ship partOf;
 	private TargetState state;
 
-	Target(String name, Ship partOf, TargetState targetState)
+	Target(String name, Ship partOf, model.targetState.TargetState targetState)
 	{
 		this.name = name;
 		this.partOf = partOf;
@@ -26,7 +23,7 @@ public class Target
 
 	}
 
-	public Target(String name, TargetState targetState)
+	public Target(String name, model.targetState.TargetState targetState)
 	{
 		this.name = name;
 		this.state = targetState;

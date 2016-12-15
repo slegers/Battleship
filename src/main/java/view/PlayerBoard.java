@@ -64,6 +64,7 @@ public class PlayerBoard extends JPanel {
             middle.setColor(tileColor);
             i++;
         }
+
     }
     private void drawNeighbours(Field left) {
         ArrayList<Field> neightbours = getNeighbours(left);
