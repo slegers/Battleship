@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 
 /**
  * Created by Kevin on 23/11/2016.
+ * @author Kevin
  */
 public class Field extends JPanel {
 
@@ -44,7 +45,6 @@ public class Field extends JPanel {
             public void mouseExited(MouseEvent e) {
                 getPlayerBoard().mouseExit((Field) e.getSource());
             }
-
             @Override
             public void mouseClicked(MouseEvent e) {
                 getPlayerBoard().mouseClick((Field) e.getSource());

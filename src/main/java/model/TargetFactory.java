@@ -1,8 +1,8 @@
 package model;
 
 
-import model.targetState.TargetState;
-import model.targetState.TargetStateFactory;
+import model.TargetState.TargetState;
+import model.TargetState.TargetStateFactory;
 
 /**
  * @author: Louis Roebben
