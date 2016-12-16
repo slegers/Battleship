@@ -1,8 +1,6 @@
 package view;
 
-import controller.ViewController;
 import model.type.ShipType;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.TreeMap;
@@ -38,13 +36,13 @@ public class PlayerBoard extends JPanel {
     }
 
     public void mouseEnter(Field f) {
-        ViewController.mouseEnter(f);
+        board.getController().getShipPlacementFacade().mouseEnter(f);
     }
     public void mouseExit(Field f) {
-        ViewController.mouseExit(f);
+        board.getController().getShipPlacementFacade().mouseExit(f);
     }
     public void mouseClick(Field f){
-        ViewController.mouseClick(f);
+        board.getController().getShipPlacementFacade().mouseClick(f);
     }
 
     public int getShipsize() {

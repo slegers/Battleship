@@ -1,7 +1,6 @@
 package view;
 
 import controller.BattleshipController;
-import controller.ViewController;
 import model.type.ShipType;
 
 import javax.swing.*;
@@ -85,14 +84,14 @@ public class BattleshipBoard extends JFrame {
         horizontal.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ViewController.setDirectionOfPlayerBoard(player1, 1);
+                controller.getShipPlacementFacade().setDirectionOfPlayerBoard(player1, 1);
             }
         });
         JRadioButton vertical = new JRadioButton("Vertical");
         vertical.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ViewController.setDirectionOfPlayerBoard(player1, 10);
+                controller.getShipPlacementFacade().setDirectionOfPlayerBoard(player1, 10);
             }
         });
         ButtonGroup group = new ButtonGroup();
@@ -122,7 +121,7 @@ public class BattleshipBoard extends JFrame {
         ShipList = new JComboBox<>(ships);
         ShipList.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                ViewController.setShipTypeOfPlayerBoard(player1, ShipType.valueOf((ShipList.getSelectedItem().toString()).split(" ")[0]));
+                controller.getShipPlacementFacade().setShipTypeOfPlayerBoard(player1, ShipType.valueOf((ShipList.getSelectedItem().toString()).split(" ")[0]));
             }
         });
         JLabel shipsTitle = new JLabel("Beschikbare schepen:");

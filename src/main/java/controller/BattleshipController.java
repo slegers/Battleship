@@ -3,6 +3,7 @@ package controller;
 import controller.ai.AiFacade;
 import model.BoardFacade;
 import model.ShipFacade;
+import model.shipplacement.ShipPlacementFacade;
 import model.settings.SettingsFacade;
 import view.BattleshipBoard;
 import view.SettingsView;
@@ -15,8 +16,10 @@ public class BattleshipController {
     private BoardFacade boardFacade = new BoardFacade();
     private BattleshipBoard board;
     private AiFacade aiFacade = new AiFacade();
-
+    private  ShipPlacementFacade shipPlacementFacade =  new ShipPlacementFacade();
+    ;
     public BattleshipController(){
+
         setSettingsFacade(new SettingsFacade());
         SettingsView.getSettingsView().setController(this);
         SettingsView.getSettingsView();
@@ -43,4 +46,9 @@ public class BattleshipController {
     public ShipFacade getShipFacade(String id){
         return boardFacade.getShipRepo(id);
     }
+
+    public ShipPlacementFacade getShipPlacementFacade(){
+        return shipPlacementFacade;
+    }
+
 }
