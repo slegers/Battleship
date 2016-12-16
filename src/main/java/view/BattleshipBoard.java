@@ -71,7 +71,12 @@ public class BattleshipBoard extends JFrame {
 
         JButton button = new JButton("Start");
         button.setPreferredSize(new Dimension(getAmountOfTiles()*getTileSize()/2,30));
-
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.startGame();
+            }
+        });
         startButton.add(button);
 
         return startButton;

@@ -51,9 +51,10 @@ public class ShipPlacement {
             if (f.getPlayerBoard().isEnabled() && canDrawShip(column, row, f.getNumber(), f)) {
                 drawNeighbours(f);
                 drawShip(f, getSelectedBackgroundColor(), getStandardBorderColor());
+                f.getPlayerBoard().getCurrentShip().setMaxShips(f.getPlayerBoard().getCurrentShip().getMaxShips() - 1);
+                f.getPlayerBoard().setAmountOfShips(f.getPlayerBoard().getAmountOfShips() + 1);
             }
-            f.getPlayerBoard().getCurrentShip().setMaxShips(f.getPlayerBoard().getCurrentShip().getMaxShips() - 1);
-            f.getPlayerBoard().setAmountOfShips(f.getPlayerBoard().getAmountOfShips() + 1);
+
         }
     }
 

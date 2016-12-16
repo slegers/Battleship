@@ -51,4 +51,7 @@ public class BattleshipController {
         return shipPlacementFacade;
     }
 
+    public void startGame() {
+
+    }
 }
