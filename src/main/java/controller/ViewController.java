@@ -41,79 +41,86 @@ public class ViewController {
     public static void mouseClick(Field f){
         if(f.getPlayerBoard().getCurrentShip().getMaxShips() <= 0){
             JOptionPane.showMessageDialog(null,"You already have too much ships of this type.");
+        }else if (f.getPlayerBoard().getAmountOfShips() >= 5) {
+            JOptionPane.showMessageDialog(null,"You have placed 5 ships already, press 'Start' to start the game.");
         }else{
             int column = f.getNumber() % 10;
             int row = f.getNumber() / 10;
             if(f.getPlayerBoard().isEnabled() && canDrawShip(column,row,f.getNumber(),f)){
-                drawShip(f,getSelectedBackgroundColor(),getStandardBorderColor());
                 drawNeighbours(f);
+                drawShip(f,getSelectedBackgroundColor(),getStandardBorderColor());
             }
             f.getPlayerBoard().getCurrentShip().setMaxShips(f.getPlayerBoard().getCurrentShip().getMaxShips()-1);
+            f.getPlayerBoard().setAmountOfShips(f.getPlayerBoard().getAmountOfShips() +1);
         }
     }
 
-    private static void drawNeighbours(Field left) {
-        ArrayList<Field> neightbours = getNeighbours(left);
-        for(Field f : neightbours) {
-            f.setColor(getSeaColor());
-        }
-    }
-
-    private static ArrayList<Field> getNeighbours(Field f) {
-        ArrayList<Field> neighbours = new ArrayList<Field>();
-        if(f.getPlayerBoard().getRichting() == 1){
-            if(f.getNumber() > 9){
-                for(int i = 0; i < f.getPlayerBoard().getShipsize(); i++){
-                    neighbours.add(f.getPlayerBoard().getFields().get(f.getNumber()- 10 + i));
-                }
+    private static void drawNeighbours(Field f) {
+        int xmin = 0;
+        int xmax = 0;
+        int ymin = 0;
+        int ymax = 0;
+        if (f.getPlayerBoard().getRichting() == 1) {
+            xmin = f.getNumber() % 10;
+            xmax = f.getNumber() % 10 + f.getPlayerBoard().getShipsize() - 1;
+            ymin = f.getNumber() / 10;
+            ymax = f.getNumber() / 10;
+            if (f.getNumber() > 9) {
+                ymin = ymin - 1;
             }
-            if(f.getNumber() < 90){
-                for(int i = 0; i < f.getPlayerBoard().getShipsize(); i++){
-                    neighbours.add(f.getPlayerBoard().getFields().get(f.getNumber()+ 10 + i));
-                }
+            if (f.getNumber() < 90) {
+                ymax = ymax + 1;
             }
-            if(f.getNumber() %10 > 0){
-                neighbours.add(f.getPlayerBoard().getFields().get(f.getNumber()-1));
+            if (f.getNumber() % 10 > 0) {
+                xmin = xmin - 1;
             }
-            if((f.getNumber() % 10 + f.getPlayerBoard().getShipsize()) < 9){
-                neighbours.add(f.getPlayerBoard().getFields().get(f.getNumber()+f.getPlayerBoard().getShipsize()));
+            if ((f.getNumber() % 10 + f.getPlayerBoard().getShipsize()) < 10) {
+                xmax = xmax + 1;
             }
         }
-        if(f.getPlayerBoard().getRichting() == 10){
-            if(f.getNumber() > 9){
-                neighbours.add(f.getPlayerBoard().getFields().get(f.getNumber()-10));
+        if (f.getPlayerBoard().getRichting() == 10) {
+            xmin = f.getNumber() % 10;
+            xmax = f.getNumber() % 10;
+            ymin = f.getNumber() / 10;
+            ymax = f.getNumber() / 10 + f.getPlayerBoard().getShipsize() - 1;
+            if (f.getNumber() > 9) {
+                ymin = ymin - 1;
             }
-            if((f.getNumber() + f.getPlayerBoard().getShipsize() * 10) < 90){
-                neighbours.add(f.getPlayerBoard().getFields().get(f.getNumber()+f.getPlayerBoard().getShipsize()*10));
+            if (f.getNumber() / 10 + f.getPlayerBoard().getShipsize() < 10 ) {
+                ymax = ymax + 1;
             }
-            if(f.getNumber() %10 > 0){
-                for(int i = 0; i < f.getPlayerBoard().getShipsize(); i++){
-                    neighbours.add(f.getPlayerBoard().getFields().get(f.getNumber() -1 + 10 * i));
-                }
+            if (f.getNumber() % 10 > 0) {
+                xmin = xmin - 1;
             }
-            if(f.getNumber() % 10 < 9){
-                for(int i = 0; i < f.getPlayerBoard().getShipsize(); i++){
-                    neighbours.add(f.getPlayerBoard().getFields().get(f.getNumber() +1 + 10 * i));
-                }
+            if (f.getNumber() % 10 < 9) {
+                xmax = xmax + 1;
             }
         }
-        return neighbours;
+        for (int x = xmin; x <= xmax; x++) {
+            for (int y = ymin; y <= ymax; y++) {
+                f.getPlayerBoard().getFields().get(y * 10 + x).setColor(getSeaColor());
+            }
+        }
     }
 
     private static void drawShip(Field f, Color tileColor, Color borderColor){
         int i = 0;
 
-        while (i <= f.getPlayerBoard().getShipsize() - 1) {
+        while (i <= f.getPlayerBoard().getShipsize() - 2) {
 
             Field middle = f.getPlayerBoard().getFields().get(f.getNumber() + i * f.getPlayerBoard().getRichting());
+            Field right = f.getPlayerBoard().getFields().get(f.getNumber() + (f.getPlayerBoard().getShipsize() - 1) * f.getPlayerBoard().getRichting());
             if (f.getPlayerBoard().getRichting() == 1) {
                 middle.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, borderColor));
                 f.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 0, borderColor));
+                right.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 1, borderColor));
             } else {
                 middle.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 1, borderColor));
                 f.setBorder(BorderFactory.createMatteBorder(1, 1, 0, 1, borderColor));
+                right.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, borderColor));
             }
             middle.setColor(tileColor);
+            right.setColor(tileColor);
             i++;
         }
     }
