@@ -4,6 +4,8 @@ import model.type.ShipType;
 import view.Field;
 import view.PlayerBoard;
 
+import java.util.TreeMap;
+
 /**
  * Created by yanice on 16/12/16.
  */
@@ -11,15 +13,15 @@ public final class ShipPlacementFacade {
 
     private ShipPlacement shipPlacement = new ShipPlacement();
 
-    public void mouseEnter(Field f) {
-        shipPlacement.mouseEnter(f);
+    public void mouseEnter(Field f,boolean gameStarted) {
+        shipPlacement.mouseEnter(f,gameStarted);
     }
 
-    public void mouseExit(Field f) {
-        shipPlacement.mouseExit(f);
+    public void mouseExit(Field f, boolean gameStarted) {
+        shipPlacement.mouseExit(f,gameStarted);
     }
-    public void mouseClick(Field f){
-        shipPlacement.mouseClick(f);
+    public void mouseClick(Field f, boolean gameStarted){
+        shipPlacement.mouseClick(f,gameStarted);
     }
 
     public void setDirectionOfPlayerBoard(PlayerBoard player1, int i) {
@@ -27,5 +29,8 @@ public final class ShipPlacementFacade {
     }
     public void setShipTypeOfPlayerBoard(PlayerBoard player1, ShipType shipType) {
         shipPlacement.setShipTypeOfPlayerBoard(player1,shipType);
+    }
+    public void clearSea(TreeMap<Integer,Field> fields){
+        shipPlacement.clearSea(fields);
     }
 }

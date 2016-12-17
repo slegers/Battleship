@@ -47,4 +47,10 @@ public class SettingsFacade
     public String getNamePlayer2(){
         return Settings.getSettings().getNamePlayer2();
     }
+    public void setGameIsStarted(){
+        Settings.getSettings().setGameIsStarted();
+    }
+    public boolean getGameIsStarted(){
+        return Settings.getSettings().getGameIsStarted();
+    }
 }

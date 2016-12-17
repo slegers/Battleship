@@ -99,6 +99,7 @@ class PlaceShipAction implements Action {
 		int[] i = new int[2];
 		i[0] = (random.nextInt(Integer.parseInt(s)));
 		i[1] = (random.nextInt(Integer.parseInt(s)));
+		//TODO toch steeds out of bounds?
 		i[2] = (random.nextInt(1));
 		return i;
 	}

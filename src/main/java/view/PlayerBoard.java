@@ -36,13 +36,13 @@ public class PlayerBoard extends JPanel {
     }
 
     public void mouseEnter(Field f) {
-        board.getController().getShipPlacementFacade().mouseEnter(f);
-    }
+        board.getController().getShipPlacementFacade().mouseEnter(f,board.getController().getSettingsFacade().getGameIsStarted());
+}
     public void mouseExit(Field f) {
-        board.getController().getShipPlacementFacade().mouseExit(f);
+        board.getController().getShipPlacementFacade().mouseExit(f,board.getController().getSettingsFacade().getGameIsStarted());
     }
     public void mouseClick(Field f){
-        board.getController().getShipPlacementFacade().mouseClick(f);
+        board.getController().getShipPlacementFacade().mouseClick(f,board.getController().getSettingsFacade().getGameIsStarted());
     }
 
     public int getShipsize() {
@@ -90,4 +90,6 @@ public class PlayerBoard extends JPanel {
     public int getAmountOfShips() { return amountOfShips; }
 
     public void setAmountOfShips(int amountOfShips) { this.amountOfShips = amountOfShips; }
+
+
 }

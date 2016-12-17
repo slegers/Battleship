@@ -74,7 +74,7 @@ public class BattleshipBoard extends JFrame {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.startGame();
+                controller.startGame(player1.getFields());
             }
         });
         startButton.add(button);

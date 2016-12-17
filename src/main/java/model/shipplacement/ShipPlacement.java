@@ -6,6 +6,7 @@ import view.PlayerBoard;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.TreeMap;
 
 /**
  * Created by Yanice on 15/12/2016.
@@ -22,15 +23,18 @@ public class ShipPlacement {
         board.setShipsize(type.getSize());
     }
 
-    public void mouseEnter(Field f) {
+    public void mouseEnter(Field f, boolean started) {
         int column = f.getNumber() % 10;
         int row = f.getNumber() / 10;
-        if (f.getBackground().equals(getStandardBackGroundColor()) && f.getPlayerBoard().isEnabled() && canDrawShip(column, row, f.getNumber(), f)) {
-            drawShip(f, getHoverBackGroundColor(), getHoverBackGroundColor());
+        if(!started){
+            if (f.getBackground().equals(getStandardBackGroundColor()) && f.getPlayerBoard().isEnabled() && canDrawShip(column, row, f.getNumber(), f)) {
+                drawShip(f, getHoverBackGroundColor(), getHoverBackGroundColor());
+            }
         }
     }
 
-    public void mouseExit(Field f) {
+    public void mouseExit(Field f,boolean started) {
+        if(!started){
         if (f.getPlayerBoard().isEnabled() && f.getBackground().equals(getHoverBackGroundColor()) && f.getPlayerBoard().isEnabled()) {
             int column = f.getNumber() % 10;
             int row = f.getNumber() / 10;
@@ -38,23 +42,27 @@ public class ShipPlacement {
                 unDrawShip(f);
             }
         }
+        }
     }
 
-    public void mouseClick(Field f) {
-        if (f.getPlayerBoard().getCurrentShip().getMaxShips() <= 0) {
-            JOptionPane.showMessageDialog(null, "You already have too much ships of this type.");
-        } else if (f.getPlayerBoard().getAmountOfShips() >= 5) {
-            JOptionPane.showMessageDialog(null, "You have placed 5 ships already, press 'Start' to start the game.");
-        } else {
-            int column = f.getNumber() % 10;
-            int row = f.getNumber() / 10;
-            if (f.getPlayerBoard().isEnabled() && canDrawShip(column, row, f.getNumber(), f)) {
-                drawNeighbours(f);
-                drawShip(f, getSelectedBackgroundColor(), getStandardBorderColor());
-                f.getPlayerBoard().getCurrentShip().setMaxShips(f.getPlayerBoard().getCurrentShip().getMaxShips() - 1);
-                f.getPlayerBoard().setAmountOfShips(f.getPlayerBoard().getAmountOfShips() + 1);
+    public void mouseClick(Field f, boolean started) {
+        if(!started) {
+            if (f.getPlayerBoard().getCurrentShip().getMaxShips() <= 0) {
+                JOptionPane.showMessageDialog(null, "You already have too much ships of this type.");
+            } else if (f.getPlayerBoard().getAmountOfShips() >= 5) {
+                JOptionPane.showMessageDialog(null, "You have placed 5 ships already, press 'Start' to start the game.");
+            } else {
+                int column = f.getNumber() % 10;
+                int row = f.getNumber() / 10;
+                if (f.getPlayerBoard().isEnabled() && canDrawShip(column, row, f.getNumber(), f)) {
+                    drawNeighbours(f);
+                    drawShip(f, getSelectedBackgroundColor(), getStandardBorderColor());
+                    f.getPlayerBoard().getCurrentShip().setMaxShips(f.getPlayerBoard().getCurrentShip().getMaxShips() - 1);
+                    f.getPlayerBoard().setAmountOfShips(f.getPlayerBoard().getAmountOfShips() + 1);
+                }
             }
-
+        }else{
+            f.setColor(Color.red);
         }
     }
 
@@ -158,6 +166,13 @@ public class ShipPlacement {
             }
         }
         return true;
+    }
+    public void clearSea(TreeMap<Integer,Field> fields){
+        for(Field field : fields.values() ){
+            if(field.getColor().equals(getSeaColor())){
+                field.setColor(getStandardBackGroundColor());
+            }
+        }
     }
 
     public Color getStandardBorderColor() {
