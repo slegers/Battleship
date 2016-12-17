@@ -21,13 +21,14 @@ public class BattleshipController {
     private BoardFacade boardFacade = new BoardFacade();
     private BattleshipBoard board;
     private AiFacade aiFacade = new AiFacade();
-    private  ShipPlacementFacade shipPlacementFacade =  new ShipPlacementFacade();
+    private  ShipPlacementFacade shipPlacementFacade;
     ;
     public BattleshipController(){
 
         setSettingsFacade(new SettingsFacade());
         SettingsView.getSettingsView().setController(this);
         SettingsView.getSettingsView();
+        shipPlacementFacade  =  new ShipPlacementFacade(this);
     }
 
     public AiFacade getAiFacade()

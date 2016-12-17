@@ -1,5 +1,6 @@
 package model.shipplacement;
 
+import controller.BattleshipController;
 import model.type.ShipType;
 import view.Field;
 import view.PlayerBoard;
@@ -8,11 +9,13 @@ import java.util.TreeMap;
 
 /**
  * Created by yanice on 16/12/16.
+ * @author Yanice Slegers
  */
 public final class ShipPlacementFacade {
 
-    private ShipPlacement shipPlacement = new ShipPlacement();
-
+    private ShipPlacement shipPlacement;
+    public ShipPlacementFacade(BattleshipController controller){
+        shipPlacement = new ShipPlacement(controller);    }
     public void mouseEnter(Field f,boolean gameStarted) {
         shipPlacement.mouseEnter(f,gameStarted);
     }

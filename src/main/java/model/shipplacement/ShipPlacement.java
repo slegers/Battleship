@@ -1,5 +1,7 @@
 package model.shipplacement;
 
+import controller.BattleshipController;
+import model.Target;
 import model.type.ShipType;
 import view.Field;
 import view.PlayerBoard;
@@ -10,9 +12,15 @@ import java.util.TreeMap;
 
 /**
  * Created by Yanice on 15/12/2016.
- * @author Yanice && Kevin
+ * @author Yanice Slegers
  */
 public class ShipPlacement {
+
+    private BattleshipController controller;
+
+    public ShipPlacement(BattleshipController controller){
+        this.controller = controller;
+    }
 
     public void setDirectionOfPlayerBoard(PlayerBoard board, int direction) {
         board.setRichting(direction);
