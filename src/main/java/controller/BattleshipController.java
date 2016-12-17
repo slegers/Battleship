@@ -59,5 +59,6 @@ public class BattleshipController {
     public void startGame(TreeMap<Integer,Field> fields) {
         getSettingsFacade().setGameIsStarted();
         getShipPlacementFacade().clearSea(fields);
+        getAiFacade().doAction(this);
     }
 }

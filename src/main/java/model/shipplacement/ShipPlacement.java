@@ -62,7 +62,11 @@ public class ShipPlacement {
                 }
             }
         }else{
-            f.setColor(Color.red);
+            if(f.getColor().equals(getSelectedBackgroundColor())){
+                f.setColor(getHitColor());
+            }else{
+                f.setColor(getSeaColor());
+            }
         }
     }
 
@@ -179,20 +183,24 @@ public class ShipPlacement {
         return Color.black;
     }
 
-    public static Color getSelectedBackgroundColor() {
+    public  Color getSelectedBackgroundColor() {
         return Color.white;
     }
 
-    public static Color getStandardBackGroundColor() {
+    public  Color getStandardBackGroundColor() {
         return Color.gray;
     }
 
-    public static Color getHoverBackGroundColor() {
+    public  Color getHoverBackGroundColor() {
         return Color.PINK;
     }
 
-    public static Color getSeaColor() {
+    public  Color getSeaColor() {
         return Color.cyan;
+    }
+
+    public Color getHitColor(){
+        return Color.red;
     }
 }
 
