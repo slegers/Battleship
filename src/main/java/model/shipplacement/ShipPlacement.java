@@ -1,61 +1,84 @@
-package controller;
+package model.shipplacement;
 
+import controller.BattleshipController;
+import model.Target;
 import model.type.ShipType;
 import view.Field;
 import view.PlayerBoard;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.TreeMap;
 
 /**
- * Created by Kevin on 15/12/2016.
- * @author Kevin
+ * Created by Yanice on 15/12/2016.
+ * @author Yanice Slegers
  */
-public class ViewController {
-    public static void setDirectionOfPlayerBoard(PlayerBoard board, int direction){
+public class ShipPlacement {
+
+    private BattleshipController controller;
+
+    public ShipPlacement(BattleshipController controller){
+        this.controller = controller;
+    }
+
+    public void setDirectionOfPlayerBoard(PlayerBoard board, int direction) {
         board.setRichting(direction);
     }
-    public static void setShipTypeOfPlayerBoard(PlayerBoard board, ShipType type){
+
+    public void setShipTypeOfPlayerBoard(PlayerBoard board, ShipType type) {
         board.setCurrentShip(type);
         board.setShipsize(type.getSize());
     }
-    public static void mouseEnter(Field f){
+
+    public void mouseEnter(Field f, boolean started) {
         int column = f.getNumber() % 10;
         int row = f.getNumber() / 10;
-        if(f.getBackground().equals(getStandardBackGroundColor()) && f.getPlayerBoard().isEnabled() && canDrawShip(column,row,f.getNumber(),f)){
-            drawShip(f,getHoverBackGroundColor(),getHoverBackGroundColor());
+        if(!started){
+            if (f.getBackground().equals(getStandardBackGroundColor()) && f.getPlayerBoard().isEnabled() && canDrawShip(column, row, f.getNumber(), f)) {
+                drawShip(f, getHoverBackGroundColor(), getHoverBackGroundColor());
+            }
         }
     }
 
-    public static void mouseExit(Field f){
+    public void mouseExit(Field f,boolean started) {
+        if(!started){
         if (f.getPlayerBoard().isEnabled() && f.getBackground().equals(getHoverBackGroundColor()) && f.getPlayerBoard().isEnabled()) {
             int column = f.getNumber() % 10;
             int row = f.getNumber() / 10;
-            if(canDrawShip(column,row,f.getNumber(),f)){
+            if (canDrawShip(column, row, f.getNumber(), f)) {
                 unDrawShip(f);
             }
         }
-    }
-
-    public static void mouseClick(Field f){
-        if(f.getPlayerBoard().getCurrentShip().getMaxShips() <= 0){
-            JOptionPane.showMessageDialog(null,"You already have too much ships of this type.");
-        }else if (f.getPlayerBoard().getAmountOfShips() >= 5) {
-            JOptionPane.showMessageDialog(null,"You have placed 5 ships already, press 'Start' to start the game.");
-        }else{
-            int column = f.getNumber() % 10;
-            int row = f.getNumber() / 10;
-            if(f.getPlayerBoard().isEnabled() && canDrawShip(column,row,f.getNumber(),f)){
-                drawNeighbours(f);
-                drawShip(f,getSelectedBackgroundColor(),getStandardBorderColor());
-            }
-            f.getPlayerBoard().getCurrentShip().setMaxShips(f.getPlayerBoard().getCurrentShip().getMaxShips()-1);
-            f.getPlayerBoard().setAmountOfShips(f.getPlayerBoard().getAmountOfShips() +1);
         }
     }
 
-    private static void drawNeighbours(Field f) {
+    public void mouseClick(Field f, boolean started) {
+        if(!started) {
+            if (f.getPlayerBoard().getCurrentShip().getMaxShips() <= 0) {
+                JOptionPane.showMessageDialog(null, "You already have too much ships of this type.");
+            } else if (f.getPlayerBoard().getAmountOfShips() >= 5) {
+                JOptionPane.showMessageDialog(null, "You have placed 5 ships already, press 'Start' to start the game.");
+            } else {
+                int column = f.getNumber() % 10;
+                int row = f.getNumber() / 10;
+                if (f.getPlayerBoard().isEnabled() && canDrawShip(column, row, f.getNumber(), f)) {
+                    drawNeighbours(f);
+                    drawShip(f, getSelectedBackgroundColor(), getStandardBorderColor());
+                    f.getPlayerBoard().getCurrentShip().setMaxShips(f.getPlayerBoard().getCurrentShip().getMaxShips() - 1);
+                    f.getPlayerBoard().setAmountOfShips(f.getPlayerBoard().getAmountOfShips() + 1);
+                }
+            }
+        }else{
+            if(f.getColor().equals(getSelectedBackgroundColor())){
+                f.setColor(getHitColor());
+            }else{
+                f.setColor(getSeaColor());
+            }
+        }
+    }
+
+    private void drawNeighbours(Field f) {
         int xmin = 0;
         int xmax = 0;
         int ymin = 0;
@@ -86,7 +109,7 @@ public class ViewController {
             if (f.getNumber() > 9) {
                 ymin = ymin - 1;
             }
-            if (f.getNumber() / 10 + f.getPlayerBoard().getShipsize() < 10 ) {
+            if (f.getNumber() / 10 + f.getPlayerBoard().getShipsize() < 10) {
                 ymax = ymax + 1;
             }
             if (f.getNumber() % 10 > 0) {
@@ -103,7 +126,7 @@ public class ViewController {
         }
     }
 
-    private static void drawShip(Field f, Color tileColor, Color borderColor){
+    private void drawShip(Field f, Color tileColor, Color borderColor) {
         int i = 0;
 
         while (i < f.getPlayerBoard().getShipsize() - 1) {
@@ -124,7 +147,8 @@ public class ViewController {
             i++;
         }
     }
-    private static void unDrawShip(Field f){
+
+    private void unDrawShip(Field f) {
         f.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, getStandardBorderColor()));
         f.setBackground(getStandardBackGroundColor());
         int i = 1;
@@ -139,16 +163,15 @@ public class ViewController {
         right.setBackground(getStandardBackGroundColor());
     }
 
-    public static boolean canDrawShip(int column, int row, int leftInt, Field f){
+    public boolean canDrawShip(int column, int row, int leftInt, Field f) {
         //Past in het veld?
-        if(!(f.getPlayerBoard().getRichting() == 1 && f.getPlayerBoard().getShipsize() + column <= 10 || f.getPlayerBoard().getRichting() == 10 && f.getPlayerBoard().getShipsize() + row <=10)){
+        if (!(f.getPlayerBoard().getRichting() == 1 && f.getPlayerBoard().getShipsize() + column <= 10 || f.getPlayerBoard().getRichting() == 10 && f.getPlayerBoard().getShipsize() + row <= 10)) {
             return false;
-        }
-        else{
+        } else {
             int i = 1;
             while (i <= f.getPlayerBoard().getShipsize() - 1) {
                 Field middle = f.getPlayerBoard().getFields().get(leftInt + i * f.getPlayerBoard().getRichting());
-                if(middle.getColor().equals(getSelectedBackgroundColor()) || middle.getColor().equals(getSeaColor())){
+                if (middle.getColor().equals(getSelectedBackgroundColor()) || middle.getColor().equals(getSeaColor())) {
                     return false;
                 }
                 i++;
@@ -156,24 +179,36 @@ public class ViewController {
         }
         return true;
     }
+    public void clearSea(TreeMap<Integer,Field> fields){
+        for(Field field : fields.values() ){
+            if(field.getColor().equals(getSeaColor())){
+                field.setColor(getStandardBackGroundColor());
+            }
+        }
+    }
 
-    public static Color getStandardBorderColor(){
+    public Color getStandardBorderColor() {
         return Color.black;
     }
 
-    public static Color getSelectedBackgroundColor(){
+    public  Color getSelectedBackgroundColor() {
         return Color.white;
     }
 
-    public static Color getStandardBackGroundColor(){
+    public  Color getStandardBackGroundColor() {
         return Color.gray;
     }
 
-    public static Color getHoverBackGroundColor(){
+    public  Color getHoverBackGroundColor() {
         return Color.PINK;
     }
 
-    public static Color getSeaColor() {
+    public  Color getSeaColor() {
         return Color.cyan;
     }
+
+    public Color getHitColor(){
+        return Color.red;
+    }
 }
+

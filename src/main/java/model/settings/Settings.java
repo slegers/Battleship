@@ -6,7 +6,7 @@ class Settings {
     private static boolean done = true;
     private int length, height;
     private String namePlayer1, namePlayer2;
-
+    private boolean gameIsStarted = false;
     private Settings() {
     }
 
@@ -51,5 +51,12 @@ class Settings {
 
     public void setNamePlayer2(String name) {
         this.namePlayer2 = name;
+    }
+
+    public void setGameIsStarted(){
+        gameIsStarted = true;
+    }
+    public boolean getGameIsStarted(){
+        return gameIsStarted;
     }
 }

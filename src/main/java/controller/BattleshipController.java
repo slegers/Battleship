@@ -1,11 +1,17 @@
 package controller;
 
+import com.sun.scenario.Settings;
 import controller.ai.AiFacade;
 import model.BoardFacade;
 import model.ShipFacade;
+import model.shipplacement.ShipPlacementFacade;
 import model.settings.SettingsFacade;
+import sun.plugin2.message.GetAppletMessage;
 import view.BattleshipBoard;
+import view.Field;
 import view.SettingsView;
+
+import java.util.TreeMap;
 
 /**
  * Created by yanice on 18/11/16.
@@ -15,11 +21,14 @@ public class BattleshipController {
     private BoardFacade boardFacade = new BoardFacade();
     private BattleshipBoard board;
     private AiFacade aiFacade = new AiFacade();
-
+    private  ShipPlacementFacade shipPlacementFacade;
+    ;
     public BattleshipController(){
+
         setSettingsFacade(new SettingsFacade());
         SettingsView.getSettingsView().setController(this);
         SettingsView.getSettingsView();
+        shipPlacementFacade  =  new ShipPlacementFacade(this);
     }
 
     public AiFacade getAiFacade()
@@ -42,5 +51,15 @@ public class BattleshipController {
 
     public ShipFacade getShipFacade(String id){
         return boardFacade.getShipRepo(id);
+    }
+
+    public ShipPlacementFacade getShipPlacementFacade(){
+        return shipPlacementFacade;
+    }
+
+    public void startGame(TreeMap<Integer,Field> fields) {
+        getSettingsFacade().setGameIsStarted();
+        getShipPlacementFacade().clearSea(fields);
+        getAiFacade().doAction(this);
     }
 }
