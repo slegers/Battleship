@@ -23,6 +23,8 @@ public class SettingsView extends JFrame{
     private HashMap<ShipType,Integer> shipTypeJTextFieldHashMap;
     private static volatile SettingsView settingsView;
     private static boolean done = true;
+    private  JComboBox legStrategieList,attackStrategieList;
+
     private JButton play;
 
 
@@ -55,7 +57,7 @@ public class SettingsView extends JFrame{
     }
 
     private void createComponents() {
-        setLayout(new GridLayout(5 + ShipType.values().length,2));
+        setLayout(new GridLayout(7 + ShipType.values().length,2));
     setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         speler1 = new JLabel("Speler 1:");
@@ -78,6 +80,17 @@ public class SettingsView extends JFrame{
         heightText = new JTextField(30+"");
         heightText.setEnabled(false);
         add(heightText);
+
+        JLabel legStrategieLabel = new JLabel("leg strategie:");
+        String[] legStrategie = {"Simple", "Advanced"};
+        legStrategieList = new JComboBox(legStrategie);
+        JLabel attackStrategieLabel = new JLabel("aanval strategie:");
+        String[] attackStrategie = {"Simple", "Advanced"};
+        attackStrategieList = new JComboBox(legStrategie);
+        add(legStrategieLabel);
+        add(legStrategieList);
+        add(attackStrategieLabel);
+        add(attackStrategieList);
         //maakt voor ieder schip type een label en plaatst de hoeveelheid schepen die er gezet kunnen worden.
         for(ShipType schip : ShipType.values()){
             JLabel label = new JLabel("Aantal " + schip.toString() + ":");
