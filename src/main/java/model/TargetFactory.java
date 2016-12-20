@@ -20,8 +20,13 @@ public interface TargetFactory
 		return new Target(place, ship, TargetStateFactory.createForbiddenState());
 	}
 
-	static Target createTarget(String place, Ship ship)
+	static Target createTarget(String place)
 	{
-		return new Target(place, ship, TargetStateFactory.createHealtyState());
+		return new Target(place, TargetStateFactory.createHealtyState());
+	}
+
+	static Target createForbiddenTarget(String place)
+	{
+		return new Target(place, TargetStateFactory.createForbiddenState());
 	}
 }
