@@ -87,7 +87,7 @@ public class ShipPlacement {
                 }
             }
         }else{
-            if(f.getColor().equals(getSelectedBackgroundColor())){
+            if(f.getColor().equals(getSelectedBackgroundColor()) || f.getColor().equals(getSeaColor()) || f.getColor().equals(getHitColor()) || f.getColor().equals(getSunkColor())){
                 f.setColor(getHitColor());
             }else{
                 f.setColor(getSeaColor());
@@ -225,7 +225,11 @@ public class ShipPlacement {
     }
 
     public Color getHitColor(){
+        return Color.yellow;
+    }
+    public Color getSunkColor(){
         return Color.red;
     }
+
 }
 
