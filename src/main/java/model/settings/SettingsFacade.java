@@ -1,5 +1,6 @@
 package model.settings;
 
+import com.sun.xml.internal.ws.api.config.management.policy.ManagementAssertion;
 import model.type.ShipType;
 
 public class SettingsFacade
@@ -52,5 +53,17 @@ public class SettingsFacade
     }
     public boolean getGameIsStarted(){
         return Settings.getSettings().getGameIsStarted();
+    }
+    public void setPlaceStrategy(String strategy){
+        Settings.getSettings().setPlaceStrategy(strategy);
+    }
+    public void setAttackStrategy(String strategy){
+        Settings.getSettings().setAttackStrategy(strategy);
+    }
+    public String getPlaceStrategy(){
+        return Settings.getSettings().getPlaceStrategy();
+    }
+    public String getAttackStrategy(){
+        return Settings.getSettings().getAttackStrategy();
     }
 }
