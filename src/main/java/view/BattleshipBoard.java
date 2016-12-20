@@ -19,6 +19,7 @@ public class BattleshipBoard extends JFrame {
     private PlayerBoard player2;
     private int amountOfTiles;
     private int tileSize;
+    private JButton button;
     JComboBox<String> ShipList;
 
     public BattleshipBoard(BattleshipController controller) {
@@ -69,12 +70,12 @@ public class BattleshipBoard extends JFrame {
         JPanel startButton = new JPanel();
         startButton.setLayout(new GridBagLayout());
 
-        JButton button = new JButton("Start");
+         button = new JButton("Start");
         button.setPreferredSize(new Dimension(getAmountOfTiles()*getTileSize()/2,30));
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.startGame(player1.getFields());
+                controller.startGame(player1.getAmountOfShips(), player1.getFields());
             }
         });
         startButton.add(button);
@@ -181,4 +182,7 @@ public class BattleshipBoard extends JFrame {
         this.tileSize = tileSize;
     }
 
+    public void startGame() {
+        button.setEnabled(false);
+    }
 }
