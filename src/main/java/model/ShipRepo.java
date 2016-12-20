@@ -12,7 +12,7 @@ import java.util.Map;
  */
 class ShipRepo implements ShipRepoInterface
 {
-	private final static int iMaxShips = 5;
+	private final static int iMaxShips = 5; //TODO FROM SETTINGS
 	private final ArrayList<Ship> ships = new ArrayList<>();
 	private final HashMap<ShipType, Integer> regesterdShips = new HashMap<>();
 
@@ -54,10 +54,10 @@ class ShipRepo implements ShipRepoInterface
 		if (regesterdShips.values().stream().mapToLong(Integer::longValue).sum() > iMaxShips)
 			throw new IllegalStateException("te veel schepen in algemeen");
 		Integer amountOfType = regesterdShips.get(ship.getType());
-		if (amountOfType >= ship.getType().getMaxShips())
+		if (amountOfType > ship.getType().getMaxShips())
 			throw new IllegalStateException("te veel schepen van type" + ShipType.Aircraftcarrier.name());
-		if (ship.getType().getSize() != ship.getTargets().size())
-			throw new IllegalStateException("schip heeft foute aantal targets");
+		if (ship.getType().getSize() != ship.getTargets().stream().filter(obj -> obj.getState().getName().contains("HealtyState")).count())
+			throw new IllegalStateException("schip heeft foute aantal targets, " + ship.getType().getSize() + " " + ship.getTargets().stream().filter(obj -> obj.getState().getName().equals("HealtyState")).count());
 		ships.add(ship);
 	}
 

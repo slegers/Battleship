@@ -19,7 +19,7 @@ public interface ShipFactory
 		return ship;
 	}
 
-	static Ship createBattleShip(List<Target> targets, ShipFacade shipFacade)
+	static Ship createBattleship(List<Target> targets, ShipFacade shipFacade)
 	{
 		Ship ship = new Ship(targets, ShipType.Battleship);
 		shipFacade.setShip(ship);

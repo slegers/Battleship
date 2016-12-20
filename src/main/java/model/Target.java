@@ -31,6 +31,10 @@ public class Target
 		this.state = targetState;
 	}
 
+	public TargetState getState() {
+		return state;
+	}
+
 	public String getName()
 	{
 		return name;

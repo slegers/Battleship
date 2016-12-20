@@ -9,6 +9,10 @@ public interface TargetState
 
 	TargetState sink();
 
+	default String getName() {
+		return this.getClass().getName();
+	}
+
 	default void processShipState()
 	{
 
