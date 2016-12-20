@@ -1,4 +1,4 @@
-package controller.ai;
+package model.ai;
 
 /**
  * @author: Louis Roebben
