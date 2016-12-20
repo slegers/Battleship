@@ -66,19 +66,20 @@ class PlaceShipAction implements Action {
 						{
 							if (varShipType != ShipType.Submarine)
 							{
-								targets.add(TargetFactory.createForbiddenTarget(String.valueOf(location[0] + 1) + (location[1] + count), ship));
-								targets.add(TargetFactory.createForbiddenTarget(String.valueOf(location[0] - 1) + (location[1] + count), ship));
+								//TODO: fix this shit!
+							//	targets.add(TargetFactory.createForbiddenTarget(String.valueOf(location[0] + 1) + (location[1] + count), ship));
+							//	targets.add(TargetFactory.createForbiddenTarget(String.valueOf(location[0] - 1) + (location[1] + count), ship));
 							}
 
-							targets.add(TargetFactory.createTarget(String.valueOf(location[0]) + (location[1] + count), ship));
+							//targets.add(TargetFactory.createTarget(String.valueOf(location[0]) + (location[1] + count), ship));
 						} else
 						{
 							if (varShipType != ShipType.Submarine)
 							{
-								targets.add(TargetFactory.createForbiddenTarget(String.valueOf(location[0] + count) + (location[1] + 1), ship));
-								targets.add(TargetFactory.createForbiddenTarget(String.valueOf(location[0] + count) + (location[1] - 1), ship));
+							//	targets.add(TargetFactory.createForbiddenTarget(String.valueOf(location[0] + count) + (location[1] + 1), ship));
+							//	targets.add(TargetFactory.createForbiddenTarget(String.valueOf(location[0] + count) + (location[1] - 1), ship));
 							}
-							targets.add(TargetFactory.createTarget(String.valueOf(location[0] + count) + (location[1]), ship));
+							//targets.add(TargetFactory.createTarget(String.valueOf(location[0] + count) + (location[1]), ship));
 						}
 					}
 					ship.setTargets(targets);

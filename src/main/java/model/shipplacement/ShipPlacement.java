@@ -80,7 +80,7 @@ public class ShipPlacement {
                         }else{
                             offset = f.getNumber() + (i*10);
                         }
-                        shipTargets.add(TargetFactory.ceateTarget(offset, TargetStateFactory.createHealtyState()));
+                        shipTargets.add(TargetFactory.ceateTarget(offset + "", TargetStateFactory.createHealtyState()));
                     }
                     Ship ship = new Ship(shipTargets, f.getPlayerBoard().getCurrentShip());
                     f.getPlayerBoard().getBoard().getController().getShipFacade("player").setShip(ship);
