@@ -14,13 +14,13 @@ import java.awt.event.ActionListener;
  *  @autor Kevin
  */
 public class BattleshipBoard extends JFrame {
+    JComboBox<String> ShipList;
     private BattleshipController controller;
     private PlayerBoard player1;
     private PlayerBoard player2;
     private int amountOfTiles;
     private int tileSize;
     private JButton button;
-    JComboBox<String> ShipList;
 
     public BattleshipBoard(BattleshipController controller) {
         this.controller = controller;
@@ -121,7 +121,7 @@ public class BattleshipBoard extends JFrame {
         String[] ships = new String[ShipType.values().length];
         int i = 0;
         for (ShipType schip : ShipType.values()) {
-            ships[i] = schip.toString() + " (" + getController().getShipFacade("player1").getAvailableShipCount().get(schip) + ")";
+            ships[i] = schip.toString() + " (" + getController().getShipFacade("player").getAvailableShipCount().get(schip) + ")";
             i++;
         }
         ShipList = new JComboBox<>(ships);
