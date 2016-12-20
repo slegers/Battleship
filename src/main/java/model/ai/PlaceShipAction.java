@@ -11,9 +11,9 @@ import model.type.ShipType;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.List;
 
 /**
  * @author: Louis Roebben
@@ -26,8 +26,6 @@ class PlaceShipAction implements Action {
 		for (ShipType varShipType : ShipType.values()) {
 			for (int i = 0; i < varAvailableShipCount.get(varShipType); i++) {
 				try {
-					Method createShipMethod = ShipFactory.class.getMethod("create" + varShipType.name() ,Ship.class);
-					Ship ship = (Ship) createShipMethod.invoke(ShipFactory.class);
 
 					int[] location = getRandomLocation(battleshipController);
 					while (location[0] < varShipType.getSize() &&
@@ -37,7 +35,7 @@ class PlaceShipAction implements Action {
 					{
 						location = getRandomLocation(battleshipController);
 					}
-					ArrayList<Target> targets = new ArrayList<Target>();
+					ArrayList<Target> targets = new ArrayList<>();
 					for (int count = 0; count < varShipType.getSize(); count++)
 					{
 						int[] finalLocation = location;
@@ -66,24 +64,25 @@ class PlaceShipAction implements Action {
 						{
 							if (varShipType != ShipType.Submarine)
 							{
-								//TODO: fix this shit!
-							//	targets.add(TargetFactory.createForbiddenTarget(String.valueOf(location[0] + 1) + (location[1] + count), ship));
-							//	targets.add(TargetFactory.createForbiddenTarget(String.valueOf(location[0] - 1) + (location[1] + count), ship));
+								targets.add(TargetFactory.createForbiddenTarget(String.valueOf(location[0] + 1) + (location[1] + count)));
+								targets.add(TargetFactory.createForbiddenTarget(String.valueOf(location[0] - 1) + (location[1] + count)));
 							}
 
-							//targets.add(TargetFactory.createTarget(String.valueOf(location[0]) + (location[1] + count), ship));
+							targets.add(TargetFactory.createTarget(String.valueOf(location[0]) + (location[1] + count)));
 						} else
 						{
 							if (varShipType != ShipType.Submarine)
 							{
-							//	targets.add(TargetFactory.createForbiddenTarget(String.valueOf(location[0] + count) + (location[1] + 1), ship));
-							//	targets.add(TargetFactory.createForbiddenTarget(String.valueOf(location[0] + count) + (location[1] - 1), ship));
+								targets.add(TargetFactory.createForbiddenTarget(String.valueOf(location[0] + count) + (location[1] + 1)));
+								targets.add(TargetFactory.createForbiddenTarget(String.valueOf(location[0] + count) + (location[1] - 1)));
 							}
-							//targets.add(TargetFactory.createTarget(String.valueOf(location[0] + count) + (location[1]), ship));
+							targets.add(TargetFactory.createTarget(String.valueOf(location[0] + count) + (location[1])));
 						}
 					}
-					ship.setTargets(targets);
-					aiShipsFacade.setShip(ship);
+					Method createShipMethod = ShipFactory.class.getMethod("create" + varShipType.name(), List.class, ShipFacade.class);
+					Ship ship = (Ship) createShipMethod.invoke(new ShipFactory(){},targets,aiShipsFacade);
+					//ship.setTargets(targets);
+					//aiShipsFacade.setShip(ship);
 
 				} catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e)
 				{
@@ -98,7 +97,7 @@ class PlaceShipAction implements Action {
 	{
 		Random random = new Random();
 		String s = String.valueOf(battleshipController.getSettingsFacade().getLength());
-		int[] i = new int[2];
+		int[] i = new int[3];
 		i[0] = (random.nextInt(Integer.parseInt(s)));
 		i[1] = (random.nextInt(Integer.parseInt(s)));
 		//TODO toch steeds out of bounds?
