@@ -106,7 +106,7 @@ public class ViewController {
     private static void drawShip(Field f, Color tileColor, Color borderColor){
         int i = 0;
 
-        while (i <= f.getPlayerBoard().getShipsize() - 2) {
+        while (i < f.getPlayerBoard().getShipsize() - 1) {
 
             Field middle = f.getPlayerBoard().getFields().get(f.getNumber() + i * f.getPlayerBoard().getRichting());
             Field right = f.getPlayerBoard().getFields().get(f.getNumber() + (f.getPlayerBoard().getShipsize() - 1) * f.getPlayerBoard().getRichting());
