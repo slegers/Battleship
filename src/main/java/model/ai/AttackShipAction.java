@@ -15,6 +15,6 @@ class AttackShipAction implements Action {
 
 	@Override
 	public void doAction(BattleshipController battleshipController) {
-		battleshipController.getShipFacade("player1").hit(attackStrategy.getTarget(battleshipController));
+		battleshipController.getShipFacade("player").hit(attackStrategy.getTarget(battleshipController));
 	}
 }
