@@ -18,6 +18,7 @@ import java.util.*;
 /**
  * Created by Yanice on 15/12/2016.
  * @author Yanice Slegers
+ * @author Kevin Peelman
  */
 public class ShipPlacement {
 
@@ -87,7 +88,7 @@ public class ShipPlacement {
                 }
             }
         }else{
-            if(f.getColor().equals(getSelectedBackgroundColor())){
+            if(f.getColor().equals(getSelectedBackgroundColor()) || f.getColor().equals(getSeaColor()) || f.getColor().equals(getHitColor()) || f.getColor().equals(getSunkColor())){
                 f.setColor(getHitColor());
             }else{
                 f.setColor(getSeaColor());
@@ -225,7 +226,11 @@ public class ShipPlacement {
     }
 
     public Color getHitColor(){
+        return Color.yellow;
+    }
+    public Color getSunkColor(){
         return Color.red;
     }
+
 }
 
