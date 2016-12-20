@@ -10,17 +10,17 @@ import model.targetState.TargetStateFactory;
 public interface TargetFactory
 {
 
-	static Target ceateTarget(int place, TargetState targetState)
+	static Target ceateTarget(String place, TargetState targetState)
 	{
 		return new Target(place, targetState);
 	}
 
-	static Target createForbiddenTarget(int place, Ship ship)
+	static Target createForbiddenTarget(String place, Ship ship)
 	{
 		return new Target(place, ship, TargetStateFactory.createForbiddenState());
 	}
 
-	static Target createTarget(int place, Ship ship)
+	static Target createTarget(String place, Ship ship)
 	{
 		return new Target(place, ship, TargetStateFactory.createHealtyState());
 	}
