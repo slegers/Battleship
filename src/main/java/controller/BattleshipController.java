@@ -1,12 +1,10 @@
 package controller;
 
-import com.sun.scenario.Settings;
-import controller.ai.AiFacade;
 import model.BoardFacade;
 import model.ShipFacade;
-import model.shipplacement.ShipPlacementFacade;
+import model.ai.AiFacade;
 import model.settings.SettingsFacade;
-import sun.plugin2.message.GetAppletMessage;
+import model.shipplacement.ShipPlacementFacade;
 import view.BattleshipBoard;
 import view.Field;
 import view.SettingsView;
@@ -23,8 +21,9 @@ public class BattleshipController {
     private BattleshipBoard board;
     private AiFacade aiFacade = new AiFacade();
     private  ShipPlacementFacade shipPlacementFacade;
-    ;
-    public BattleshipController(){
+
+	public BattleshipController()
+	{
 
         setSettingsFacade(new SettingsFacade());
         SettingsView.getSettingsView().setController(this);

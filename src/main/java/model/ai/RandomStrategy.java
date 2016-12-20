@@ -1,4 +1,4 @@
-package controller.ai;
+package model.ai;
 
 import controller.BattleshipController;
 

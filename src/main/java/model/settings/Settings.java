@@ -5,9 +5,10 @@ class Settings {
     private static volatile Settings settings;
     private static boolean done = true;
     private int length, height;
-    private String namePlayer1, namePlayer2;
+    private String namePlayer1, namePlayer2,attackStrategy,placeStrategy;
     private boolean gameIsStarted = false;
     private Settings() {
+
     }
 
     public static synchronized Settings getSettings() {
@@ -58,5 +59,21 @@ class Settings {
     }
     public boolean getGameIsStarted(){
         return gameIsStarted;
+    }
+
+    public void setAttackStrategy(String attackStrategy) {
+        this.attackStrategy = attackStrategy;
+    }
+
+    public void setPlaceStrategy(String placeStrategy) {
+        this.placeStrategy = placeStrategy;
+    }
+
+    public String getAttackStrategy() {
+        return attackStrategy;
+    }
+
+    public String getPlaceStrategy() {
+        return placeStrategy;
     }
 }
