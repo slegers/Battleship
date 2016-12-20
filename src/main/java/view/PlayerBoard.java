@@ -91,5 +91,13 @@ public class PlayerBoard extends JPanel {
 
     public void setAmountOfShips(int amountOfShips) { this.amountOfShips = amountOfShips; }
 
+    public BattleshipBoard getBoard() {
+        return board;
+    }
+
+    public void setBoard(BattleshipBoard board) {
+        this.board = board;
+    }
+
 
 }

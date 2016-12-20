@@ -1,14 +1,19 @@
 package model.shipplacement;
 
 import controller.BattleshipController;
+import model.Ship;
+import model.ShipFacade;
 import model.Target;
+import model.TargetFactory;
+import model.factory.ShipFactory;
+import model.targetState.TargetStateFactory;
 import model.type.ShipType;
 import view.Field;
 import view.PlayerBoard;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * Created by Yanice on 15/12/2016.
@@ -67,6 +72,18 @@ public class ShipPlacement {
                     drawShip(f, getSelectedBackgroundColor(), getStandardBorderColor());
                     f.getPlayerBoard().getCurrentShip().setMaxShips(f.getPlayerBoard().getCurrentShip().getMaxShips() - 1);
                     f.getPlayerBoard().setAmountOfShips(f.getPlayerBoard().getAmountOfShips() + 1);
+                    ArrayList<Target> shipTargets = new ArrayList<Target>();
+                    for(int i = 0; i < f.getPlayerBoard().getShipsize(); i++){
+                        int offset = 0;
+                        if(f.getPlayerBoard().getRichting() == 1){
+                            offset = f.getNumber() + i;
+                        }else{
+                            offset = f.getNumber() + (i*10);
+                        }
+                        shipTargets.add(TargetFactory.ceateTarget(offset, TargetStateFactory.createHealtyState()));
+                    }
+                    Ship ship = new Ship(shipTargets, f.getPlayerBoard().getCurrentShip());
+                    f.getPlayerBoard().getBoard().getController().getShipFacade("player").setShip(ship);
                 }
             }
         }else{

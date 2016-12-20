@@ -13,6 +13,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
+import java.util.List;
 
 /**
  * @author: Louis Roebben
@@ -25,7 +26,7 @@ class PlaceShipAction implements Action {
 		for (ShipType varShipType : ShipType.values()) {
 			for (int i = 0; i < varAvailableShipCount.get(varShipType); i++) {
 				try {
-					Method createShipMethod = ShipFactory.class.getMethod("create" + varShipType.name(), Ship.class);
+					Method createShipMethod = ShipFactory.class.getMethod("create" + varShipType.name() ,Ship.class);
 					Ship ship = (Ship) createShipMethod.invoke(ShipFactory.class);
 
 					int[] location = getRandomLocation(battleshipController);
