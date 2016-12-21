@@ -114,6 +114,7 @@ public class ShipPlacement {
                         f.setColor(getHitColor());
                         target.setHit(true);
                         controller.getShipFacade("player").increaseSucesfullHits();
+
                         System.out.println("action");
                     } else if (target.getState().getClass().getSimpleName().equals("ForbiddenState")) {
                         if (f.getColor().equals(getStandardBackGroundColor())) {
@@ -128,6 +129,7 @@ public class ShipPlacement {
                     }
                 }
             }
+            controller.getShipFacade("player").notifyObservers();
         }
     }
 
