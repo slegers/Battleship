@@ -25,6 +25,11 @@ public class Target
 
 	}
 
+	@Override
+	public boolean equals(Object o){
+		return getName().equals(((Target)o).getName());
+	}
+
 	public Target(String name, TargetState targetState)
 	{
 		this.name = name;

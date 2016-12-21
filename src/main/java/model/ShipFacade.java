@@ -1,5 +1,6 @@
 package model;
 
+import model.observer.Observer;
 import model.type.ShipType;
 
 import java.util.List;
@@ -72,5 +73,25 @@ public class ShipFacade implements ShipRepoInterface
 	@Override
 	public int getMisses() {
 		return shipRepo.getMisses();
+	}
+
+	@Override
+	public List<Observer> getObservers() {
+		return shipRepo.getObservers();
+	}
+
+	@Override
+	public void registerObserver(Observer o) {
+		shipRepo.registerObserver(o);
+	}
+
+	@Override
+	public void removeObserver(Observer o) {
+		shipRepo.removeObserver(o);
+	}
+
+	@Override
+	public void notifyObservers() {
+		shipRepo.notifyObservers();
 	}
 }

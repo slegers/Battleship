@@ -1,5 +1,6 @@
 package model;
 
+import model.observer.Subject;
 import model.type.ShipType;
 
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.Map;
 /**
  * @author: Louis Roebben
  */
-interface ShipRepoInterface
+interface ShipRepoInterface extends Subject
 {
 	Ship getShip(String place);
 

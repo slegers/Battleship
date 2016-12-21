@@ -89,13 +89,21 @@ public class ShipPlacement {
             }
         }else{
             List<Ship> enemyShips = f.getPlayerBoard().getBoard().getController().getShipFacade("ai").getAllShips();
-            List<Target> targets = new ArrayList<Target>();
+            HashMap<Integer,Target> targets = new HashMap<Integer, Target>();
             for( Ship s : enemyShips){
-                targets.addAll(s.getTargets());
+                for(Target t : s.getTargets()){
+                    targets.put(Integer.parseInt(t.getName()),t);
+                }
             }
-            //Target
-            if(false){
-                f.setColor(getHitColor());
+            Target target = targets.get(f.getNumber());
+            if(target != null){
+                System.out.println(target.getState().getClass().getSimpleName());
+                if(target.getState().getClass().getSimpleName().equals("HealtyState")){
+                    f.setColor(getHitColor());
+                }else{
+                    f.setColor(Color.orange);
+                }
+
             }else{
                 f.setColor(getSeaColor());
             }

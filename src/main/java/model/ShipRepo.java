@@ -1,5 +1,6 @@
 package model;
 
+import model.observer.Observer;
 import model.type.ShipType;
 
 import java.util.ArrayList;
@@ -93,5 +94,25 @@ class ShipRepo implements ShipRepoInterface
 	}
 	public int getMisses(){
 		return misses;
+	}
+
+	@Override
+	public List<Observer> getObservers() {
+		return null;
+	}
+
+	@Override
+	public void registerObserver(Observer o) {
+
+	}
+
+	@Override
+	public void removeObserver(Observer o) {
+
+	}
+
+	@Override
+	public void notifyObservers() {
+
 	}
 }
