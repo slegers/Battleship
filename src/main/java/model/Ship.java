@@ -17,6 +17,9 @@ public class Ship implements hitable
 	{
 		type = shipType;
 		this.targets = targets;
+		for(Target t : targets){
+			t.setPartOf(this);
+		}
 	}
 
 	public boolean isShipSunk() {
