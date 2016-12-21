@@ -96,17 +96,18 @@ public class ShipPlacement {
                 }
             }
             Target target = targets.get(f.getNumber());
+            if(f.getPlayerBoard().isEnabled()){
             if(target != null){
-                System.out.println(target.getState().getClass().getSimpleName());
                 if(target.getState().getClass().getSimpleName().equals("HealtyState")){
                     f.setColor(getHitColor());
+                    //target.setHit(true);
+                    System.out.println("action");
                 }else{
-                    f.setColor(Color.orange);
+                    f.setColor(getSeaColor());
                 }
-
             }else{
                 f.setColor(getSeaColor());
-            }
+            }}
         }
     }
 
