@@ -16,6 +16,7 @@ class ShipRepo implements ShipRepoInterface
 	private final static int iMaxShips = 5; //TODO FROM SETTINGS
 	private final ArrayList<Ship> ships = new ArrayList<>();
 	private final HashMap<ShipType, Integer> regesterdShips = new HashMap<>();
+	private ArrayList<Observer> observersList = new ArrayList<>();
 	private int misses;
 	ShipRepo() {
 		//init regesterdShips
@@ -103,16 +104,26 @@ class ShipRepo implements ShipRepoInterface
 
 	@Override
 	public void registerObserver(Observer o) {
-
+		observersList.add(o);
 	}
 
 	@Override
 	public void removeObserver(Observer o) {
-
+		observersList.remove(o);
 	}
 
 	@Override
 	public void notifyObservers() {
+		for (Observer observer : observersList){
+			observer.update();
+		}
+	}
 
+	public ArrayList<Observer> getObserversList() {
+		return observersList;
+	}
+
+	public void setObserversList(ArrayList<Observer> observersList) {
+		this.observersList = observersList;
 	}
 }
