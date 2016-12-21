@@ -111,6 +111,9 @@ public class ShipPlacement {
             if (f.getPlayerBoard().isEnabled()) {
                 if (target != null) {
                     if (target.getState().getClass().getSimpleName().equals("HealtyState")) {
+                        if(target.getPartOf().isShipSunk()){
+                            System.out.println("total sunk");
+                        }
                         f.setColor(getHitColor());
                         target.setHit(true);
                         controller.getShipFacade("player").increaseSucesfullHits();
