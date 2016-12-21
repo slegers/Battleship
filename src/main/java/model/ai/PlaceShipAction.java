@@ -1,6 +1,7 @@
 package model.ai;
 
 import controller.BattleshipController;
+import model.Ship;
 import model.ShipFacade;
 import model.Target;
 import model.TargetFactory;
@@ -89,10 +90,17 @@ class PlaceShipAction implements Action {
 				} catch (NoSuchMethodException ex) {
 					System.out.println(varShipType.name());
 				}
-				System.out.print("placing done");
+				System.out.println("placing done");
 			}
 		}
-
+		System.out.println(battleshipController.getShipFacade("ai").getAllShips().size());
+		for(Ship ship : battleshipController.getShipFacade("ai").getAllShips()){
+			System.out.print(ship.getType().toString());
+			for(Target t: ship.getTargets()){
+				System.out.print(", " +  t.getName() + " " +  t.getState().getName());
+			}
+			System.out.println();
+		}
 	}
 
 	private int[] getRandomLocation(BattleshipController battleshipController)

@@ -14,6 +14,7 @@ import view.PlayerBoard;
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 /**
  * Created by Yanice on 15/12/2016.
@@ -71,7 +72,6 @@ public class ShipPlacement {
                 if (f.getPlayerBoard().isEnabled() && canDrawShip(column, row, f.getNumber(), f)) {
                     drawNeighbours(f);
                     drawShip(f, getSelectedBackgroundColor(), getStandardBorderColor());
-                    f.getPlayerBoard().getCurrentShip().setMaxShips(f.getPlayerBoard().getCurrentShip().getMaxShips() - 1);
                     f.getPlayerBoard().setAmountOfShips(f.getPlayerBoard().getAmountOfShips() + 1);
                     ArrayList<Target> shipTargets = new ArrayList<Target>();
                     for(int i = 0; i < f.getPlayerBoard().getShipsize(); i++){
@@ -88,7 +88,13 @@ public class ShipPlacement {
                 }
             }
         }else{
-            if(f.getColor().equals(getSelectedBackgroundColor()) || f.getColor().equals(getSeaColor()) || f.getColor().equals(getHitColor()) || f.getColor().equals(getSunkColor())){
+            List<Ship> enemyShips = f.getPlayerBoard().getBoard().getController().getShipFacade("ai").getAllShips();
+            List<Target> targets = new ArrayList<Target>();
+            for( Ship s : enemyShips){
+                targets.addAll(s.getTargets());
+            }
+            //Target
+            if(false){
                 f.setColor(getHitColor());
             }else{
                 f.setColor(getSeaColor());

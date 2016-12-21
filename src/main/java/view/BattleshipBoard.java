@@ -70,7 +70,7 @@ public class BattleshipBoard extends JFrame {
         JPanel startButton = new JPanel();
         startButton.setLayout(new GridBagLayout());
 
-         button = new JButton("Start");
+        button = new JButton("Start");
         button.setPreferredSize(new Dimension(getAmountOfTiles()*getTileSize()/2,30));
         button.addActionListener(new ActionListener() {
             @Override
