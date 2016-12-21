@@ -13,6 +13,7 @@ import view.PlayerBoard;
 
 import javax.swing.*;
 import java.awt.*;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.List;
@@ -86,14 +87,15 @@ public class ShipPlacement {
                         }
                         shipTargets.add(TargetFactory.ceateTarget(Integer.toString(offset), TargetStateFactory.createHealtyState()));
                     }
-/*
-                    Method createShipMethod = ShipFactory.class.getMethod("create" + varShipType.name(), List.class, ShipFacade.class);
-                    createShipMethod.invoke(new ShipFactory() {
-                    }, targets, aiShipsFacade);
-*/
-
-                    Ship ship = new Ship(shipTargets, f.getPlayerBoard().getCurrentShip());
-                    f.getPlayerBoard().getBoard().getController().getShipFacade("player").setShip(ship);
+                    ShipFacade playerShipFacade = controller.getShipFacade("player");
+                    try {
+                        Method createShipMethod = ShipFactory.class.getMethod("create" + f.getPlayerBoard().getCurrentShip().name(), List.class, ShipFacade.class);
+                        createShipMethod.invoke(new ShipFactory() {}, shipTargets, playerShipFacade);
+                        System.out.println("added");
+                        System.out.println(f.getPlayerBoard().getCurrentShip().name());
+                    } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e){
+                        e.printStackTrace();
+                    }
                 }
             }
         }else{
