@@ -36,4 +36,5 @@ public final class ShipPlacementFacade {
     public void clearSea(TreeMap<Integer,Field> fields){
         shipPlacement.clearSea(fields);
     }
+
 }

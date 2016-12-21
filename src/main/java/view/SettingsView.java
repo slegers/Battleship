@@ -128,8 +128,9 @@ public class SettingsView extends JFrame{
         getController().getSettingsFacade().setHeight(Integer.parseInt(heightText.getText()));
         getController().getSettingsFacade().setNamePlayer1(speler1Text.getText());
         getController().getSettingsFacade().setNamePlayer2(speler2Text.getText());
+        getController().getSettingsFacade().setNamePlayer2(speler2Text.getText());
         getController().getSettingsFacade().setPlaceStrategy(legStrategieList.getSelectedItem().toString());
-        getController().getSettingsFacade().setPlaceStrategy(attackStrategieList.getSelectedItem().toString());
+        getController().getSettingsFacade().setAttackStrategy(attackStrategieList.getSelectedItem().toString());
 
         for(ShipType schip : ShipType.values()){
             getController().getSettingsFacade().setAmount(schip,shipTypeJTextFieldHashMap.get(schip));

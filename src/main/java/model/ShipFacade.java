@@ -68,4 +68,9 @@ public class ShipFacade implements ShipRepoInterface
 	public Map<ShipType, Integer> getAvailableShipCount() {
 		return shipRepo.getAvailableShipCount();
 	}
+
+	@Override
+	public int getMisses() {
+		return shipRepo.getMisses();
+	}
 }

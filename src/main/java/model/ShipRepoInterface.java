@@ -28,4 +28,6 @@ interface ShipRepoInterface
 
 	Map<ShipType, Integer> getAvailableShipCount();
 
+	int getMisses();
+
 }

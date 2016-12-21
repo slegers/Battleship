@@ -7,6 +7,7 @@ class Settings {
     private int length, height;
     private String namePlayer1, namePlayer2,attackStrategy,placeStrategy;
     private boolean gameIsStarted = false;
+    private final int maxScore = 19;
     private Settings() {
 
     }
@@ -75,5 +76,9 @@ class Settings {
 
     public String getPlaceStrategy() {
         return placeStrategy;
+    }
+
+    public int getMaxScore() {
+        return maxScore;
     }
 }

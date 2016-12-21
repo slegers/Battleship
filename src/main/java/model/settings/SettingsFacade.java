@@ -72,4 +72,8 @@ public class SettingsFacade
 	public void setAttackStrategy(String strategy) {
 		Settings.getSettings().setAttackStrategy(strategy);
 	}
+
+	public int getMaxScore(){
+		return Settings.getSettings().getMaxScore();
+	}
 }

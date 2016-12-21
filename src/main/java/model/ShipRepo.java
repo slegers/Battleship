@@ -15,13 +15,14 @@ class ShipRepo implements ShipRepoInterface
 	private final static int iMaxShips = 5; //TODO FROM SETTINGS
 	private final ArrayList<Ship> ships = new ArrayList<>();
 	private final HashMap<ShipType, Integer> regesterdShips = new HashMap<>();
-
+	private int misses;
 	ShipRepo() {
 		//init regesterdShips
 		for (ShipType shipType : ShipType.values())
 		{
 			regesterdShips.put(shipType, 0);
 		}
+		misses = 0;
 	}
 
 	@Override
@@ -86,5 +87,11 @@ class ShipRepo implements ShipRepoInterface
 			availableCount.put(varNext.getKey(), varNext.getKey().getMaxShips() - varNext.getValue());
 		}
 		return availableCount;
+	}
+	public void missed(){
+		misses = misses + 1;
+	}
+	public int getMisses(){
+		return misses;
 	}
 }

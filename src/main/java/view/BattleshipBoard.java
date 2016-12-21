@@ -185,4 +185,8 @@ public class BattleshipBoard extends JFrame {
     public void startGame() {
         button.setEnabled(false);
     }
+    public void update(){
+        getController().getSettingsFacade().setNamePlayer1(player1 + "(" + (controller.getSettingsFacade().getMaxScore() - controller.getShipFacade("player").getMisses())+ ")");
+        getController().getSettingsFacade().setNamePlayer2(player2 + "(" + (controller.getSettingsFacade().getMaxScore() - controller.getShipFacade("ai").getMisses())+ ")");
+    }
 }
