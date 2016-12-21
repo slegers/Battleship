@@ -19,6 +19,11 @@ public class Ship implements hitable
 		this.targets = targets;
 	}
 
+	public boolean isShipSunk() {
+		return targets.stream().filter(obj ->
+				!obj.getName().contains("Forbidden")).anyMatch(obj ->
+				!obj.getName().contains("Healty"));
+	}
 	public List<Target> getTargets()
 	{
 		return targets;
