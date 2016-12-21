@@ -1,6 +1,7 @@
 package view;
 
 import controller.BattleshipController;
+import model.observer.Observer;
 import model.type.ShipType;
 
 import javax.swing.*;
@@ -13,7 +14,7 @@ import java.awt.event.ActionListener;
  *  @author yanice
  *  @autor Kevin
  */
-public class BattleshipBoard extends JFrame {
+public class BattleshipBoard extends JFrame implements Observer{
     JComboBox<String> ShipList;
     private BattleshipController controller;
     private PlayerBoard player1;
@@ -21,6 +22,7 @@ public class BattleshipBoard extends JFrame {
     private int amountOfTiles;
     private int tileSize;
     private JButton button;
+    private JLabel player1Label,player2Label;
 
     public BattleshipBoard(BattleshipController controller) {
         this.controller = controller;
@@ -144,7 +146,7 @@ public class BattleshipBoard extends JFrame {
     private JPanel createPlayer1Panel() {
         JPanel player1Panel = new JPanel();
         player1Panel.setLayout(new FlowLayout());
-        JLabel player1Label = new JLabel(getController().getSettingsFacade().getNamePlayer1());
+        player1Label = new JLabel(getController().getSettingsFacade().getNamePlayer1());
         player1Label.setPreferredSize(new Dimension(getAmountOfTiles()*getTileSize(), 15));
         player1Label.setHorizontalAlignment(SwingConstants.CENTER);
         player1 = new PlayerBoard(getTileSize(), getAmountOfTiles()*getAmountOfTiles(), this);
@@ -156,7 +158,7 @@ public class BattleshipBoard extends JFrame {
     private JPanel createPlayer2Panel() {
         JPanel player2Panel = new JPanel();
         player2Panel.setLayout(new FlowLayout());
-        JLabel player2Label = new JLabel(getController().getSettingsFacade().getNamePlayer2());
+        player2Label = new JLabel(getController().getSettingsFacade().getNamePlayer2());
         player2Label.setPreferredSize(new Dimension(getAmountOfTiles()*getTileSize(), 15));
         player2Label.setHorizontalAlignment(SwingConstants.CENTER);
         player2 = new PlayerBoard(getTileSize(), getAmountOfTiles()*getAmountOfTiles(), this);
@@ -188,7 +190,9 @@ public class BattleshipBoard extends JFrame {
         player2.setEnabled(true);
     }
     public void update(){
-        getController().getSettingsFacade().setNamePlayer1(player1 + "(" + (controller.getSettingsFacade().getMaxScore() - controller.getShipFacade("player").getMisses())+ ")");
-        getController().getSettingsFacade().setNamePlayer2(player2 + "(" + (controller.getSettingsFacade().getMaxScore() - controller.getShipFacade("ai").getMisses())+ ")");
+        player1Label.setText(getController().getSettingsFacade().getNamePlayer1() + "( " + (controller.getSettingsFacade().getMaxScore() - controller.getShipFacade("player").getMisses())+ ")");
+        player2Label.setText(getController().getSettingsFacade().getNamePlayer2()  + "( " + (controller.getSettingsFacade().getMaxScore() - controller.getShipFacade("ai").getMisses())+ ")");
+        repaint();
+        revalidate();
     }
 }
