@@ -98,8 +98,8 @@ class ShipRepo implements ShipRepoInterface
 	}
 
 	@Override
-	public List<Observer> getObservers() {
-		return null;
+	public ArrayList<Observer> getObservers() {
+		return observersList;
 	}
 
 	@Override
@@ -114,16 +114,9 @@ class ShipRepo implements ShipRepoInterface
 
 	@Override
 	public void notifyObservers() {
+		System.out.println(observersList.size());
 		for (Observer observer : observersList){
 			observer.update();
 		}
-	}
-
-	public ArrayList<Observer> getObserversList() {
-		return observersList;
-	}
-
-	public void setObserversList(ArrayList<Observer> observersList) {
-		this.observersList = observersList;
 	}
 }

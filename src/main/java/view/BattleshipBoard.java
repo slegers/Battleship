@@ -22,6 +22,7 @@ public class BattleshipBoard extends JFrame implements Observer{
     private int amountOfTiles;
     private int tileSize;
     private JButton button;
+    private JLabel player1Label,player2Label;
 
     public BattleshipBoard(BattleshipController controller) {
         this.controller = controller;
@@ -145,7 +146,7 @@ public class BattleshipBoard extends JFrame implements Observer{
     private JPanel createPlayer1Panel() {
         JPanel player1Panel = new JPanel();
         player1Panel.setLayout(new FlowLayout());
-        JLabel player1Label = new JLabel(getController().getSettingsFacade().getNamePlayer1());
+        player1Label = new JLabel(getController().getSettingsFacade().getNamePlayer1());
         player1Label.setPreferredSize(new Dimension(getAmountOfTiles()*getTileSize(), 15));
         player1Label.setHorizontalAlignment(SwingConstants.CENTER);
         player1 = new PlayerBoard(getTileSize(), getAmountOfTiles()*getAmountOfTiles(), this);
@@ -157,7 +158,7 @@ public class BattleshipBoard extends JFrame implements Observer{
     private JPanel createPlayer2Panel() {
         JPanel player2Panel = new JPanel();
         player2Panel.setLayout(new FlowLayout());
-        JLabel player2Label = new JLabel(getController().getSettingsFacade().getNamePlayer2());
+        player2Label = new JLabel(getController().getSettingsFacade().getNamePlayer2());
         player2Label.setPreferredSize(new Dimension(getAmountOfTiles()*getTileSize(), 15));
         player2Label.setHorizontalAlignment(SwingConstants.CENTER);
         player2 = new PlayerBoard(getTileSize(), getAmountOfTiles()*getAmountOfTiles(), this);
@@ -189,9 +190,8 @@ public class BattleshipBoard extends JFrame implements Observer{
         player2.setEnabled(true);
     }
     public void update(){
-        System.out.println("j");
-        getController().getSettingsFacade().setNamePlayer1(player1 + "(" + (controller.getSettingsFacade().getMaxScore() - controller.getShipFacade("player").getMisses())+ ")");
-        getController().getSettingsFacade().setNamePlayer2(player2 + "(" + (controller.getSettingsFacade().getMaxScore() - controller.getShipFacade("ai").getMisses())+ ")");
+        player1Label.setText(getController().getSettingsFacade().getNamePlayer1() + "( " + (controller.getSettingsFacade().getMaxScore() - controller.getShipFacade("player").getMisses())+ ")");
+        player2Label.setText(getController().getSettingsFacade().getNamePlayer2()  + "( " + (controller.getSettingsFacade().getMaxScore() - controller.getShipFacade("ai").getMisses())+ ")");
         repaint();
         revalidate();
     }
