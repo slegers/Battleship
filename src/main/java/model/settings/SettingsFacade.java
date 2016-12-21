@@ -83,4 +83,8 @@ public class SettingsFacade
     public void savePropertiesFile() {
     	Settings.getSettings().savePropertiesFile();
 	}
+
+	public int getWidth() {
+		return Settings.getSettings().getLength();
+	}
 }

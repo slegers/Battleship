@@ -29,8 +29,7 @@ public class SettingsView extends JFrame{
 
 
     private SettingsView(){
-            shipTypeJTextFieldHashMap = new HashMap<>();
-        init();
+        shipTypeJTextFieldHashMap = new HashMap<>();
     }
 
     public static synchronized SettingsView getSettingsView(){
@@ -47,7 +46,7 @@ public class SettingsView extends JFrame{
         return this.controller;
     }
 
-    private void init(){
+    public void init(){
         createComponents();
         setBounds(0,0,100,200);
         setTitle("Zeeslag - Instellingen");
@@ -62,31 +61,34 @@ public class SettingsView extends JFrame{
 
         speler1 = new JLabel("Speler 1:");
         add(speler1);
-        speler1Text = new JTextField("player 1");
+        speler1Text = new JTextField(controller.getSettingsFacade().getNamePlayer1());
         add(speler1Text);
+
         speler2 = new JLabel("Speler 2:");
         add(speler2);
-        speler2Text = new JTextField("Computer");
+        speler2Text = new JTextField(controller.getSettingsFacade().getNamePlayer2());
         speler2Text.setEnabled(false);
         add(speler2Text);
 
         length = new JLabel("Breedte:");
         add(length);
-        widthText = new JTextField(10+"");
+        widthText = new JTextField(controller.getSettingsFacade().getWidth() + "");
         widthText.setEnabled(false);
         add(widthText);
         height = new JLabel("Lengte:");
         add(height);
-        heightText = new JTextField(30+"");
+        heightText = new JTextField(controller.getSettingsFacade().getHeight() + "");
         heightText.setEnabled(false);
         add(heightText);
 
         JLabel legStrategieLabel = new JLabel("leg strategie:");
         String[] legStrategie = {"Simple", "Advanced"};
         legStrategieList = new JComboBox(legStrategie);
+        legStrategieList.setSelectedItem(getController().getSettingsFacade().getPlaceStrategy());
         JLabel attackStrategieLabel = new JLabel("aanval strategie:");
         String[] attackStrategie = {"Simple", "Advanced"};
         attackStrategieList = new JComboBox(legStrategie);
+        attackStrategieList.setSelectedItem(getController().getSettingsFacade().getAttackStrategy());
         add(legStrategieLabel);
         add(legStrategieList);
         add(attackStrategieLabel);

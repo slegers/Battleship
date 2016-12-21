@@ -24,9 +24,9 @@ public class BattleshipController {
 
 	public BattleshipController()
 	{
-        setSettingsFacade(new SettingsFacade());
+        facade = new SettingsFacade();
         SettingsView.getSettingsView().setController(this);
-        SettingsView.getSettingsView();
+        SettingsView.getSettingsView().init();
         shipPlacementFacade  =  new ShipPlacementFacade(this);
     }
 
@@ -41,11 +41,6 @@ public class BattleshipController {
 
     public SettingsFacade getSettingsFacade(){
         return facade;
-    }
-
-    public void setSettingsFacade(SettingsFacade facade)
-    {
-        this.facade = facade;
     }
 
     public ShipFacade getShipFacade(String id){

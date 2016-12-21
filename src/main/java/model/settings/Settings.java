@@ -1,9 +1,7 @@
 package model.settings;
 
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.Properties;
 
 class Settings {
@@ -15,7 +13,7 @@ class Settings {
     private final int maxScore = 19;
     private final int maxShips = 5;
     private Settings() {
-
+        readProperties();
     }
 
     public static synchronized Settings getSettings() {
@@ -24,6 +22,36 @@ class Settings {
             settings = new Settings();
         }
         return settings;
+    }
+
+    public void readProperties() {
+        Properties prop = new Properties();
+        InputStream input = null;
+
+        try {
+
+            input = new FileInputStream("files/config.properties");
+            // load a properties file
+            prop.load(input);
+            // get the property value and print it out
+            length = Integer.parseInt(prop.getProperty("length"));
+            height = Integer.parseInt(prop.getProperty("height"));
+            namePlayer1 = prop.getProperty("namePlayer1");
+            namePlayer2 = prop.getProperty("namePlayer2");
+            attackStrategy = prop.getProperty("attackStrategy");
+            placeStrategy = prop.getProperty("placeStrategy");
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } finally {
+            if (input != null) {
+                try {
+                    input.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     public void setLength(int length) {
