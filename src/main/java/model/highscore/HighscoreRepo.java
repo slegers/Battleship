@@ -28,8 +28,6 @@ class HighscoreRepo implements HighscoreRepoInterface
 		throw new IllegalStateException("Highscore already instantiated");
 	}
 
-
-	@Override
 	public boolean addPossibleHighscore(String name, Integer count)
 	{
 		assert !name.contains("@");
@@ -54,19 +52,18 @@ class HighscoreRepo implements HighscoreRepoInterface
 		}
 	}
 
-	@Override
+
 	public Map<String, Integer> getHighscores()
 	{
 		return scores;
 	}
 
-	@Override
+
 	public List<String> getValues()
 	{
 		return scores.entrySet().stream().map(obj -> obj.getKey() + "@" + obj.getValue()).collect(Collectors.toList());
 	}
 
-	@Override
 	public void setValues(List<String> values)
 	{
 		values.forEach(obj -> scores.put(obj.split("@")[0], Integer.valueOf(obj.split("@")[1])));

@@ -10,13 +10,11 @@ public class HighscoreFacade implements HighscoreRepoInterface
 {
 	private final HighscoreRepo highscoreRepo = HighscoreRepo.createHighscoreRepo();
 
-	@Override
 	public List<String> getValues()
 	{
 		return highscoreRepo.getValues();
 	}
 
-	@Override
 	public void setValues(List<String> values)
 	{
 		highscoreRepo.setValues(values);
