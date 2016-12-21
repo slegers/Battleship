@@ -79,4 +79,8 @@ public class SettingsFacade
 	public int getMaxShips(){
 		return Settings.getSettings().getMaxShips();
 	}
+
+    public void savePropertiesFile() {
+    	Settings.getSettings().savePropertiesFile();
+	}
 }

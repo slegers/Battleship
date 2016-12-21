@@ -1,6 +1,11 @@
 package model.settings;
 
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.Properties;
+
 class Settings {
     private static volatile Settings settings;
     private static boolean done = true;
@@ -85,5 +90,37 @@ class Settings {
 
     public int getMaxShips() {
         return maxShips;
+    }
+
+    public void savePropertiesFile() {
+        Properties prop = new Properties();
+        OutputStream output = null;
+
+        try {
+
+            output = new FileOutputStream("files/config.properties");
+
+            // set the properties value
+            prop.setProperty("length", length+"");
+            prop.setProperty("height", height+"");
+            prop.setProperty("namePlayer1", namePlayer1);
+            prop.setProperty("namePlayer2", namePlayer2);
+            prop.setProperty("attackStrategy", attackStrategy);
+            prop.setProperty("placeStrategy", placeStrategy);
+            // save properties to project root folder
+            prop.store(output, null);
+
+        } catch (IOException io) {
+            io.printStackTrace();
+        } finally {
+            if (output != null) {
+                try {
+                    output.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
     }
 }

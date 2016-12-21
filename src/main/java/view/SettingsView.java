@@ -135,6 +135,7 @@ public class SettingsView extends JFrame{
         for(ShipType schip : ShipType.values()){
             getController().getSettingsFacade().setAmount(schip,shipTypeJTextFieldHashMap.get(schip));
         }
+        getController().getSettingsFacade().savePropertiesFile();
     }
 
 }
