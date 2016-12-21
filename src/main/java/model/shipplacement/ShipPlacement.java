@@ -86,11 +86,17 @@ public class ShipPlacement {
                         }
                         shipTargets.add(TargetFactory.ceateTarget(Integer.toString(offset), TargetStateFactory.createHealtyState()));
                     }
-/*
-                    Method createShipMethod = ShipFactory.class.getMethod("create" + varShipType.name(), List.class, ShipFacade.class);
-                    createShipMethod.invoke(new ShipFactory() {
-                    }, targets, aiShipsFacade);
-*/
+
+                    ShipFacade playerShipFacade = controller.getShipFacade("player");
+                    try {
+                        Method createShipMethod = ShipFactory.class.getMethod("create" + f.getPlayerBoard().getCurrentShip().name(), List.class, ShipFacade.class);
+                        //createShipMethod.invoke(new ShipFactory() {}, targets, playerShipFacade);
+                    } catch (NoSuchMethodException e){
+                        e.printStackTrace();
+                    }
+
+
+
 
                     Ship ship = new Ship(shipTargets, f.getPlayerBoard().getCurrentShip());
                     f.getPlayerBoard().getBoard().getController().getShipFacade("player").setShip(ship);
