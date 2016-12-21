@@ -17,14 +17,14 @@ class ShipRepo implements ShipRepoInterface
 	private final ArrayList<Ship> ships = new ArrayList<>();
 	private final HashMap<ShipType, Integer> regesterdShips = new HashMap<>();
 	private ArrayList<Observer> observersList = new ArrayList<>();
-	private int misses;
+	private int successfulhits;
 	ShipRepo() {
 		//init regesterdShips
 		for (ShipType shipType : ShipType.values())
 		{
 			regesterdShips.put(shipType, 0);
 		}
-		misses = 0;
+		successfulhits = 0;
 	}
 
 	@Override
@@ -90,11 +90,14 @@ class ShipRepo implements ShipRepoInterface
 		}
 		return availableCount;
 	}
-	public void missed(){
-		misses = misses + 1;
+
+	public int getSucessfulHits(){
+		return successfulhits;
 	}
-	public int getMisses(){
-		return misses;
+
+	@Override
+	public void increaseSucesfullHits() {
+		successfulhits = successfulhits + 1;
 	}
 
 	@Override
@@ -114,7 +117,6 @@ class ShipRepo implements ShipRepoInterface
 
 	@Override
 	public void notifyObservers() {
-		System.out.println(observersList.size());
 		for (Observer observer : observersList){
 			observer.update();
 		}

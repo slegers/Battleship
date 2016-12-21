@@ -9,7 +9,6 @@ import java.util.*;
  * Created by yanice on 21/12/16.
  */
 public interface Subject {
-
     List<Observer> getObservers();
     void registerObserver(Observer o);
     void removeObserver(Observer o);
