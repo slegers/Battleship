@@ -27,17 +27,16 @@ class PlaceShipAction implements Action {
 		int maxShips = 5;
 		int iCount = 0;
 		for (ShipType varShipType : ShipType.values()) {
-			if (iCount > maxShips) return;
-			iCount++;
-			shipplaceloop:
-			for (int i = 0; i < varAvailableShipCount.get(varShipType); i++) {
+			if (iCount >= maxShips) return;
+			shipBreakLoop:
+			for (int i = 0; i < varAvailableShipCount.get(varShipType); i++)
+			{
 				try {
 
 					int[] location = getRandomLocation(battleshipController);
-					while (location[0] < varShipType.getSize() &&
-							location[0] > battleshipController.getSettingsFacade().getHeight() + varShipType.getSize() &&
-							location[1] < varShipType.getSize() &&
-							location[1] > battleshipController.getSettingsFacade().getLength() + varShipType.getSize()) {
+					while (location[0] > battleshipController.getSettingsFacade().getHeight() - varShipType.getSize() &&
+							location[1] > battleshipController.getSettingsFacade().getLength() - varShipType.getSize())
+					{
 						location = getRandomLocation(battleshipController);
 					}
 					ArrayList<Target> targets = new ArrayList<>();
@@ -55,7 +54,8 @@ class PlaceShipAction implements Action {
 									|| finalLocation[1] < 0 || finalLocation[1] > battleshipController.getSettingsFacade().getLength())
 							{
 								i--;//WARNING SIDE EFFECT
-								break shipplaceloop;
+								//iCount--;
+								continue shipBreakLoop;
 							}
 						} else {
 							if (aiShipsFacade.getAllShips().stream().anyMatch(obj ->
@@ -68,7 +68,8 @@ class PlaceShipAction implements Action {
 									|| finalLocation[1] < 0 || finalLocation[1] < battleshipController.getSettingsFacade().getLength())
 							{
 								i--;//WARNING SIDE EFFECT
-								break shipplaceloop;
+								//iCount--;
+								continue shipBreakLoop;
 							}
 						}
 					}
@@ -106,7 +107,8 @@ class PlaceShipAction implements Action {
 				} catch (NoSuchMethodException ex) {
 					System.out.println(varShipType.name());
 				}
-				System.out.println("placing done");
+				iCount++;
+				System.out.println("placing done " + iCount);
 			}
 		}
 		System.out.println(battleshipController.getShipFacade("ai").getAllShips().size());
