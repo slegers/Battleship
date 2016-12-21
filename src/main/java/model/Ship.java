@@ -17,12 +17,19 @@ public class Ship implements hitable
 	{
 		type = shipType;
 		this.targets = targets;
+		for(Target t : targets){
+			t.setPartOf(this);
+		}
 	}
 
 	public boolean isShipSunk() {
-		return targets.stream().filter(obj ->
-				!obj.getName().contains("Forbidden")).anyMatch(obj ->
-				!obj.getName().contains("Healty"));
+		if (targets.stream().filter(obj ->
+				!obj.getState().getName().contains("Forbidden")).anyMatch(obj ->
+				!obj.getState().getName().contains("Healty"))) {
+			targets.forEach(obj -> obj.getState().sink());
+			return true;
+		}
+		return false;
 	}
 	public List<Target> getTargets()
 	{
