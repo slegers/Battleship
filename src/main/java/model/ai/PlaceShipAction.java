@@ -50,7 +50,10 @@ class PlaceShipAction implements Action {
 									|| aiShipsFacade.getAllShips().stream().anyMatch(obj ->
 									obj.inhabitsTarget(String.valueOf(finalLocation[0] + 1) + (finalLocation[1] + finalCount)))
 									|| aiShipsFacade.getAllShips().stream().anyMatch(obj ->
-									obj.inhabitsTarget(String.valueOf(finalLocation[0] - 1) + (finalLocation[1] + finalCount)))) {
+									obj.inhabitsTarget(String.valueOf(finalLocation[0] - 1) + (finalLocation[1] + finalCount)))
+									|| finalLocation[0] < 0 || finalLocation[0] > battleshipController.getSettingsFacade().getHeight()
+									|| finalLocation[1] < 0 || finalLocation[1] > battleshipController.getSettingsFacade().getLength())
+							{
 								i--;//WARNING SIDE EFFECT
 								break shipplaceloop;
 							}
@@ -60,7 +63,10 @@ class PlaceShipAction implements Action {
 									|| aiShipsFacade.getAllShips().stream().anyMatch(obj ->
 									obj.inhabitsTarget(String.valueOf(finalLocation[0] + finalCount) + (finalLocation[1] + 1)))
 									|| aiShipsFacade.getAllShips().stream().anyMatch(obj ->
-									obj.inhabitsTarget(String.valueOf(finalLocation[0] + finalCount) + (finalLocation[1] - 1)))) {
+									obj.inhabitsTarget(String.valueOf(finalLocation[0] + finalCount) + (finalLocation[1] - 1)))
+									|| finalLocation[0] < 0 || finalLocation[0] < battleshipController.getSettingsFacade().getHeight()
+									|| finalLocation[1] < 0 || finalLocation[1] < battleshipController.getSettingsFacade().getLength())
+							{
 								i--;//WARNING SIDE EFFECT
 								break shipplaceloop;
 							}
@@ -69,14 +75,22 @@ class PlaceShipAction implements Action {
 					for (int count = 0; count < varShipType.getSize(); count++) {
 						if (location[2] == 0) {
 							//Sides
-							targets.add(TargetFactory.createForbiddenTarget(String.valueOf(location[0] + 1) + (location[1] + count)));
-							targets.add(TargetFactory.createForbiddenTarget(String.valueOf(location[0] - 1) + (location[1] + count)));
+							String sideA = String.valueOf(location[0] + 1) + (location[1] + count);
+							String sideB = String.valueOf(location[0] - 1) + (location[1] + count);
+							if (Integer.parseInt(sideA) > 0)
+								targets.add(TargetFactory.createForbiddenTarget(sideA));
+							if (Integer.parseInt(sideB) > 0)
+								targets.add(TargetFactory.createForbiddenTarget(sideB));
 
 							targets.add(TargetFactory.createTarget(String.valueOf(location[0]) + (location[1] + count)));
 						} else {
 							//Sides
-							targets.add(TargetFactory.createForbiddenTarget(String.valueOf(location[0] + count) + (location[1] + 1)));
-							targets.add(TargetFactory.createForbiddenTarget(String.valueOf(location[0] + count) + (location[1] - 1)));
+							String sideA = String.valueOf(location[0] + count) + (location[1] + 1);
+							String sideB = String.valueOf(location[0] + count) + (location[1] - 1);
+							if (Integer.parseInt(sideA) > 0)
+								targets.add(TargetFactory.createForbiddenTarget(sideA));
+							if (Integer.parseInt(sideB) > 0)
+								targets.add(TargetFactory.createForbiddenTarget(sideB));
 
 							targets.add(TargetFactory.createTarget(String.valueOf(location[0] + count) + (location[1])));
 						}
