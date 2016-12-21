@@ -58,7 +58,7 @@ public class BattleshipController {
     }
 
     public void startGame(int amountOfShips, TreeMap<Integer,Field> fields) {
-        if(amountOfShips == 5) {
+        if(amountOfShips == getSettingsFacade().getMaxShips()) {
             getSettingsFacade().setGameIsStarted();
             getShipPlacementFacade().clearSea(fields);
             getAiFacade().doAction(this);

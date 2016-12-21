@@ -1,6 +1,7 @@
 package view;
 
 import controller.BattleshipController;
+import model.observer.Observer;
 import model.type.ShipType;
 
 import javax.swing.*;
@@ -13,7 +14,7 @@ import java.awt.event.ActionListener;
  *  @author yanice
  *  @autor Kevin
  */
-public class BattleshipBoard extends JFrame {
+public class BattleshipBoard extends JFrame implements Observer{
     JComboBox<String> ShipList;
     private BattleshipController controller;
     private PlayerBoard player1;
@@ -188,7 +189,10 @@ public class BattleshipBoard extends JFrame {
         player2.setEnabled(true);
     }
     public void update(){
+        System.out.println("j");
         getController().getSettingsFacade().setNamePlayer1(player1 + "(" + (controller.getSettingsFacade().getMaxScore() - controller.getShipFacade("player").getMisses())+ ")");
         getController().getSettingsFacade().setNamePlayer2(player2 + "(" + (controller.getSettingsFacade().getMaxScore() - controller.getShipFacade("ai").getMisses())+ ")");
+        repaint();
+        revalidate();
     }
 }
