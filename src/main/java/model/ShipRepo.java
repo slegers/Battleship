@@ -54,14 +54,15 @@ class ShipRepo implements ShipRepoInterface
 	@Override
 	public void setShip(Ship ship)
 	{
-		if (regesterdShips.values().stream().mapToLong(Integer::longValue).sum() > iMaxShips)
+		if (ships.size() > iMaxShips)
 			throw new IllegalStateException("te veel schepen in algemeen");
-		Integer amountOfType = regesterdShips.get(ship.getType());
-		if (amountOfType > ship.getType().getMaxShips())
+		Integer amountOfType = getAvailableShipCount().get(ship.getType());
+		if (amountOfType <= 0)
 			throw new IllegalStateException("te veel schepen van type" + ShipType.Aircraftcarrier.name());
 		if (ship.getType().getSize() != ship.getTargets().stream().filter(obj -> obj.getState().getName().contains("HealtyState")).count())
 			throw new IllegalStateException("schip heeft foute aantal targets, " + ship.getType().getSize() + " " + ship.getTargets().stream().filter(obj -> obj.getState().getName().equals("HealtyState")).count());
 		ships.add(ship);
+		regesterdShips.put(ship.getType(), regesterdShips.get(ship.getType()) + 1);
 	}
 
 	@Override
