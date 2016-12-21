@@ -76,4 +76,7 @@ public class SettingsFacade
 	public int getMaxScore(){
 		return Settings.getSettings().getMaxScore();
 	}
+	public int getMaxShips(){
+		return Settings.getSettings().getMaxShips();
+	}
 }

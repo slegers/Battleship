@@ -8,6 +8,7 @@ class Settings {
     private String namePlayer1, namePlayer2,attackStrategy,placeStrategy;
     private boolean gameIsStarted = false;
     private final int maxScore = 19;
+    private final int maxShips = 5;
     private Settings() {
 
     }
@@ -80,5 +81,9 @@ class Settings {
 
     public int getMaxScore() {
         return maxScore;
+    }
+
+    public int getMaxShips() {
+        return maxShips;
     }
 }
