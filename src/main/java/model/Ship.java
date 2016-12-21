@@ -24,8 +24,8 @@ public class Ship implements hitable
 
 	public boolean isShipSunk() {
 		if (targets.stream().filter(obj ->
-				!obj.getState().getName().contains("Forbidden")).anyMatch(obj ->
-				!obj.getState().getName().contains("Healty"))) {
+				!obj.getState().getName().contains("Forbidden")).noneMatch(obj ->
+				obj.getState().getName().contains("Healty"))) {
 			targets.forEach(obj -> obj.getState().sink());
 			return true;
 		}
