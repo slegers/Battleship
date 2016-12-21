@@ -71,8 +71,13 @@ public class ShipFacade implements ShipRepoInterface
 	}
 
 	@Override
-	public int getMisses() {
-		return shipRepo.getMisses();
+	public int getSucessfulHits() {
+		return shipRepo.getSucessfulHits();
+	}
+
+	@Override
+	public void increaseSucesfullHits() {
+		 shipRepo.increaseSucesfullHits();
 	}
 
 	@Override

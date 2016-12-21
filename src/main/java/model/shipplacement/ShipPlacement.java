@@ -103,7 +103,7 @@ public class ShipPlacement {
                 }
             }
         }else{
-            controller.getShipFacade("player").notifyObservers();
+
             List<Ship> enemyShips = f.getPlayerBoard().getBoard().getController().getShipFacade("ai").getAllShips();
             HashMap<Integer, Target> targets = new HashMap<Integer, Target>();
             for (Ship s : enemyShips) {
@@ -117,6 +117,7 @@ public class ShipPlacement {
                     if (target.getState().getClass().getSimpleName().equals("HealtyState")) {
                         f.setColor(getHitColor());
                         target.setHit(true);
+                        controller.getShipFacade("player").increaseSucesfullHits();
                         System.out.println("action");
                     } else if (target.getState().getClass().getSimpleName().equals("ForbiddenState")) {
                         if (f.getColor().equals(getStandardBackGroundColor())) {

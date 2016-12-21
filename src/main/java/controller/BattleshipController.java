@@ -24,7 +24,6 @@ public class BattleshipController {
 
 	public BattleshipController()
 	{
-
         setSettingsFacade(new SettingsFacade());
         SettingsView.getSettingsView().setController(this);
         SettingsView.getSettingsView();
@@ -63,7 +62,7 @@ public class BattleshipController {
             getShipPlacementFacade().clearSea(fields);
             getAiFacade().doAction(this);
             getShipFacade("player").getObservers().add(board);
-            getShipFacade("ai").getObservers().add(board);
+            //getShipFacade("ai").getObservers().add(board);
             board.startGame();
         } else {
             JOptionPane.showMessageDialog(null, "You need to place 5 ships first.");

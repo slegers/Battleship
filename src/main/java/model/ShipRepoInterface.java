@@ -29,6 +29,8 @@ interface ShipRepoInterface extends Subject
 
 	Map<ShipType, Integer> getAvailableShipCount();
 
-	int getMisses();
+	int getSucessfulHits();
+
+	void increaseSucesfullHits();
 
 }
