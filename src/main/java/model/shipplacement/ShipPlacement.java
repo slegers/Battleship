@@ -13,6 +13,7 @@ import view.PlayerBoard;
 
 import javax.swing.*;
 import java.awt.*;
+import java.lang.reflect.Method;
 import java.util.*;
 import java.util.List;
 
@@ -62,7 +63,9 @@ public class ShipPlacement {
 
     public void mouseClick(Field f, boolean started) {
         if(!started) {
-            if (f.getPlayerBoard().getCurrentShip().getMaxShips() <= 0) {
+            Map<ShipType, Integer> availableShip = f.getPlayerBoard().getBoard().getController().getShipFacade("player").getAvailableShipCount();
+            System.out.println(availableShip.get(f.getPlayerBoard().getCurrentShip()));
+            if (availableShip.get(f.getPlayerBoard().getCurrentShip())<= 0) {
                 JOptionPane.showMessageDialog(null, "You already have too much ships of this type.");
             } else if (f.getPlayerBoard().getAmountOfShips() >= 5) {
                 JOptionPane.showMessageDialog(null, "You have placed 5 ships already, press 'Start' to start the game.");
@@ -83,31 +86,44 @@ public class ShipPlacement {
                         }
                         shipTargets.add(TargetFactory.ceateTarget(Integer.toString(offset), TargetStateFactory.createHealtyState()));
                     }
+
+                    Method createShipMethod = ShipFactory.class.getMethod("create" + varShipType.name(), List.class, ShipFacade.class);
+                    createShipMethod.invoke(new ShipFactory() {
+                    }, targets, aiShipsFacade);
+
+
                     Ship ship = new Ship(shipTargets, f.getPlayerBoard().getCurrentShip());
                     f.getPlayerBoard().getBoard().getController().getShipFacade("player").setShip(ship);
                 }
             }
-        }else{
+        }else {
             List<Ship> enemyShips = f.getPlayerBoard().getBoard().getController().getShipFacade("ai").getAllShips();
-            HashMap<Integer,Target> targets = new HashMap<Integer, Target>();
-            for( Ship s : enemyShips){
-                for(Target t : s.getTargets()){
-                    targets.put(Integer.parseInt(t.getName()),t);
+            HashMap<Integer, Target> targets = new HashMap<Integer, Target>();
+            for (Ship s : enemyShips) {
+                for (Target t : s.getTargets()) {
+                    targets.put(Integer.parseInt(t.getName()), t);
                 }
             }
             Target target = targets.get(f.getNumber());
-            if(f.getPlayerBoard().isEnabled()){
-            if(target != null){
-                if(target.getState().getClass().getSimpleName().equals("HealtyState")){
-                    f.setColor(getHitColor());
-                    //target.setHit(true);
-                    System.out.println("action");
-                }else{
-                    f.setColor(getSeaColor());
+            if (f.getPlayerBoard().isEnabled()) {
+                if (target != null) {
+                    if (target.getState().getClass().getSimpleName().equals("HealtyState")) {
+                        f.setColor(getHitColor());
+                        target.setHit(true);
+                        System.out.println("action");
+                    } else if (target.getState().getClass().getSimpleName().equals("ForbiddenState")) {
+                        if (f.getColor().equals(getStandardBackGroundColor())) {
+                            f.setColor(getSeaColor());
+                            System.out.println("action miss");
+                        }
+                    }
+                } else {
+                    if (f.getColor().equals(getStandardBackGroundColor())) {
+                        f.setColor(getSeaColor());
+                        System.out.println("action miss 2");
+                    }
                 }
-            }else{
-                f.setColor(getSeaColor());
-            }}
+            }
         }
     }
 
