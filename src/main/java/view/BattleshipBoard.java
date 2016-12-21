@@ -184,6 +184,8 @@ public class BattleshipBoard extends JFrame {
 
     public void startGame() {
         button.setEnabled(false);
+        player1.setEnabled(false);
+        player2.setEnabled(true);
     }
     public void update(){
         getController().getSettingsFacade().setNamePlayer1(player1 + "(" + (controller.getSettingsFacade().getMaxScore() - controller.getShipFacade("player").getMisses())+ ")");
