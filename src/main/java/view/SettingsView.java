@@ -62,7 +62,7 @@ public class SettingsView extends JFrame{
 
         speler1 = new JLabel("Speler 1:");
         add(speler1);
-        speler1Text = new JTextField();
+        speler1Text = new JTextField("player 1");
         add(speler1Text);
         speler2 = new JLabel("Speler 2:");
         add(speler2);
