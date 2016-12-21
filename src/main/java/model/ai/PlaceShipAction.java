@@ -13,7 +13,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author: Louis Roebben
@@ -51,6 +51,7 @@ class PlaceShipAction implements Action {
 									obj.inhabitsTarget(String.valueOf(finalLocation[0] + 1) + (finalLocation[1] + finalCount)))
 									|| aiShipsFacade.getAllShips().stream().anyMatch(obj ->
 									obj.inhabitsTarget(String.valueOf(finalLocation[0] - 1) + (finalLocation[1] + finalCount)))) {
+								i--;//WARNING SIDE EFFECT
 								break shipplaceloop;
 							}
 						} else {
@@ -60,6 +61,7 @@ class PlaceShipAction implements Action {
 									obj.inhabitsTarget(String.valueOf(finalLocation[0] + finalCount) + (finalLocation[1] + 1)))
 									|| aiShipsFacade.getAllShips().stream().anyMatch(obj ->
 									obj.inhabitsTarget(String.valueOf(finalLocation[0] + finalCount) + (finalLocation[1] - 1)))) {
+								i--;//WARNING SIDE EFFECT
 								break shipplaceloop;
 							}
 						}
@@ -105,12 +107,11 @@ class PlaceShipAction implements Action {
 
 	private int[] getRandomLocation(BattleshipController battleshipController)
 	{
-		Random random = new Random();
 		String s = String.valueOf(battleshipController.getSettingsFacade().getLength());
 		int[] i = new int[3];
-		i[0] = (random.nextInt(Integer.parseInt(s)));
-		i[1] = (random.nextInt(Integer.parseInt(s)));
-		i[2] = (random.nextInt(1));
+		i[0] = ThreadLocalRandom.current().nextInt(0, 9 + 1);
+		i[1] = ThreadLocalRandom.current().nextInt(0, 9 + 1);
+		i[2] = ThreadLocalRandom.current().nextInt(0, 1 + 1);
 		return i;
 	}
 }
