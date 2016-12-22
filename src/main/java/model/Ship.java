@@ -23,13 +23,12 @@ public class Ship implements hitable
 	}
 
 	public boolean isShipSunk() {
-		if (targets.stream().filter(obj ->
-				!obj.getState().getName().contains("Forbidden")).noneMatch(obj ->
-				obj.getState().getName().contains("Healty"))) {
-			targets.forEach(obj -> obj.getState().sink());
-			return true;
+		for(Target t : getTargets()){
+			if(t.getState().getClass().getSimpleName().equals("HealtyState")){
+				return false;
+			}
 		}
-		return false;
+		return true;
 	}
 	public List<Target> getTargets()
 	{

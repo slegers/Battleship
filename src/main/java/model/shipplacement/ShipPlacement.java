@@ -65,7 +65,6 @@ public class ShipPlacement {
     public void mouseClick(Field f, boolean started) {
         if(!started) {
             Map<ShipType, Integer> availableShip = f.getPlayerBoard().getBoard().getController().getShipFacade("player").getAvailableShipCount();
-            System.out.println(availableShip.get(f.getPlayerBoard().getCurrentShip()));
             if (availableShip.get(f.getPlayerBoard().getCurrentShip())<= 0) {
                 JOptionPane.showMessageDialog(null, "You already have too much ships of this type.");
             } else if (f.getPlayerBoard().getAmountOfShips() >= 5) {
@@ -91,8 +90,6 @@ public class ShipPlacement {
                     try {
                         Method createShipMethod = ShipFactory.class.getMethod("create" + f.getPlayerBoard().getCurrentShip().name(), List.class, ShipFacade.class);
                         createShipMethod.invoke(new ShipFactory() {}, shipTargets, playerShipFacade);
-                        System.out.println("added");
-                        System.out.println(f.getPlayerBoard().getCurrentShip().name());
                     } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e){
                         e.printStackTrace();
                     }
@@ -111,24 +108,38 @@ public class ShipPlacement {
             if (f.getPlayerBoard().isEnabled()) {
                 if (target != null) {
                     if (target.getState().getClass().getSimpleName().equals("HealtyState")) {
-                        if(target.getPartOf().isShipSunk()){
-                            System.out.println("total sunk");
-                        }
                         f.setColor(getHitColor());
                         target.setHit(true);
                         controller.getShipFacade("player").increaseSucesfullHits();
-
-                        System.out.println("action");
+                        if(target.getPartOf().isShipSunk()){
+                            for(Target t : target.getPartOf().getTargets()){
+                                if(t.getState().getClass().getSimpleName().equals("DamagedState")) {
+                                    //TODO set targets on sunk state
+                                    f.getPlayerBoard().getFields().get(Integer.parseInt(t.getName())).setColor(getSunkColor());
+                                }
+                            }
+                            boolean won = true;
+                            for(Ship s : enemyShips){
+                                if(!s.isShipSunk()){
+                                    won = false;
+                                }
+                            }
+                            if(won){
+                                JOptionPane.showMessageDialog(null, "You won!");
+                                //TODO extra game ending actions
+                            }
+                        }
+                        //System.out.println("action");
                     } else if (target.getState().getClass().getSimpleName().equals("ForbiddenState")) {
                         if (f.getColor().equals(getStandardBackGroundColor())) {
                             f.setColor(getSeaColor());
-                            System.out.println("action miss");
+                            //System.out.println("action miss");
                         }
                     }
                 } else {
                     if (f.getColor().equals(getStandardBackGroundColor())) {
                         f.setColor(getSeaColor());
-                        System.out.println("action miss 2");
+                       // System.out.println("action miss 2");
                     }
                 }
             }
@@ -268,6 +279,7 @@ public class ShipPlacement {
     public Color getHitColor(){
         return Color.yellow;
     }
+
     public Color getSunkColor(){
         return Color.red;
     }
