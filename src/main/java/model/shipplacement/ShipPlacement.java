@@ -62,88 +62,96 @@ public class ShipPlacement {
         }
     }
 
-    public void mouseClick(Field f, boolean started) {
-        if(!started) {
-            Map<ShipType, Integer> availableShip = f.getPlayerBoard().getBoard().getController().getShipFacade("player").getAvailableShipCount();
-            if (availableShip.get(f.getPlayerBoard().getCurrentShip())<= 0) {
-                JOptionPane.showMessageDialog(null, "You already have too much ships of this type.");
-            } else if (f.getPlayerBoard().getAmountOfShips() >= 5) {
-                JOptionPane.showMessageDialog(null, "You have placed 5 ships already, press 'Start' to start the game.");
-            } else {
-                int column = f.getNumber() % 10;
-                int row = f.getNumber() / 10;
-                if (f.getPlayerBoard().isEnabled() && canDrawShip(column, row, f.getNumber(), f)) {
-                    drawNeighbours(f);
-                    drawShip(f, getSelectedBackgroundColor(), getStandardBorderColor());
-                    f.getPlayerBoard().setAmountOfShips(f.getPlayerBoard().getAmountOfShips() + 1);
-                    ArrayList<Target> shipTargets = new ArrayList<Target>();
-                    for(int i = 0; i < f.getPlayerBoard().getShipsize(); i++){
-                        int offset = 0;
-                        if(f.getPlayerBoard().getRichting() == 1){
-                            offset = f.getNumber() + i;
-                        }else{
-                            offset = f.getNumber() + (i*10);
-                        }
-                        shipTargets.add(TargetFactory.ceateTarget(Integer.toString(offset), TargetStateFactory.createHealtyState()));
+    public void mouseClickGameNotStarted(Field f){
+        Map<ShipType, Integer> availableShip = f.getPlayerBoard().getBoard().getController().getShipFacade("player").getAvailableShipCount();
+        if (availableShip.get(f.getPlayerBoard().getCurrentShip())<= 0) {
+            JOptionPane.showMessageDialog(null, "You already have too much ships of this type.");
+        } else if (f.getPlayerBoard().getAmountOfShips() >= 5) {
+            JOptionPane.showMessageDialog(null, "You have placed 5 ships already, press 'Start' to start the game.");
+        } else {
+            int column = f.getNumber() % 10;
+            int row = f.getNumber() / 10;
+            if (f.getPlayerBoard().isEnabled() && canDrawShip(column, row, f.getNumber(), f)) {
+                drawNeighbours(f);
+                drawShip(f, getSelectedBackgroundColor(), getStandardBorderColor());
+                f.getPlayerBoard().setAmountOfShips(f.getPlayerBoard().getAmountOfShips() + 1);
+                ArrayList<Target> shipTargets = new ArrayList<Target>();
+                for(int i = 0; i < f.getPlayerBoard().getShipsize(); i++){
+                    int offset = 0;
+                    if(f.getPlayerBoard().getRichting() == 1){
+                        offset = f.getNumber() + i;
+                    }else{
+                        offset = f.getNumber() + (i*10);
                     }
-                    ShipFacade playerShipFacade = controller.getShipFacade("player");
-                    try {
-                        Method createShipMethod = ShipFactory.class.getMethod("create" + f.getPlayerBoard().getCurrentShip().name(), List.class, ShipFacade.class);
-                        createShipMethod.invoke(new ShipFactory() {}, shipTargets, playerShipFacade);
-                    } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e){
-                        e.printStackTrace();
-                    }
+                    shipTargets.add(TargetFactory.ceateTarget(Integer.toString(offset), TargetStateFactory.createHealtyState()));
+                }
+                ShipFacade playerShipFacade = controller.getShipFacade("player");
+                try {
+                    Method createShipMethod = ShipFactory.class.getMethod("create" + f.getPlayerBoard().getCurrentShip().name(), List.class, ShipFacade.class);
+                    createShipMethod.invoke(new ShipFactory() {}, shipTargets, playerShipFacade);
+                } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e){
+                    e.printStackTrace();
                 }
             }
-        }else{
+        }
+    }
 
-            List<Ship> enemyShips = f.getPlayerBoard().getBoard().getController().getShipFacade("ai").getAllShips();
-            HashMap<Integer, Target> targets = new HashMap<Integer, Target>();
-            for (Ship s : enemyShips) {
-                for (Target t : s.getTargets()) {
-                    targets.put(Integer.parseInt(t.getName()), t);
-                }
+    public void mouseClickGameStarted(Field f){
+
+        List<Ship> enemyShips = f.getPlayerBoard().getBoard().getController().getShipFacade("ai").getAllShips();
+        HashMap<Integer, Target> targets = new HashMap<Integer, Target>();
+        for (Ship s : enemyShips) {
+            for (Target t : s.getTargets()) {
+                targets.put(Integer.parseInt(t.getName()), t);
             }
-            Target target = targets.get(f.getNumber());
-            if (f.getPlayerBoard().isEnabled()) {
-                if (target != null) {
-                    if (target.getState().getClass().getSimpleName().equals("HealtyState")) {
-                        f.setColor(getHitColor());
-                        target.setHit(true);
-                        controller.getShipFacade("player").increaseSucesfullHits();
-                        if(target.getPartOf().isShipSunk()){
-                            for(Target t : target.getPartOf().getTargets()){
-                                if(t.getState().getClass().getSimpleName().equals("DamagedState")) {
-                                    //TODO set targets on sunk state
-                                    f.getPlayerBoard().getFields().get(Integer.parseInt(t.getName())).setColor(getSunkColor());
-                                }
-                            }
-                            boolean won = true;
-                            for(Ship s : enemyShips){
-                                if(!s.isShipSunk()){
-                                    won = false;
-                                }
-                            }
-                            if(won){
-                                JOptionPane.showMessageDialog(null, "You won!");
-                                //TODO extra game ending actions
+        }
+        Target target = targets.get(f.getNumber());
+        if (f.getPlayerBoard().isEnabled()) {
+            if (target != null) {
+                if (target.getState().getClass().getSimpleName().equals("HealtyState")) {
+                    f.setColor(getHitColor());
+                    target.setHit(true);
+                    controller.getShipFacade("player").increaseSucesfullHits();
+                    if(target.getPartOf().isShipSunk()){
+                        for(Target t : target.getPartOf().getTargets()){
+                            if(t.getState().getClass().getSimpleName().equals("DamagedState")) {
+                                //TODO set targets on sunk state
+                                f.getPlayerBoard().getFields().get(Integer.parseInt(t.getName())).setColor(getSunkColor());
                             }
                         }
-                        //System.out.println("action");
-                    } else if (target.getState().getClass().getSimpleName().equals("ForbiddenState")) {
-                        if (f.getColor().equals(getStandardBackGroundColor())) {
-                            f.setColor(getSeaColor());
-                            //System.out.println("action miss");
+                        boolean won = true;
+                        for(Ship s : enemyShips){
+                            if(!s.isShipSunk()){
+                                won = false;
+                            }
+                        }
+                        if(won){
+                            JOptionPane.showMessageDialog(null, "You won!");
+                            //TODO extra game ending actions
                         }
                     }
-                } else {
+                    //System.out.println("action");
+                } else if (target.getState().getClass().getSimpleName().equals("ForbiddenState")) {
                     if (f.getColor().equals(getStandardBackGroundColor())) {
                         f.setColor(getSeaColor());
-                       // System.out.println("action miss 2");
+                        //System.out.println("action miss");
                     }
                 }
+            } else {
+                if (f.getColor().equals(getStandardBackGroundColor())) {
+                    f.setColor(getSeaColor());
+                    // System.out.println("action miss 2");
+                }
             }
-            controller.getShipFacade("player").notifyObservers();
+        }
+        controller.getShipFacade("player").notifyObservers();
+    }
+
+    public void mouseClick(Field f, boolean started) {
+        if(!started) {
+            mouseClickGameNotStarted(f);
+        }else{
+            mouseClickGameStarted(f);
         }
     }
 
