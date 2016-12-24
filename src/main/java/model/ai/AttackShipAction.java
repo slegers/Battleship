@@ -22,6 +22,7 @@ class AttackShipAction implements Action {
 		try
 		{
 			battleshipController.getShipFacade("player").hit(target);
+
 		} catch (NoSuchElementException ignored)
 		{
 		}

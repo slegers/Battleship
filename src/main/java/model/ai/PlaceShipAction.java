@@ -25,7 +25,7 @@ class PlaceShipAction implements Action {
 		Map<ShipType, Integer> varAvailableShipCount = aiShipsFacade.getAvailableShipCount();
 		//TODO from settings
 		int maxShips = 5;
-		int iCount = 0;
+		int iCount = 1;
 		for (ShipType varShipType : ShipType.values()) {
 			shipBreakLoop:
 			for (int i = 0; i < varAvailableShipCount.get(varShipType); i++)
@@ -114,7 +114,7 @@ class PlaceShipAction implements Action {
 				iCount++;
 				System.out.println("placing done " + iCount);
 			}
-		}
+	}
 		System.out.println(battleshipController.getShipFacade("ai").getAllShips().size());
 		for(Ship ship : battleshipController.getShipFacade("ai").getAllShips()){
 			System.out.print(ship.getType().toString());
