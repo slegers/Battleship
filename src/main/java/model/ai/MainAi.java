@@ -1,6 +1,7 @@
 package model.ai;
 
 import controller.BattleshipController;
+import model.observer.Observer;
 import model.settings.SettingsFacade;
 
 /**
@@ -10,18 +11,23 @@ class MainAi implements Action, AiSettings
 {
 	private AiState aiState;
 	private SettingsFacade settingsFacade;
+	private BattleshipController battleshipController;
 
-
-	public MainAi() {
+	public MainAi()
+	{
 		this.aiState = AiStateFactory.createPlaceState();
 
 	}
 
-	void placingDone() {
+	void placingDone()
+	{
 		this.aiState = AiStateFactory.createAttackState(settingsFacade);
 	}
+
 	@Override
-	public void doAction(BattleshipController battleshipController) {
+	public void doAction(BattleshipController battleshipController)
+	{
+
 		aiState.getNextAction().doAction(battleshipController);
 	}
 

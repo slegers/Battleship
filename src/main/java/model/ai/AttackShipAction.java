@@ -1,6 +1,9 @@
 package model.ai;
 
 import controller.BattleshipController;
+import model.ShipFacade;
+
+import java.util.NoSuchElementException;
 
 /**
  * @author: Louis Roebben
@@ -15,6 +18,13 @@ class AttackShipAction implements Action {
 
 	@Override
 	public void doAction(BattleshipController battleshipController) {
-		battleshipController.getShipFacade("player").hit(attackStrategy.getTarget(battleshipController));
+		String target = attackStrategy.getTarget(battleshipController);
+		try
+		{
+			battleshipController.getShipFacade("player").hit(target);
+		} catch (NoSuchElementException ignored)
+		{
+		}
+		battleshipController.getShipFacade("player").notifyObservers();
 	}
 }

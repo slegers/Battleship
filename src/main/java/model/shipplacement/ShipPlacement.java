@@ -152,6 +152,7 @@ public class ShipPlacement {
             mouseClickGameNotStarted(f);
         }else{
             mouseClickGameStarted(f);
+            controller.getAiFacade().doAction(controller);//TODO danger no MVC
         }
     }
 
