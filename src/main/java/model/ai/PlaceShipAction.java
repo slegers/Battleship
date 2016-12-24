@@ -23,8 +23,7 @@ class PlaceShipAction implements Action {
 	public void doAction(BattleshipController battleshipController) {
 		ShipFacade aiShipsFacade = battleshipController.getShipFacade("ai");
 		Map<ShipType, Integer> varAvailableShipCount = aiShipsFacade.getAvailableShipCount();
-		//TODO from settings
-		int maxShips = 5;
+		int maxShips = battleshipController.getSettingsFacade().getMaxShips();
 		int iCount = 0;
 		for (ShipType varShipType : ShipType.values()) {
 			if (iCount >= maxShips) return;
