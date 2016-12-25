@@ -13,6 +13,8 @@ import view.SettingsView;
 import view.ShowWinner;
 
 import javax.swing.*;
+import java.awt.*;
+import java.util.NoSuchElementException;
 import java.util.TreeMap;
 
 /**
@@ -80,7 +82,7 @@ public class BattleshipController implements Observer
     }
 
     @Override
-    public void update(String target) {
+    public void update(String target, Color color) {
 		if (getShipFacade("ai").getAllShips().stream().allMatch(Ship::isShipSunk))
 		{
             new ShowWinner(getSettingsFacade().getNamePlayer1(),10);
@@ -92,6 +94,15 @@ public class BattleshipController implements Observer
             resetGame();
         }
 
+        try {
+            getShipFacade("player").getShip(target).inhabitsTarget(target);
+            color = Color.yellow;
+        }catch (NoSuchElementException e){
+
+        }
+
+
+        board.update(target,color);
     }
 
     private void resetGame() {

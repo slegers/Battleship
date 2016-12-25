@@ -200,9 +200,9 @@ public class BattleshipBoard extends JFrame implements Observer {
     }
 
     @Override
-    public void update(String target) {
+    public void update(String target,Color color) {
         System.out.println("js");
-        player1.getFields().get(Integer.parseInt(target)).setColor(Color.cyan);
+        player1.getFields().get(Integer.parseInt(target)).setColor(color);
         //TODO:  louis recaftor with is hit ...
     }
 }

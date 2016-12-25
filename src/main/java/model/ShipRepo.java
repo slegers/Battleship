@@ -3,6 +3,7 @@ package model;
 import model.observer.Observer;
 import model.type.ShipType;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -125,7 +126,7 @@ class ShipRepo implements ShipRepoInterface
 
 	public void notifyObservers(String target) {
 		for (Observer observer : observersList){
-			observer.update(target);
+			observer.update(target, Color.cyan);
 		}
 	}
 }
