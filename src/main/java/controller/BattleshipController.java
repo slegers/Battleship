@@ -91,7 +91,6 @@ public class BattleshipController implements Observer
             getShipFacade("player").getShip(targetString).inhabitsTarget(targetString);
             color = Color.yellow;
             getShipFacade("ai").increaseSucesfullHits();
-            System.out.println(targetString);
             java.util.List<Ship> enemyShips = getShipFacade("player").getAllShips();
             HashMap<Integer, Target> targets = new HashMap<Integer, Target>();
             for (Ship s : enemyShips) {
@@ -100,8 +99,10 @@ public class BattleshipController implements Observer
                 }
             }
             Target target = targets.get(Integer.parseInt(targetString));
-            System.out.println();
-            target.getName();
+            target.setHit(true);
+            if(target.getPartOf().isShipSunk()){
+                color = Color.red;
+            }
             getShipPlacementFacade().setRedOnSunk(target, board.player1.getFields().get(Integer.parseInt(targetString)));
         } catch (NoSuchElementException e) {
 
