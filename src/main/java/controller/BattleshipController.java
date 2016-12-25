@@ -7,14 +7,14 @@ import model.ai.AiFacade;
 import model.observer.Observer;
 import model.settings.SettingsFacade;
 import model.shipplacement.ShipPlacementFacade;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import view.BattleshipBoard;
 import view.Field;
 import view.SettingsView;
 import view.ShowWinner;
 
 import javax.swing.*;
-import javax.swing.plaf.synth.SynthTextAreaUI;
+import java.awt.*;
+import java.util.NoSuchElementException;
 import java.util.TreeMap;
 
 /**
@@ -82,20 +82,28 @@ public class BattleshipController implements Observer
     }
 
     @Override
-    public void update(String target) {
+    public void update(String target, Color color) {
 		if (getShipFacade("ai").getAllShips().stream().allMatch(Ship::isShipSunk))
 		{
             new ShowWinner(getSettingsFacade().getNamePlayer1(),10);
             resetGame();
-
         }
 		if (getShipFacade("player").getAllShips().stream().allMatch(Ship::isShipSunk))
 		{
             new ShowWinner(getSettingsFacade().getNamePlayer2(),10);
             resetGame();
         }
-        board.update(target);
-	}
+
+        try {
+            getShipFacade("player").getShip(target).inhabitsTarget(target);
+            color = Color.yellow;
+        }catch (NoSuchElementException e){
+
+        }
+
+
+        board.update(target,color);
+    }
 
     private void resetGame() {
         getSettingsFacade().setGameIsStarted(false);

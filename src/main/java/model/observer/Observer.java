@@ -1,5 +1,6 @@
 package model.observer;
 
+import java.awt.*;
 import java.util.List;
 
 /**
@@ -8,5 +9,5 @@ import java.util.List;
 public interface Observer {
     void update();
 
-    void update(String target);
+    void update(String target,Color color);
 }
