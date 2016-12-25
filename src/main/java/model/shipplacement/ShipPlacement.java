@@ -102,8 +102,8 @@ public class ShipPlacement {
             compTurn = true;
         }
         List<Ship> enemyShips = f.getPlayerBoard().getBoard().getController().getShipFacade("ai").getAllShips();
-        HashMap<Integer, Target> targets = new HashMap<Integer, Target>();
-        for (Ship s : enemyShips) {
+		HashMap<Integer, Target> targets = new HashMap<>();
+		for (Ship s : enemyShips) {
             for (Target t : s.getTargets()) {
                 targets.put(Integer.parseInt(t.getName()), t);
             }
