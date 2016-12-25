@@ -86,12 +86,15 @@ public class BattleshipController implements Observer
 		if (getShipFacade("ai").getAllShips().stream().allMatch(Ship::isShipSunk))
 		{
             new ShowWinner(getSettingsFacade().getNamePlayer1(),10);
-		}
+            resetGame();
+
+        }
 		if (getShipFacade("player").getAllShips().stream().allMatch(Ship::isShipSunk))
 		{
             new ShowWinner(getSettingsFacade().getNamePlayer2(),10);
+            resetGame();
         }
-        resetGame();
+        board.update(target);
 	}
 
     private void resetGame() {
