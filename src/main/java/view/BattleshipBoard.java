@@ -6,6 +6,7 @@ import model.observer.Observer;
 import model.type.ShipType;
 
 import javax.swing.*;
+import javax.swing.plaf.synth.SynthTextAreaUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -194,14 +195,13 @@ public class BattleshipBoard extends JFrame implements Observer {
     public void update() {
         player1Label.setText(getController().getSettingsFacade().getNamePlayer1() + " ( " + (controller.getSettingsFacade().getMaxScore() - controller.getShipFacade("player").getSucessfulHits()) + " )");
         player2Label.setText(getController().getSettingsFacade().getNamePlayer2() + " ( " + (controller.getSettingsFacade().getMaxScore() - controller.getShipFacade("ai").getSucessfulHits()) + " )");
-
-
         repaint();
         revalidate();
     }
 
     @Override
     public void update(String target) {
+        System.out.println("js");
         player1.getFields().get(Integer.parseInt(target)).setColor(Color.cyan);
         //TODO:  louis recaftor with is hit ...
     }

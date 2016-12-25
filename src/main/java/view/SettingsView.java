@@ -99,7 +99,6 @@ public class SettingsView extends JFrame{
             add(label);
             JTextField text = new JTextField(schip.getMaxShips() +"");
             text.setEnabled(false);
-            //TODO: validation settings
            shipTypeJTextFieldHashMap.put(schip,Integer.parseInt(text.getText()));
             add(text);
         }
