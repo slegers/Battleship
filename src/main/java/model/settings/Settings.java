@@ -89,8 +89,8 @@ class Settings {
         this.namePlayer2 = name;
     }
 
-    public void setGameIsStarted(){
-        gameIsStarted = true;
+    public void setGameIsStarted(boolean f){
+        gameIsStarted = f;
     }
     public boolean getGameIsStarted(){
         return gameIsStarted;

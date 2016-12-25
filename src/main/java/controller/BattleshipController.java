@@ -14,6 +14,7 @@ import view.SettingsView;
 import view.ShowWinner;
 
 import javax.swing.*;
+import javax.swing.plaf.synth.SynthTextAreaUI;
 import java.util.TreeMap;
 
 /**
@@ -25,7 +26,7 @@ public class BattleshipController implements Observer
     private BoardFacade boardFacade = new BoardFacade();
     private BattleshipBoard board;
     private AiFacade aiFacade = new AiFacade();
-    private  ShipPlacementFacade shipPlacementFacade;
+    private ShipPlacementFacade shipPlacementFacade;
 
 	public BattleshipController()
 	{
@@ -52,13 +53,17 @@ public class BattleshipController implements Observer
         return boardFacade.getShipRepo(id);
     }
 
+    public void removeShipFacade(String id){
+        boardFacade.dropShipRepo(id);
+    }
+
     public ShipPlacementFacade getShipPlacementFacade(){
         return shipPlacementFacade;
     }
 
     public void startGame(int amountOfShips, TreeMap<Integer,Field> fields) {
         if(amountOfShips == getSettingsFacade().getMaxShips()) {
-            getSettingsFacade().setGameIsStarted();
+            getSettingsFacade().setGameIsStarted(true);
             getShipPlacementFacade().clearSea(fields);
             getAiFacade().doAction(this);
 			getShipFacade("player").registerObserver(this);
@@ -86,5 +91,14 @@ public class BattleshipController implements Observer
 		{
             new ShowWinner(getSettingsFacade().getNamePlayer2(),10);
         }
+        resetGame();
 	}
+
+    private void resetGame() {
+        getSettingsFacade().setGameIsStarted(false);
+        removeShipFacade("ai");
+        removeShipFacade("player");
+        board.dispose();
+        SettingsView.getSettingsView().setVisible(true);
+    }
 }

@@ -50,8 +50,8 @@ public class SettingsFacade
 		Settings.getSettings().setNamePlayer2(name);
 	}
 
-    public void setGameIsStarted(){
-        Settings.getSettings().setGameIsStarted();
+    public void setGameIsStarted(boolean f ){
+        Settings.getSettings().setGameIsStarted(f);
     }
     public boolean getGameIsStarted(){
         return Settings.getSettings().getGameIsStarted();
@@ -87,4 +87,6 @@ public class SettingsFacade
 	public int getWidth() {
 		return Settings.getSettings().getLength();
 	}
+
+
 }

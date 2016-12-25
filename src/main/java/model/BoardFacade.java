@@ -18,4 +18,7 @@ public final class BoardFacade
 		}
 		return boardRepo.get(id);
 	}
+	public void dropShipRepo(String id){
+		boardRepo.remove(id);
+	}
 }
