@@ -103,6 +103,11 @@ class ShipRepo implements ShipRepoInterface
 	}
 
 	@Override
+	public int getScore() {
+		return 19 - getSucessfulHits();
+	}
+
+	@Override
 	public ArrayList<Observer> getObservers() {
 		return observersList;
 	}

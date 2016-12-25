@@ -81,6 +81,11 @@ public class ShipFacade implements ShipRepoInterface
 	}
 
 	@Override
+	public int getScore() {
+		return 19 - getSucessfulHits();
+	}
+
+	@Override
 	public List<Observer> getObservers() {
 		return shipRepo.getObservers();
 	}

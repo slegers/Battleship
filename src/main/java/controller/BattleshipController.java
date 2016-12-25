@@ -85,12 +85,12 @@ public class BattleshipController implements Observer
     public void update(String target, Color color) {
 		if (getShipFacade("ai").getAllShips().stream().allMatch(Ship::isShipSunk))
 		{
-            new ShowWinner(getSettingsFacade().getNamePlayer1(),10);
+            new ShowWinner(getSettingsFacade().getNamePlayer1(),getShipFacade("player").getScore());
             resetGame();
         }
 		if (getShipFacade("player").getAllShips().stream().allMatch(Ship::isShipSunk))
 		{
-            new ShowWinner(getSettingsFacade().getNamePlayer2(),10);
+            new ShowWinner(getSettingsFacade().getNamePlayer2(),getShipFacade("ai").getScore());
             resetGame();
         }
 

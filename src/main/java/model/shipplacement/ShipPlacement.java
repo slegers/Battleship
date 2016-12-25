@@ -97,7 +97,10 @@ public class ShipPlacement {
     }
 
     public void mouseClickGameStarted(Field f){
-
+        boolean compTurn = false;
+        if(f.getColor().equals(getStandardBackGroundColor())){
+            compTurn = true;
+        }
         List<Ship> enemyShips = f.getPlayerBoard().getBoard().getController().getShipFacade("ai").getAllShips();
         HashMap<Integer, Target> targets = new HashMap<Integer, Target>();
         for (Ship s : enemyShips) {
@@ -145,9 +148,11 @@ public class ShipPlacement {
                     // System.out.println("action miss 2");
                 }
             }
-//TODO : set actoin
         }
-        controller.getShipFacade("player").notifyObservers();
+        if(compTurn){
+            controller.getAiFacade().doAction(controller);
+            controller.getShipFacade("player").notifyObservers();
+        }
     }
 
     public void mouseClick(Field f, boolean started) {
