@@ -112,6 +112,7 @@ public class ShipPlacement {
                     f.setColor(getHitColor());
                     target.setHit(true);
                     controller.getShipFacade("player").increaseSucesfullHits();
+                    System.out.println(target.getPartOf().isShipSunk());
                     if(target.getPartOf().isShipSunk()){
                         for(Target t : target.getPartOf().getTargets()){
                             if(t.getState().getClass().getSimpleName().equals("DamagedState")) {
