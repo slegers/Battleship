@@ -138,12 +138,14 @@ public class ShipPlacement {
                         //System.out.println("action miss");
                     }
                 }
+
             } else {
                 if (f.getColor().equals(getStandardBackGroundColor())) {
                     f.setColor(getSeaColor());
                     // System.out.println("action miss 2");
                 }
             }
+//TODO : set actoin
         }
         controller.getShipFacade("player").notifyObservers();
     }
@@ -153,7 +155,7 @@ public class ShipPlacement {
             mouseClickGameNotStarted(f);
         }else{
             mouseClickGameStarted(f);
-            controller.getAiFacade().doAction(controller);//TODO danger no MVC
+            //TODO danger no MVC
         }
     }
 
