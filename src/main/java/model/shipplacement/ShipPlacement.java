@@ -97,7 +97,10 @@ public class ShipPlacement {
     }
 
     public void mouseClickGameStarted(Field f){
-
+        boolean compTurn = false;
+        if(f.getColor().equals(getStandardBackGroundColor())){
+            compTurn = true;
+        }
         List<Ship> enemyShips = f.getPlayerBoard().getBoard().getController().getShipFacade("ai").getAllShips();
         HashMap<Integer, Target> targets = new HashMap<Integer, Target>();
         for (Ship s : enemyShips) {
@@ -120,6 +123,7 @@ public class ShipPlacement {
                         //System.out.println("action miss");
                     }
                 }
+
             } else {
                 if (f.getColor().equals(getStandardBackGroundColor())) {
                     f.setColor(getSeaColor());
@@ -127,7 +131,10 @@ public class ShipPlacement {
                 }
             }
         }
-        controller.getShipFacade("player").notifyObservers();
+        if(compTurn){
+            controller.getAiFacade().doAction(controller);
+            controller.getShipFacade("player").notifyObservers();
+        }
     }
 
     public void setRedOnSunk(Target target, Field f){
@@ -146,7 +153,7 @@ public class ShipPlacement {
             mouseClickGameNotStarted(f);
         }else{
             mouseClickGameStarted(f);
-            controller.getAiFacade().doAction(controller);//TODO danger no MVC
+            //TODO danger no MVC
         }
     }
 

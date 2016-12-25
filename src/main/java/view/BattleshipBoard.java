@@ -193,16 +193,15 @@ public class BattleshipBoard extends JFrame implements Observer {
     }
 
     public void update() {
-        player1Label.setText(getController().getSettingsFacade().getNamePlayer1() + " ( " + (controller.getSettingsFacade().getMaxScore() - controller.getShipFacade("player").getSucessfulHits()) + " )");
-        player2Label.setText(getController().getSettingsFacade().getNamePlayer2() + " ( " + (controller.getSettingsFacade().getMaxScore() - controller.getShipFacade("ai").getSucessfulHits()) + " )");
+        player1Label.setText(getController().getSettingsFacade().getNamePlayer1() + " ( " + (controller.getShipFacade("player").getScore()) + " )");
+        player2Label.setText(getController().getSettingsFacade().getNamePlayer2() + " ( " + (controller.getShipFacade("ai").getScore()) + " )");
         repaint();
         revalidate();
     }
 
     @Override
     public void update(String target,Color color) {
-        System.out.println("js");
+        update();
         player1.getFields().get(Integer.parseInt(target)).setColor(color);
-        //TODO:  louis recaftor with is hit ...
     }
 }

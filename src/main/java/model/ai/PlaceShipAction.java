@@ -21,7 +21,6 @@ import java.util.concurrent.ThreadLocalRandom;
 class PlaceShipAction implements Action {
 	@Override
 	public void doAction(BattleshipController battleshipController) {
-		//System.out.println("1");
 		ShipFacade aiShipsFacade = battleshipController.getShipFacade("ai");
 		Map<ShipType, Integer> varAvailableShipCount = aiShipsFacade.getAvailableShipCount();
 		int maxShips = battleshipController.getSettingsFacade().getMaxShips();

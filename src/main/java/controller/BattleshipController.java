@@ -90,6 +90,7 @@ public class BattleshipController implements Observer
         try {
             getShipFacade("player").getShip(targetString).inhabitsTarget(targetString);
             color = Color.yellow;
+            getShipFacade("ai").increaseSucesfullHits();
             System.out.println(targetString);
             java.util.List<Ship> enemyShips = getShipFacade("player").getAllShips();
             HashMap<Integer, Target> targets = new HashMap<Integer, Target>();
@@ -99,25 +100,24 @@ public class BattleshipController implements Observer
                 }
             }
             Target target = targets.get(Integer.parseInt(targetString));
-            System.out.println();target.getName();
+            System.out.println();
+            target.getName();
             getShipPlacementFacade().setRedOnSunk(target, board.player1.getFields().get(Integer.parseInt(targetString)));
-        }catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
 
         }
 
-        if (getShipFacade("ai").getAllShips().stream().allMatch(Ship::isShipSunk))
-        {
-            new ShowWinner(getSettingsFacade().getNamePlayer1(),10);
+        if (getShipFacade("ai").getAllShips().stream().allMatch(Ship::isShipSunk)) {
+            new ShowWinner(getSettingsFacade().getNamePlayer1(), 10);
             resetGame();
         }
-        if (getShipFacade("player").getAllShips().stream().allMatch(Ship::isShipSunk))
-        {
-            new ShowWinner(getSettingsFacade().getNamePlayer2(),10);
+        if (getShipFacade("player").getAllShips().stream().allMatch(Ship::isShipSunk)) {
+            new ShowWinner(getSettingsFacade().getNamePlayer2(), 10);
             resetGame();
         }
 
 
-        board.update(targetString,color);
+        board.update(targetString, color);
     }
 
     private void resetGame() {

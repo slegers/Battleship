@@ -32,5 +32,5 @@ interface ShipRepoInterface extends Subject
 	int getSucessfulHits();
 
 	void increaseSucesfullHits();
-
+	int getScore();
 }
