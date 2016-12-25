@@ -96,7 +96,11 @@ public class ShipFacade implements ShipRepoInterface
 	}
 
 	@Override
-	public void notifyObservers() {
+	public void notifyObservers( ) {
 		shipRepo.notifyObservers();
+	}
+
+	public void notifyObservers(String target) {
+		shipRepo.notifyObservers(target);
 	}
 }

@@ -8,4 +8,6 @@ import java.util.List;
 public interface Observer {
     //TODO: interface
     void update();
+
+    void update(String target);
 }

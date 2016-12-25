@@ -1,5 +1,6 @@
 package view;
 
+import com.sun.xml.internal.bind.v2.TODO;
 import controller.BattleshipController;
 import model.observer.Observer;
 import model.type.ShipType;
@@ -14,7 +15,7 @@ import java.awt.event.ActionListener;
  *  @author yanice
  *  @autor Kevin
  */
-public class BattleshipBoard extends JFrame implements Observer{
+public class BattleshipBoard extends JFrame implements Observer {
     JComboBox<String> ShipList;
     private BattleshipController controller;
     private PlayerBoard player1;
@@ -22,7 +23,7 @@ public class BattleshipBoard extends JFrame implements Observer{
     private int amountOfTiles;
     private int tileSize;
     private JButton button;
-    private JLabel player1Label,player2Label;
+    private JLabel player1Label, player2Label;
 
     public BattleshipBoard(BattleshipController controller) {
         this.controller = controller;
@@ -43,7 +44,7 @@ public class BattleshipBoard extends JFrame implements Observer{
         setLayout(new GridLayout(1, 3));
         this.setTitle("Zeeslag");
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setSize(new Dimension((getAmountOfTiles()*getTileSize()+50)*3, (getAmountOfTiles()*getTileSize()+80)));
+        this.setSize(new Dimension((getAmountOfTiles() * getTileSize() + 50) * 3, (getAmountOfTiles() * getTileSize() + 80)));
         this.setVisible(true);
         this.setLocationRelativeTo(null);
 
@@ -58,8 +59,8 @@ public class BattleshipBoard extends JFrame implements Observer{
         JPanel startButton = startButton();
 
         JPanel options = new JPanel();
-        options.setPreferredSize(new Dimension(getAmountOfTiles()*getTileSize(), 15));
-        options.setLayout(new GridLayout(3,1));
+        options.setPreferredSize(new Dimension(getAmountOfTiles() * getTileSize(), 15));
+        options.setLayout(new GridLayout(3, 1));
 
         options.add(selectShip);
         options.add(selectDirection);
@@ -68,12 +69,12 @@ public class BattleshipBoard extends JFrame implements Observer{
         return options;
     }
 
-    private JPanel startButton(){
+    private JPanel startButton() {
         JPanel startButton = new JPanel();
         startButton.setLayout(new GridBagLayout());
 
         button = new JButton("Start");
-        button.setPreferredSize(new Dimension(getAmountOfTiles()*getTileSize()/2,30));
+        button.setPreferredSize(new Dimension(getAmountOfTiles() * getTileSize() / 2, 30));
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -85,7 +86,7 @@ public class BattleshipBoard extends JFrame implements Observer{
         return startButton;
     }
 
-    private JPanel selectDirection(){
+    private JPanel selectDirection() {
         JPanel direction = new JPanel();
         JRadioButton horizontal = new JRadioButton("Horizontal");
         horizontal.setSelected(true);
@@ -107,10 +108,10 @@ public class BattleshipBoard extends JFrame implements Observer{
         group.add(vertical);
 
         JLabel directiontitle = new JLabel("Richting:");
-        directiontitle.setPreferredSize(new Dimension(getAmountOfTiles()*getTileSize(),30));
+        directiontitle.setPreferredSize(new Dimension(getAmountOfTiles() * getTileSize(), 30));
 
         JPanel buttons = new JPanel();
-        buttons.setLayout(new GridLayout(1,2));
+        buttons.setLayout(new GridLayout(1, 2));
         buttons.add(horizontal);
         buttons.add(vertical);
 
@@ -133,11 +134,11 @@ public class BattleshipBoard extends JFrame implements Observer{
             }
         });
         JLabel shipsTitle = new JLabel("Beschikbare schepen:");
-        shipsTitle.setPreferredSize(new Dimension(getAmountOfTiles()*getTileSize(),30));
+        shipsTitle.setPreferredSize(new Dimension(getAmountOfTiles() * getTileSize(), 30));
 
         JPanel selectShip = new JPanel();
         selectShip.setLayout(new FlowLayout());
-        selectShip.setPreferredSize(new Dimension(getAmountOfTiles()*getTileSize(), 30));
+        selectShip.setPreferredSize(new Dimension(getAmountOfTiles() * getTileSize(), 30));
         selectShip.add(shipsTitle);
         selectShip.add(ShipList);
         return selectShip;
@@ -147,9 +148,9 @@ public class BattleshipBoard extends JFrame implements Observer{
         JPanel player1Panel = new JPanel();
         player1Panel.setLayout(new FlowLayout());
         player1Label = new JLabel(getController().getSettingsFacade().getNamePlayer1());
-        player1Label.setPreferredSize(new Dimension(getAmountOfTiles()*getTileSize(), 15));
+        player1Label.setPreferredSize(new Dimension(getAmountOfTiles() * getTileSize(), 15));
         player1Label.setHorizontalAlignment(SwingConstants.CENTER);
-        player1 = new PlayerBoard(getTileSize(), getAmountOfTiles()*getAmountOfTiles(), this);
+        player1 = new PlayerBoard(getTileSize(), getAmountOfTiles() * getAmountOfTiles(), this);
         player1Panel.add(player1Label);
         player1Panel.add(player1);
         return player1Panel;
@@ -159,9 +160,9 @@ public class BattleshipBoard extends JFrame implements Observer{
         JPanel player2Panel = new JPanel();
         player2Panel.setLayout(new FlowLayout());
         player2Label = new JLabel(getController().getSettingsFacade().getNamePlayer2());
-        player2Label.setPreferredSize(new Dimension(getAmountOfTiles()*getTileSize(), 15));
+        player2Label.setPreferredSize(new Dimension(getAmountOfTiles() * getTileSize(), 15));
         player2Label.setHorizontalAlignment(SwingConstants.CENTER);
-        player2 = new PlayerBoard(getTileSize(), getAmountOfTiles()*getAmountOfTiles(), this);
+        player2 = new PlayerBoard(getTileSize(), getAmountOfTiles() * getAmountOfTiles(), this);
         player2.setEnabled(false);
         player2Panel.add(player2Label);
         player2Panel.add(player2);
@@ -189,11 +190,19 @@ public class BattleshipBoard extends JFrame implements Observer{
         player1.setEnabled(false);
         player2.setEnabled(true);
     }
-    public void update(){
-        player1Label.setText(getController().getSettingsFacade().getNamePlayer1() + " ( " + (controller.getSettingsFacade().getMaxScore() - controller.getShipFacade("player").getSucessfulHits())+ " )");
-        player2Label.setText(getController().getSettingsFacade().getNamePlayer2()  + " ( " + (controller.getSettingsFacade().getMaxScore() - controller.getShipFacade("ai").getSucessfulHits())+ " )");
+
+    public void update() {
+        player1Label.setText(getController().getSettingsFacade().getNamePlayer1() + " ( " + (controller.getSettingsFacade().getMaxScore() - controller.getShipFacade("player").getSucessfulHits()) + " )");
+        player2Label.setText(getController().getSettingsFacade().getNamePlayer2() + " ( " + (controller.getSettingsFacade().getMaxScore() - controller.getShipFacade("ai").getSucessfulHits()) + " )");
+
 
         repaint();
         revalidate();
+    }
+
+    @Override
+    public void update(String target) {
+        player1.getFields().get(Integer.parseInt(target)).setColor(Color.cyan);
+        //TODO:  louis recaftor with is hit ...
     }
 }
