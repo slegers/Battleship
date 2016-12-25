@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 /**
  * @author: Louis Roebben
@@ -42,7 +43,7 @@ class PlaceShipAction implements Action {
 					{
 						location = getRandomLocation(battleshipController);
 					}
-					ArrayList<Target> targets = new ArrayList<>();
+					List<Target> targets = new ArrayList<>();
 
 					if (!isValidLocation(location, varShipType.getSize(), location[2], battleshipController))
 					{
@@ -56,10 +57,12 @@ class PlaceShipAction implements Action {
 						int iside = (location[2] == 1) ? 0 : 1;
 						int currentX = location[0] + count * iside;
 						int currentY = location[1] + count * iup;
-						String sideA = String.valueOf(currentX + 1) + currentY;
-						String sideB = String.valueOf(currentX - 1) + currentY;
-						if (Integer.parseInt(sideA) >= 0) targets.add(TargetFactory.createForbiddenTarget(sideA));
-						if (Integer.parseInt(sideB) >= 0) targets.add(TargetFactory.createForbiddenTarget(sideB));
+						String sideA = String.valueOf(currentX + iside) + currentY + iup;
+						String sideB = String.valueOf(currentX - iside) + currentY + iup;
+						if (Integer.parseInt(sideA) >= 0 && Integer.parseInt(sideA) <= 100)
+							targets.add(TargetFactory.createForbiddenTarget(sideA));
+						if (Integer.parseInt(sideB) >= 0 && Integer.parseInt(sideA) <= 100)
+							targets.add(TargetFactory.createForbiddenTarget(sideB));
 						if (count < 0)
 						{
 							targets.add(TargetFactory.createForbiddenTarget(String.valueOf(currentX) + currentY));
@@ -70,7 +73,8 @@ class PlaceShipAction implements Action {
 							targets.add(TargetFactory.createTarget(String.valueOf(currentX) + currentY));
 						}
 					}
-					assert targets.stream().noneMatch(obj -> obj.getName().contains("-"));
+					List<Target> collect = targets.stream().filter(obj -> Integer.parseInt(obj.getName()) > 0).collect(Collectors.toList());
+					targets = collect;
 					//System.out.println("adding");
 					Method createShipMethod = ShipFactory.class.getMethod("create" + varShipType.name(), List.class, ShipFacade.class);
 					createShipMethod.invoke(new ShipFactory() {}, targets, aiShipsFacade);
@@ -110,8 +114,8 @@ class PlaceShipAction implements Action {
 	private int[] getRandomLocation(BattleshipController battleshipController)
 	{
 		int[] i = new int[3];
-		i[0] = ThreadLocalRandom.current().nextInt(0, battleshipController.getSettingsFacade().getLength() + 1);
-		i[1] = ThreadLocalRandom.current().nextInt(0, battleshipController.getSettingsFacade().getLength() + 1);
+		i[0] = ThreadLocalRandom.current().nextInt(0, battleshipController.getSettingsFacade().getLength());
+		i[1] = ThreadLocalRandom.current().nextInt(0, battleshipController.getSettingsFacade().getLength());
 		i[2] = ThreadLocalRandom.current().nextInt(0, 1 + 1);
 		return i;
 	}
