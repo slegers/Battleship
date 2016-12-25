@@ -24,12 +24,16 @@ class PlaceShipAction implements Action {
 		ShipFacade aiShipsFacade = battleshipController.getShipFacade("ai");
 		Map<ShipType, Integer> varAvailableShipCount = aiShipsFacade.getAvailableShipCount();
 		int maxShips = battleshipController.getSettingsFacade().getMaxShips();
-		int iCount = 0;
+		int iCount = 1;
 		for (ShipType varShipType : ShipType.values()) {
-			if (iCount >= maxShips) return;
 			shipBreakLoop:
 			for (int i = 0; i < varAvailableShipCount.get(varShipType); i++)
 			{
+				if (iCount >= maxShips)
+				{
+					battleshipController.getAiFacade().placingDone();
+					return;
+				}
 				try {
 
 					int[] location = getRandomLocation(battleshipController);
@@ -109,15 +113,17 @@ class PlaceShipAction implements Action {
 				iCount++;
 				System.out.println("placing done " + iCount);
 			}
-		}
+	}
 		System.out.println(battleshipController.getShipFacade("ai").getAllShips().size());
 		for(Ship ship : battleshipController.getShipFacade("ai").getAllShips()){
 			System.out.print(ship.getType().toString());
 			for(Target t: ship.getTargets()){
 				System.out.print(", " +  t.getName() + " " +  t.getState().getName());
 			}
-			System.out.println();
 		}
+		assert false;
+		//Should never be here
+		//got to love goto's
 	}
 
 	private int[] getRandomLocation(BattleshipController battleshipController)

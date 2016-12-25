@@ -1,6 +1,7 @@
 package model.ai;
 
 import controller.BattleshipController;
+import model.observer.Observer;
 
 /**
  * @author: Louis Roebben

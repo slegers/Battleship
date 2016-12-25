@@ -3,6 +3,7 @@ package controller;
 import model.BoardFacade;
 import model.ShipFacade;
 import model.ai.AiFacade;
+import model.observer.Observer;
 import model.settings.SettingsFacade;
 import model.shipplacement.ShipPlacementFacade;
 import view.BattleshipBoard;
@@ -15,7 +16,8 @@ import java.util.TreeMap;
 /**
  * Created by yanice on 18/11/16.
  */
-public class BattleshipController {
+public class BattleshipController implements Observer
+{
     private SettingsFacade facade;
     private BoardFacade boardFacade = new BoardFacade();
     private BattleshipBoard board;
@@ -63,5 +65,11 @@ public class BattleshipController {
             JOptionPane.showMessageDialog(null, "You need to place 5 ships first.");
 
         }
+    }
+
+    @Override
+    public void update()
+    {
+
     }
 }
