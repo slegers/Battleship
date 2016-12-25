@@ -106,7 +106,7 @@ class PlaceShipAction implements Action {
 							}
 						}
 					}
-					System.out.println("jajaja");
+					System.out.println("adding");
 					Method createShipMethod = ShipFactory.class.getMethod("create" + varShipType.name(), List.class, ShipFacade.class);
 					createShipMethod.invoke(new ShipFactory() {}, targets, aiShipsFacade);
 					//ship.setTargets(targets);

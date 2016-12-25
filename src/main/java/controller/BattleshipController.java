@@ -7,14 +7,12 @@ import model.ai.AiFacade;
 import model.observer.Observer;
 import model.settings.SettingsFacade;
 import model.shipplacement.ShipPlacementFacade;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import view.BattleshipBoard;
 import view.Field;
 import view.SettingsView;
 import view.ShowWinner;
 
 import javax.swing.*;
-import javax.swing.plaf.synth.SynthTextAreaUI;
 import java.util.TreeMap;
 
 /**
@@ -86,13 +84,15 @@ public class BattleshipController implements Observer
 		if (getShipFacade("ai").getAllShips().stream().allMatch(Ship::isShipSunk))
 		{
             new ShowWinner(getSettingsFacade().getNamePlayer1(),10);
-		}
+            resetGame();
+        }
 		if (getShipFacade("player").getAllShips().stream().allMatch(Ship::isShipSunk))
 		{
             new ShowWinner(getSettingsFacade().getNamePlayer2(),10);
+            resetGame();
         }
-        resetGame();
-	}
+
+    }
 
     private void resetGame() {
         getSettingsFacade().setGameIsStarted(false);
