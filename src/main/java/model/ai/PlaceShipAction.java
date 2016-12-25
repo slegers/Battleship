@@ -49,10 +49,6 @@ class PlaceShipAction implements Action {
 						if (location[2] == 0) {
 							if (aiShipsFacade.getAllShips().stream().anyMatch(obj ->
 									obj.inhabitsTarget(String.valueOf(finalLocation[0]) + (finalLocation[1] + finalCount)))
-									|| aiShipsFacade.getAllShips().stream().anyMatch(obj ->
-									obj.inhabitsTarget(String.valueOf(finalLocation[0] + 1) + (finalLocation[1] + finalCount)))
-									|| aiShipsFacade.getAllShips().stream().anyMatch(obj ->
-									obj.inhabitsTarget(String.valueOf(finalLocation[0] - 1) + (finalLocation[1] + finalCount)))
 									|| finalLocation[0] < 0 || finalLocation[0] > battleshipController.getSettingsFacade().getHeight()
 									|| finalLocation[1] < 0 || finalLocation[1] > battleshipController.getSettingsFacade().getLength())
 							{
@@ -63,10 +59,6 @@ class PlaceShipAction implements Action {
 						} else {
 							if (aiShipsFacade.getAllShips().stream().anyMatch(obj ->
 									obj.inhabitsTarget(String.valueOf(finalLocation[0] + finalCount) + finalLocation[1]))
-									|| aiShipsFacade.getAllShips().stream().anyMatch(obj ->
-									obj.inhabitsTarget(String.valueOf(finalLocation[0] + finalCount) + (finalLocation[1] + 1)))
-									|| aiShipsFacade.getAllShips().stream().anyMatch(obj ->
-									obj.inhabitsTarget(String.valueOf(finalLocation[0] + finalCount) + (finalLocation[1] - 1)))
 									|| finalLocation[0] < 0 || finalLocation[0] < battleshipController.getSettingsFacade().getHeight()
 									|| finalLocation[1] < 0 || finalLocation[1] < battleshipController.getSettingsFacade().getLength())
 							{
@@ -76,7 +68,7 @@ class PlaceShipAction implements Action {
 							}
 						}
 					}
-					for (int count = 0; count < varShipType.getSize(); count++) {
+					for (int count = -1; count < varShipType.getSize(); count++) {
 						if (location[2] == 0) {
 							//Sides
 							String sideA = String.valueOf(location[0] + 1) + (location[1] + count);
@@ -85,7 +77,12 @@ class PlaceShipAction implements Action {
 								targets.add(TargetFactory.createForbiddenTarget(sideA));
 							if (Integer.parseInt(sideB) > 0)
 								targets.add(TargetFactory.createForbiddenTarget(sideB));
-
+							if (Integer.parseInt(sideA) > 0 && Integer.parseInt(sideB) > 0 && count < 0)
+							{
+								targets.add(TargetFactory.createForbiddenTarget(sideA));
+								targets.add(TargetFactory.createForbiddenTarget(sideB));
+								targets.add(TargetFactory.createForbiddenTarget(String.valueOf(location[0]) + (location[1] + count)));
+							}
 							targets.add(TargetFactory.createTarget(String.valueOf(location[0]) + (location[1] + count)));
 						} else {
 							//Sides
@@ -95,18 +92,26 @@ class PlaceShipAction implements Action {
 								targets.add(TargetFactory.createForbiddenTarget(sideA));
 							if (Integer.parseInt(sideB) > 0)
 								targets.add(TargetFactory.createForbiddenTarget(sideB));
-
+							if (Integer.parseInt(sideA) > 0 && Integer.parseInt(sideB) > 0 && count < 0)
+							{
+								targets.add(TargetFactory.createForbiddenTarget(sideA));
+								targets.add(TargetFactory.createForbiddenTarget(sideB));
+								targets.add(TargetFactory.createForbiddenTarget(String.valueOf(location[0] + count) + (location[1])));
+							}
 							targets.add(TargetFactory.createTarget(String.valueOf(location[0] + count) + (location[1])));
 						}
 					}
 					Method createShipMethod = ShipFactory.class.getMethod("create" + varShipType.name(), List.class, ShipFacade.class);
-					createShipMethod.invoke(new ShipFactory() {
-					}, targets, aiShipsFacade);
+					createShipMethod.invoke(new ShipFactory() {}, targets, aiShipsFacade);
 					//ship.setTargets(targets);
 					//aiShipsFacade.setShip(ship);
 
-				} catch (IllegalAccessException | InvocationTargetException e) {
+				} catch (IllegalAccessException e)
+				{
 					e.printStackTrace();
+				} catch (InvocationTargetException e)
+				{
+					e.getTargetException();
 				} catch (NoSuchMethodException ex) {
 					System.out.println(varShipType.name());
 				}
