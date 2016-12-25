@@ -122,4 +122,10 @@ class ShipRepo implements ShipRepoInterface
 			observer.update();
 		}
 	}
+
+	public void notifyObservers(String target) {
+		for (Observer observer : observersList){
+			observer.update(target);
+		}
+	}
 }

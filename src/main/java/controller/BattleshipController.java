@@ -72,4 +72,9 @@ public class BattleshipController implements Observer
     {
 
     }
+
+    @Override
+    public void update(String target) {
+
+    }
 }
