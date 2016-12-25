@@ -19,8 +19,8 @@ import java.awt.event.ActionListener;
 public class BattleshipBoard extends JFrame implements Observer {
     JComboBox<String> ShipList;
     private BattleshipController controller;
-    private PlayerBoard player1;
-    private PlayerBoard player2;
+    public PlayerBoard player1;
+    public PlayerBoard player2;
     private int amountOfTiles;
     private int tileSize;
     private JButton button;

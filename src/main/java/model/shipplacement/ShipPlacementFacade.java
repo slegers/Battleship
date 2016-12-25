@@ -1,10 +1,13 @@
 package model.shipplacement;
 
 import controller.BattleshipController;
+import model.Ship;
+import model.Target;
 import model.type.ShipType;
 import view.Field;
 import view.PlayerBoard;
 
+import java.util.List;
 import java.util.TreeMap;
 
 /**
@@ -26,6 +29,8 @@ public final class ShipPlacementFacade {
     public void mouseClick(Field f, boolean gameStarted){
         shipPlacement.mouseClick(f,gameStarted);
     }
+
+    public void setRedOnSunk(Target target, Field f){shipPlacement.setRedOnSunk(target,f);};
 
     public void setDirectionOfPlayerBoard(PlayerBoard player1, int i) {
         shipPlacement.setDirectionOfPlayerBoard(player1,i);

@@ -105,7 +105,7 @@ class PlaceShipAction implements Action {
 							}
 						}
 					}
-					System.out.println("adding");
+					//System.out.println("adding");
 					Method createShipMethod = ShipFactory.class.getMethod("create" + varShipType.name(), List.class, ShipFacade.class);
 					createShipMethod.invoke(new ShipFactory() {}, targets, aiShipsFacade);
 					//ship.setTargets(targets);
@@ -121,7 +121,7 @@ class PlaceShipAction implements Action {
 					System.out.println(varShipType.name());
 				}
 				iCount++;
-				System.out.println("placing done " + iCount);
+				//System.out.println("placing done " + iCount);
 			}
 	}
 		System.out.println(battleshipController.getShipFacade("ai").getAllShips().size());

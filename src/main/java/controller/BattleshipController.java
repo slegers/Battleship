@@ -3,9 +3,11 @@ package controller;
 import model.BoardFacade;
 import model.Ship;
 import model.ShipFacade;
+import model.Target;
 import model.ai.AiFacade;
 import model.observer.Observer;
 import model.settings.SettingsFacade;
+import model.shipplacement.ShipPlacement;
 import model.shipplacement.ShipPlacementFacade;
 import view.BattleshipBoard;
 import view.Field;
@@ -14,6 +16,8 @@ import view.ShowWinner;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.NoSuchElementException;
 import java.util.TreeMap;
 
@@ -82,27 +86,38 @@ public class BattleshipController implements Observer
     }
 
     @Override
-    public void update(String target, Color color) {
-		if (getShipFacade("ai").getAllShips().stream().allMatch(Ship::isShipSunk))
-		{
-            new ShowWinner(getSettingsFacade().getNamePlayer1(),getShipFacade("player").getScore());
-            resetGame();
-        }
-		if (getShipFacade("player").getAllShips().stream().allMatch(Ship::isShipSunk))
-		{
-            new ShowWinner(getSettingsFacade().getNamePlayer2(),getShipFacade("ai").getScore());
-            resetGame();
-        }
-
+    public void update(String targetString, Color color) {
         try {
-            getShipFacade("player").getShip(target).inhabitsTarget(target);
+            getShipFacade("player").getShip(targetString).inhabitsTarget(targetString);
             color = Color.yellow;
             getShipFacade("ai").increaseSucesfullHits();
-        }catch (NoSuchElementException e){
+            System.out.println(targetString);
+            java.util.List<Ship> enemyShips = getShipFacade("player").getAllShips();
+            HashMap<Integer, Target> targets = new HashMap<Integer, Target>();
+            for (Ship s : enemyShips) {
+                for (Target t : s.getTargets()) {
+                    targets.put(Integer.parseInt(t.getName()), t);
+                }
+            }
+            Target target = targets.get(Integer.parseInt(targetString));
+            System.out.println();
+            target.getName();
+            getShipPlacementFacade().setRedOnSunk(target, board.player1.getFields().get(Integer.parseInt(targetString)));
+        } catch (NoSuchElementException e) {
 
         }
-        //The fist one is needed
-        board.update(target,color);
+
+        if (getShipFacade("ai").getAllShips().stream().allMatch(Ship::isShipSunk)) {
+            new ShowWinner(getSettingsFacade().getNamePlayer1(), 10);
+            resetGame();
+        }
+        if (getShipFacade("player").getAllShips().stream().allMatch(Ship::isShipSunk)) {
+            new ShowWinner(getSettingsFacade().getNamePlayer2(), 10);
+            resetGame();
+        }
+
+
+        board.update(targetString, color);
     }
 
     private void resetGame() {

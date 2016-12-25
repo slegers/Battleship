@@ -115,25 +115,7 @@ public class ShipPlacement {
                     f.setColor(getHitColor());
                     target.setHit(true);
                     controller.getShipFacade("player").increaseSucesfullHits();
-                    System.out.println(target.getPartOf().isShipSunk());
-                    if(target.getPartOf().isShipSunk()){
-                        for(Target t : target.getPartOf().getTargets()){
-                            if(t.getState().getClass().getSimpleName().equals("DamagedState")) {
-                                //TODO set targets on sunk state
-                                f.getPlayerBoard().getFields().get(Integer.parseInt(t.getName())).setColor(getSunkColor());
-                            }
-                        }
-                        boolean won = true;
-                        for(Ship s : enemyShips){
-                            if(!s.isShipSunk()){
-                                won = false;
-                            }
-                        }
-                        if(won){
-                            JOptionPane.showMessageDialog(null, "You won!");
-                            //TODO extra game ending actions
-                        }
-                    }
+                    setRedOnSunk(target,f);
                     //System.out.println("action");
                 } else if (target.getState().getClass().getSimpleName().equals("ForbiddenState")) {
                     if (f.getColor().equals(getStandardBackGroundColor())) {
@@ -152,6 +134,17 @@ public class ShipPlacement {
         if(compTurn){
             controller.getAiFacade().doAction(controller);
             controller.getShipFacade("player").notifyObservers();
+        }
+    }
+
+    public void setRedOnSunk(Target target, Field f){
+        if(target.getPartOf().isShipSunk()){
+            for(Target t : target.getPartOf().getTargets()){
+                if(t.getState().getClass().getSimpleName().equals("DamagedState")) {
+                    //TODO set targets on sunk state
+                    f.getPlayerBoard().getFields().get(Integer.parseInt(t.getName())).setColor(getSunkColor());
+                }
+            }
         }
     }
 
