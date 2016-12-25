@@ -28,7 +28,7 @@ class AttackShipAction implements Action {
 		} catch (NoSuchElementException ignored)
 		{
 		}
-		System.out.println("t: " + target);
+		//System.out.println("t: " + target);
 		battleshipController.getShipFacade("player").notifyObservers(target);
 	}
 

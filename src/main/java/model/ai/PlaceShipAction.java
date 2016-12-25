@@ -21,7 +21,7 @@ import java.util.concurrent.ThreadLocalRandom;
 class PlaceShipAction implements Action {
 	@Override
 	public void doAction(BattleshipController battleshipController) {
-		System.out.println("1");
+		//System.out.println("1");
 		ShipFacade aiShipsFacade = battleshipController.getShipFacade("ai");
 		Map<ShipType, Integer> varAvailableShipCount = aiShipsFacade.getAvailableShipCount();
 		int maxShips = battleshipController.getSettingsFacade().getMaxShips();
@@ -106,7 +106,7 @@ class PlaceShipAction implements Action {
 							}
 						}
 					}
-					System.out.println("adding");
+					//System.out.println("adding");
 					Method createShipMethod = ShipFactory.class.getMethod("create" + varShipType.name(), List.class, ShipFacade.class);
 					createShipMethod.invoke(new ShipFactory() {}, targets, aiShipsFacade);
 					//ship.setTargets(targets);
@@ -122,7 +122,7 @@ class PlaceShipAction implements Action {
 					System.out.println(varShipType.name());
 				}
 				iCount++;
-				System.out.println("placing done " + iCount);
+				//System.out.println("placing done " + iCount);
 			}
 	}
 		System.out.println(battleshipController.getShipFacade("ai").getAllShips().size());
