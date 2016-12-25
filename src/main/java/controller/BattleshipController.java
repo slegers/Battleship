@@ -97,11 +97,11 @@ public class BattleshipController implements Observer
         try {
             getShipFacade("player").getShip(target).inhabitsTarget(target);
             color = Color.yellow;
+            getShipFacade("ai").increaseSucesfullHits();
         }catch (NoSuchElementException e){
 
         }
-
-
+        //The fist one is needed
         board.update(target,color);
     }
 
