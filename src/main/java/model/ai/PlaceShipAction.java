@@ -83,8 +83,10 @@ class PlaceShipAction implements Action {
 								targets.add(TargetFactory.createForbiddenTarget(sideA));
 								targets.add(TargetFactory.createForbiddenTarget(sideB));
 								targets.add(TargetFactory.createForbiddenTarget(String.valueOf(location[0]) + (location[1] + count)));
+							} else
+							{
+								targets.add(TargetFactory.createTarget(String.valueOf(location[0]) + (location[1] + count)));
 							}
-							targets.add(TargetFactory.createTarget(String.valueOf(location[0]) + (location[1] + count)));
 						} else {
 							//Sides
 							String sideA = String.valueOf(location[0] + count) + (location[1] + 1);
@@ -98,8 +100,10 @@ class PlaceShipAction implements Action {
 								targets.add(TargetFactory.createForbiddenTarget(sideA));
 								targets.add(TargetFactory.createForbiddenTarget(sideB));
 								targets.add(TargetFactory.createForbiddenTarget(String.valueOf(location[0] + count) + (location[1])));
+							} else
+							{
+								targets.add(TargetFactory.createTarget(String.valueOf(location[0] + count) + (location[1])));
 							}
-							targets.add(TargetFactory.createTarget(String.valueOf(location[0] + count) + (location[1])));
 						}
 					}
 					System.out.println("jajaja");
