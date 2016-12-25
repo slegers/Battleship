@@ -1,11 +1,13 @@
 package controller;
 
 import model.BoardFacade;
+import model.Ship;
 import model.ShipFacade;
 import model.ai.AiFacade;
 import model.observer.Observer;
 import model.settings.SettingsFacade;
 import model.shipplacement.ShipPlacementFacade;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import view.BattleshipBoard;
 import view.Field;
 import view.SettingsView;
@@ -58,8 +60,9 @@ public class BattleshipController implements Observer
             getSettingsFacade().setGameIsStarted();
             getShipPlacementFacade().clearSea(fields);
             getAiFacade().doAction(this);
-            getShipFacade("player").getObservers().add(board);
-            //getShipFacade("ai").getObservers().add(board);
+			getShipFacade("player").registerObserver(this);
+			getShipFacade("ai").registerObserver(this);
+			//getShipFacade("ai").getObservers().add(board);
             board.startGame();
         } else {
             JOptionPane.showMessageDialog(null, "You need to place 5 ships first.");
@@ -75,6 +78,13 @@ public class BattleshipController implements Observer
 
     @Override
     public void update(String target) {
-
-    }
+		if (getShipFacade("ai").getAllShips().stream().allMatch(Ship::isShipSunk))
+		{
+			throw new NotImplementedException();//TODO game is won by player
+		}
+		if (getShipFacade("player").getAllShips().stream().allMatch(Ship::isShipSunk))
+		{
+			throw new NotImplementedException();//TODO game is won by ai
+		}
+	}
 }
